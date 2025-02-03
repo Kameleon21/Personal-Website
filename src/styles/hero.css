@@ -1,0 +1,148 @@
+/* Base styles for typewriter elements */
+.typewriter-h1,
+.typewriter-p {
+  position: relative;
+  width: fit-content;
+  overflow: hidden;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* Heading specific styles */
+.typewriter-h1 {
+  letter-spacing: 0.1em;
+  animation: typing-h1 2s steps(40, end) forwards;
+}
+
+/* Paragraph animation - starts after heading finishes */
+.typewriter-p {
+  opacity: 0;
+  animation: typing-p 2s steps(40, end) 2s forwards;
+}
+
+/* Button appearance animation */
+.button-appear {
+  animation: fadeIn 0.5s ease-in 4s forwards;
+  letter-spacing: normal;
+}
+
+/* Typing animation for heading */
+@keyframes typing-h1 {
+  0% { 
+    width: 0;
+    border-right: 3px solid white;
+  }
+  99% {
+    border-right: 3px solid white;
+  }
+  100% { 
+    width: 100%;
+    border-right: none;
+  }
+}
+
+/* Typing animation for paragraph */
+@keyframes typing-p {
+  0% { 
+    width: 0;
+    opacity: 1;
+    border-right: 3px solid white;
+  }
+  99% {
+    border-right: 3px solid white;
+  }
+  100% { 
+    width: 100%;
+    opacity: 1;
+    border-right: none;
+  }
+}
+
+/* Button fade in animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Make text non-selectable during animation */
+.typewriter-h1,
+.typewriter-p {
+  user-select: none;
+}
+
+/* Reset white-space for mobile responsiveness after animation */
+@media (max-width: 768px) {
+  .typewriter-h1,
+  .typewriter-p {
+    white-space: normal;
+  }
+}
+
+/* Add padding-top to account for fixed nav */
+section {
+  padding-top: 5rem;
+}
+
+/* Nav link hover effect */
+nav a {
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Hamburger Menu Styles */
+.hamburger-line {
+  width: 24px;
+  height: 2px;
+  background-color: #1f2937;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+/* Hamburger to X animation */
+.open .hamburger-line:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.open .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.open .hamburger-line:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile menu transition */
+#mobile-menu {
+  transform: translateY(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+#mobile-menu.translate-y-0 {
+  transform: translateY(0);
+}
+
+/* Ensure proper stacking on mobile */
+@media (max-width: 1024px) {
+  .container {
+    text-align: center;
+  }
+  
+  .typewriter-h1,
+  .typewriter-p {
+    margin: 0 auto;
+  }
+} 
