@@ -11,18 +11,18 @@
 /* Heading specific styles */
 .typewriter-h1 {
   letter-spacing: 0.1em;
-  animation: typing-h1 2s steps(40, end) forwards;
+  animation: typing-h1 1.5s steps(40, end) forwards;
 }
 
 /* Paragraph animation - starts after heading finishes */
 .typewriter-p {
   opacity: 0;
-  animation: typing-p 2s steps(40, end) 2s forwards;
+  animation: typing-p 1.5s steps(40, end) 1.5s forwards;
 }
 
 /* Button appearance animation */
 .button-appear {
-  animation: fadeIn 0.5s ease-in 4s forwards;
+  animation: fadeIn 0.5s ease-in 3s forwards;
   letter-spacing: normal;
 }
 

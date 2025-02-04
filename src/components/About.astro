@@ -1,0 +1,61 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<section id="about" class="min-h-screen bg-white py-20 px-8">
+    <div class="container mx-auto">
+      <h2 class="text-5xl font-bold mb-16 opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
+        About Me
+      </h2>
+      
+      <div class="bg-gray-50 rounded-3xl p-12 shadow-lg opacity-0 transform translate-y-10 transition-all duration-700 ease-out delay-200 slide-up">
+        <p class="text-gray-700 text-2xl leading-relaxed mb-12">
+          I'm a passionate developer with 5+ years of experience building web applications. My focus is on creating clean, efficient, and user-friendly solutions.
+        </p>
+        
+        <div class="flex gap-8 items-center">
+          <a href="https://github.com/Kameleon21" class="text-gray-600 hover:text-gray-900 transition-colors" target="_blank">
+            <Icon name="mdi:github" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out"/>
+          </a>
+          <a href="https://www.linkedin.com/in/kamil-rogozinski/" class="text-gray-600 hover:text-gray-900 transition-colors" target="_blank">
+            <Icon name="mdi:linkedin" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out"/>
+          </a>
+          <a href="https://twitter.com/yourusername" class="text-gray-600 hover:text-gray-900 transition-colors" target="_blank">
+            <Icon name="mdi:instagram" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out"/>
+          </a>
+          <a href="mailto:kamilrogozinski29@gmail.com" class="text-gray-600 hover:text-gray-900 transition-colors" target="_blank">
+            <Icon name="mdi:email" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out"/>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+  
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('opacity-0', 'translate-y-10');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+  
+    // Observe elements with slide-up class
+    document.querySelectorAll('.slide-up').forEach((element) => {
+      observer.observe(element);
+    });
+  </script>
+  
+  <style>
+    .slide-up {
+      will-change: transform, opacity;
+    }
+  </style>
