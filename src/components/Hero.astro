@@ -5,37 +5,6 @@ import '../styles/hero.css';
 
 ---
 
-<nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 py-4 px-8 shadow-sm">
-  <div class="container mx-auto flex justify-between items-center">
-    <a href="/" class="text-2xl font-bold text-gray-800">Portfolio</a>
-    
-    <!-- Desktop Navigation -->
-    <div class="hidden lg:flex gap-8">
-      <a href="#about" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">About</a>
-      <a href="#work" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">Work</a>
-      <a href="blog" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">Blog</a>
-      <a href="/contact" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">Contact</a>
-    </div>
-
-    <!-- Hamburger button -->
-    <button id="menu-toggle" class="lg:hidden flex flex-col justify-center items-center w-8 h-8" aria-label="Toggle Menu">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-
-    <!-- Mobile Navigation -->
-    <div id="mobile-menu" class="fixed lg:hidden top-[4.5rem] left-0 w-full bg-white/95 backdrop-blur-sm py-4 px-8 transform -translate-y-full transition-transform duration-300 ease-in-out">
-      <div class="flex flex-col gap-4">
-        <a href="#about" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">About</a>
-        <a href="/work" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">Work</a>
-        <a href="/blog" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">Blog</a>
-        <a href="/contact" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">Contact</a>
-      </div>
-    </div>
-  </div>
-</nav>
-
 <section class="min-h-screen bg-gradient-to-r from-blue-500 to-purple-600 flex items-center px-8">
   <div class="container mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-8">
     <div class="text-white max-w-2xl">
@@ -58,15 +27,3 @@ import '../styles/hero.css';
     </div>
   </div>
 </section>
-
-<script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  let isOpen = false;
-
-  menuToggle?.addEventListener('click', () => {
-    isOpen = !isOpen;
-    menuToggle.classList.toggle('open', isOpen);
-    mobileMenu?.classList.toggle('translate-y-0', isOpen);
-  });
-</script>
