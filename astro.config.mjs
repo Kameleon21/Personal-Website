@@ -1,16 +1,21 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwindcss from "@tailwindcss/vite";
-
-
-import icon from "astro-icon";
+import tailwind from '@astrojs/tailwind';
+import icon from 'astro-icon';
 
 
 // https://astro.build/config
 export default defineConfig({
-  vite: {
-    plugins: [tailwindcss()],
-  },
-
-  integrations: [icon()],
+  integrations: [
+    tailwind({
+      applyBaseStyles: true,
+    }),
+    icon()
+  ],
+  markdown: {
+    shikiConfig: {
+      theme: 'dracula',
+      wrap: true
+    }
+  }
 });

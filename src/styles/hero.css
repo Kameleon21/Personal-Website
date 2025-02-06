@@ -12,12 +12,15 @@
 .typewriter-h1 {
   letter-spacing: 0.1em;
   animation: typing-h1 1.5s steps(40, end) forwards;
+  line-height: 1.2;
+  padding-bottom: 0.2em;
 }
 
 /* Paragraph animation - starts after heading finishes */
 .typewriter-p {
   opacity: 0;
   animation: typing-p 1.5s steps(40, end) 1.5s forwards;
+  line-height: 1.5;
 }
 
 /* Button appearance animation */
@@ -70,11 +73,24 @@
   user-select: none;
 }
 
-/* Reset white-space for mobile responsiveness after animation */
+/* Reset white-space and add wrapping for mobile responsiveness */
 @media (max-width: 768px) {
   .typewriter-h1,
   .typewriter-p {
     white-space: normal;
+    overflow: visible;
+  }
+  
+  /* Remove animations on mobile for better readability */
+  .typewriter-h1 {
+    animation: none;
+    width: 100%;
+  }
+  
+  .typewriter-p {
+    animation: none;
+    width: 100%;
+    opacity: 1;
   }
 }
 

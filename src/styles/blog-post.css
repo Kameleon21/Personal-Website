@@ -1,0 +1,36 @@
+/* Style code blocks */
+.prose pre {
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  position: relative;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  color: inherit;
+}
+
+/* Copy button styles */
+.copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+  color: #fff;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.copy-button.copied {
+  background: #22c55e;
+} 

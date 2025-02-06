@@ -12,7 +12,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
   <Header />
   <section class="min-h-screen bg-white py-20 px-8">
     <div class="container mx-auto max-w-6xl">
-      <h1 class="text-5xl font-bold mb-16">Latest Posts</h1>
+      <h1 class="text-5xl font-bold mb-16">All Posts</h1>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {sortedPosts.map((post) => (

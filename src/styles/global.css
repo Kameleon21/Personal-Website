@@ -1,1 +1,85 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Additional global styles */
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  font-weight: 400;
+}
+
+/* Merriweather font classes */
+.merriweather-light {
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+}
+
+.merriweather-regular {
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+}
+
+.merriweather-bold {
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+}
+
+.merriweather-black {
+  font-family: "Merriweather", serif;
+  font-weight: 900;
+}
+
+/* Italic variants */
+.merriweather-light-italic {
+  font-family: "Merriweather", serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.merriweather-regular-italic {
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.merriweather-bold-italic {
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.merriweather-black-italic {
+  font-family: "Merriweather", serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* Add these to your existing global.css */
+.funnel-sans-light {
+  font-family: "Funnel Sans", serif;
+  font-weight: 300;
+}
+
+.funnel-sans-regular {
+  font-family: "Funnel Sans", serif;
+  font-weight: 400;
+}
+
+.funnel-sans-medium {
+  font-family: "Funnel Sans", serif;
+  font-weight: 500;
+}
+
+.funnel-sans-semibold {
+  font-family: "Funnel Sans", serif;
+  font-weight: 600;
+}
+
+.funnel-sans-bold {
+  font-family: "Funnel Sans", serif;
+  font-weight: 700;
+}
+
+.funnel-sans-extrabold {
+  font-family: "Funnel Sans", serif;
+  font-weight: 800;
+}

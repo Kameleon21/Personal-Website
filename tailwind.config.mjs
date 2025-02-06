@@ -3,7 +3,25 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   darkMode: 'class', // Enable class-based dark mode
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['"Merriweather"', 'serif'], // This makes Merriweather the default font
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            'code::before': {
+              content: '""'
+            },
+            'code::after': {
+              content: '""'
+            }
+          }
+        }
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 } 

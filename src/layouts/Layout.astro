@@ -1,5 +1,12 @@
 ---
 import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title = "Kamil Rogozinski - Portfolio", description = "Personal portfolio and blog of Kamil Rogozinski" } = Astro.props;
 ---
 
 <!doctype html>
@@ -9,7 +16,20 @@ import '../styles/global.css';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Kamil - Personal Website</title>
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		
+		<!-- Add Merriweather font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+		
+		<!-- Add Funnel Sans font -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300,400,500,600,700,800&display=swap" rel="stylesheet">
+		
+		<!-- Your other head elements -->
 	</head>
 	<body>
 		<slot />
