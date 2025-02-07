@@ -2,9 +2,9 @@
 import { Icon } from 'astro-icon/components';
 ---
 
-<section id="about" class="min-h-screen bg-white py-20 px-8">
+<section id="about" class="min-h-screen bg-white py-20 px-8" aria-labelledby="about-heading">
     <div class="container mx-auto">
-      <h2 class="text-5xl font-bold mb-16 opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
+      <h2 id="about-heading" class="text-5xl font-bold mb-16 opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
         About Me
       </h2>
       
@@ -13,20 +13,52 @@ import { Icon } from 'astro-icon/components';
           I'm a passionate developer with 5+ years of experience building web applications. My focus is on creating clean, efficient, and user-friendly solutions.
         </p>
         
-        <div class="flex gap-8 items-center">
-          <a href="https://github.com/Kameleon21" class="text-gray-600 hover:text-gray-900 transition-colors" target="_blank">
-            <Icon name="mdi:github" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out"/>
-          </a>
-          <a href="https://www.linkedin.com/in/kamil-rogozinski/" class="text-gray-600 hover:text-gray-900 transition-colors" target="_blank">
-            <Icon name="mdi:linkedin" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out"/>
-          </a>
-          <a href="https://twitter.com/yourusername" class="text-gray-600 hover:text-gray-900 transition-colors" target="_blank">
-            <Icon name="mdi:instagram" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out"/>
-          </a>
-          <a href="mailto:kamilrogozinski29@gmail.com" class="text-gray-600 hover:text-gray-900 transition-colors" target="_blank">
-            <Icon name="mdi:email" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out"/>
-          </a>
-        </div>
+        <nav aria-label="Social media links">
+          <ul class="flex gap-8 items-center list-none p-0">
+            <li>
+              <a 
+                href="https://github.com/Kameleon21" 
+                class="text-gray-600 hover:text-gray-900 transition-colors" 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit my GitHub profile"
+              >
+                <Icon name="mdi:github" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
+              </a>
+            </li>
+            <li>
+              <a 
+                href="https://www.linkedin.com/in/kamil-rogozinski/" 
+                class="text-gray-600 hover:text-gray-900 transition-colors" 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Connect with me on LinkedIn"
+              >
+                <Icon name="mdi:linkedin" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
+              </a>
+            </li>
+            <li>
+              <a 
+                href="https://twitter.com/yourusername" 
+                class="text-gray-600 hover:text-gray-900 transition-colors" 
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Follow me on Instagram"
+              >
+                <Icon name="mdi:instagram" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
+              </a>
+            </li>
+            <li>
+              <a 
+                href="mailto:kamilrogozinski29@gmail.com" 
+                class="text-gray-600 hover:text-gray-900 transition-colors"
+                aria-label="Send me an email"
+              >
+                <Icon name="mdi:email" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </section>

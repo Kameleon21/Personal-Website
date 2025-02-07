@@ -1,0 +1,40 @@
+---
+interface Props {
+  activeTab: 'get-in-touch' | 'work-together';
+}
+
+const { activeTab } = Astro.props;
+---
+
+<div class="flex gap-4 mb-8" role="tablist" aria-label="Contact options">
+  <button 
+    class={`flex-1 py-3 px-6 rounded-full transition-all duration-300 text-center contact-tab ${activeTab === 'get-in-touch' ? 'active' : ''}`}
+    data-tab="get-in-touch"
+    role="tab"
+    aria-selected={activeTab === 'get-in-touch'}
+    aria-controls="contact-form"
+    id="tab-get-in-touch">
+    Get in Touch
+  </button>
+  <button 
+    class={`flex-1 py-3 px-6 rounded-full transition-all duration-300 text-center contact-tab ${activeTab === 'work-together' ? 'active' : ''}`}
+    data-tab="work-together"
+    role="tab"
+    aria-selected={activeTab === 'work-together'}
+    aria-controls="contact-form"
+    id="tab-work-together">
+    Work Together
+  </button>
+</div>
+
+<style>
+  .contact-tab {
+    background-color: white;
+    color: #64748b;
+  }
+
+  .contact-tab.active {
+    background-color: #3b82f6;
+    color: white;
+  }
+</style> 

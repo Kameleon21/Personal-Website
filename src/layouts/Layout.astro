@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 
 interface Props {
 	title?: string;
@@ -31,8 +33,12 @@ const { title = "Kamil Rogozinski - Portfolio", description = "Personal portfoli
 		
 		<!-- Your other head elements -->
 	</head>
-	<body>
-		<slot />
+	<body class="flex flex-col min-h-screen">
+		<Header />
+		<main class="flex-grow">
+			<slot />
+		</main>
+		<Footer />
 	</body>
 </html>
 
