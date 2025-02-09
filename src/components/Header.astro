@@ -1,116 +1,67 @@
 ---
+import '../styles/hamburger.css';
 ---
 
-<nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 py-4 px-8 shadow-sm">
+<nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-[100] py-4 px-8 shadow-sm">
   <div class="container mx-auto flex justify-between items-center relative">
-    <a href="/" class="text-2xl font-bold text-gray-800 z-50">Portfolio</a>
+    <a href="/" class="text-2xl font-bold text-gray-800 relative z-[102]">Portfolio</a>
     
     <!-- Desktop Navigation -->
     <div class="hidden lg:flex gap-8">
-      <a href="/#about" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">About</a>
-      <a href="/#work" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">Work</a>
-      <a href="/blog" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">Blog</a>
-      <a href="/#contact" class="text-xl text-gray-600 hover:text-gray-800 transition-colors">Contact</a>
+      <a href="/#about" class="text-xl text-gray-600 hover:text-indigo-600 transition-colors">About</a>
+      <a href="/#work" class="text-xl text-gray-600 hover:text-indigo-600 transition-colors">Work</a>
+      <a href="/blog" class="text-xl text-gray-600 hover:text-indigo-600 transition-colors">Blog</a>
+      <a href="/#contact" class="text-xl text-gray-600 hover:text-indigo-600 transition-colors">Contact</a>
     </div>
 
-    <!-- Hamburger button -->
+    <!-- Hamburger Menu Button -->
     <button 
-      id="menu-toggle" 
-      class="lg:hidden w-10 h-10 relative focus:outline-none z-50"
-      aria-label="Toggle Menu"
+      id="hamburger"
+      class="lg:hidden flex flex-col justify-center items-center w-12 h-12 relative focus:outline-none z-[102] gap-1.5 p-2.5 rounded-lg hover:bg-gray-100 transition-colors"
+      aria-label="Menu"
       aria-expanded="false"
-      aria-controls="mobile-menu"
     >
-      <span class="block absolute h-0.5 w-6 bg-gray-800 transform transition duration-500 ease-in-out -translate-y-1.5"></span>
-      <span class="block absolute h-0.5 w-6 bg-gray-800 transform transition duration-500 ease-in-out"></span>
-      <span class="block absolute h-0.5 w-6 bg-gray-800 transform transition duration-500 ease-in-out translate-y-1.5"></span>
+      <div class="w-6 h-0.5 bg-gray-800"></div>
+      <div class="w-6 h-0.5 bg-gray-800"></div>
+      <div class="w-6 h-0.5 bg-gray-800"></div>
     </button>
 
-    <!-- Mobile Navigation -->
+    <!-- Mobile Navigation Menu -->
     <div 
-      id="mobile-menu" 
-      class="fixed lg:hidden top-0 left-0 w-full h-screen bg-white py-20 px-8 transform -translate-y-full transition-transform duration-300 ease-in-out"
-      aria-hidden="true"
+      id="mobile-nav"
+      class="fixed left-0 right-0 top-[72px] bg-white shadow-lg z-[101] transform translate-y-[-100%] lg:hidden overflow-hidden"
     >
-      <div class="flex flex-col gap-6 items-center">
-        <a href="/#about" class="text-2xl text-gray-800 hover:text-blue-600 transition-colors">About</a>
-        <a href="/#work" class="text-2xl text-gray-800 hover:text-blue-600 transition-colors">Work</a>
-        <a href="/blog" class="text-2xl text-gray-800 hover:text-blue-600 transition-colors">Blog</a>
-        <a href="/#contact" class="text-2xl text-gray-800 hover:text-blue-600 transition-colors">Contact</a>
+      <div class="container mx-auto">
+        <div class="flex flex-col px-8">
+          <a href="/#about" 
+            class="py-4 text-lg text-gray-800 hover:bg-gray-50 hover:text-indigo-600 transition-all font-medium border-b border-gray-100" 
+            style="--index: 0">
+            About
+          </a>
+          <a href="/#work" 
+            class="py-4 text-lg text-gray-800 hover:bg-gray-50 hover:text-indigo-600 transition-all font-medium border-b border-gray-100" 
+            style="--index: 1">
+            Work
+          </a>
+          <a href="/blog" 
+            class="py-4 text-lg text-gray-800 hover:bg-gray-50 hover:text-indigo-600 transition-all font-medium border-b border-gray-100" 
+            style="--index: 2">
+            Blog
+          </a>
+          <a href="/#contact" 
+            class="py-4 text-lg text-gray-800 hover:bg-gray-50 hover:text-indigo-600 transition-all font-medium" 
+            style="--index: 3">
+            Contact
+          </a>
+        </div>
       </div>
     </div>
   </div>
 </nav>
 
-<style>
-  /* Hamburger menu animation styles */
-  #menu-toggle span {
-    @apply absolute left-2 right-2;
-    transform-origin: center;
-  }
-
-  #menu-toggle.open span:first-child {
-    @apply rotate-45 translate-y-0;
-  }
-
-  #menu-toggle.open span:nth-child(2) {
-    @apply opacity-0;
-  }
-
-  #menu-toggle.open span:last-child {
-    @apply -rotate-45 translate-y-0;
-  }
-
-  /* Mobile menu animation */
-  #mobile-menu.open {
-    @apply translate-y-0;
-  }
-</style>
-
 <script>
-  const menuToggle = document.getElementById('menu-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const body = document.body;
-  let isOpen = false;
-
-  // Menu toggle click handler
-  menuToggle?.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevent event from bubbling up
-    isOpen = !isOpen;
-    toggleMenu(isOpen);
+  import { initMobileMenu } from '../scripts/header.js';
+  document.addEventListener('DOMContentLoaded', () => {
+    initMobileMenu();
   });
-
-  // Close menu when clicking on mobile menu links
-  mobileMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      isOpen = false;
-      toggleMenu(false);
-    });
-  });
-
-  // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    const target = e.target as Node;
-    if (isOpen && !menuToggle?.contains(target) && !mobileMenu?.contains(target)) {
-      isOpen = false;
-      toggleMenu(false);
-    }
-  });
-
-  // Close menu when pressing Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && isOpen) {
-      isOpen = false;
-      toggleMenu(false);
-    }
-  });
-
-  // Helper function to toggle menu state
-  function toggleMenu(open: boolean) {
-    menuToggle?.classList.toggle('open', open);
-    menuToggle?.setAttribute('aria-expanded', open.toString());
-    mobileMenu?.classList.toggle('open', open);
-    mobileMenu?.setAttribute('aria-hidden', (!open).toString());
-    body.style.overflow = open ? 'hidden' : '';
-  }
 </script> 

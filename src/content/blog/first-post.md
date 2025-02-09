@@ -1,6 +1,6 @@
 ---
-title: "Exploring Astro: The Future of Static Site Generation"
-description: "A comprehensive guide to Astro's features and capabilities"
+title: "My First Blog Post"
+description: "This is a brief description of my first blog post."
 pubDate: 2025-02-06
 author: "Kamil"
 image: "/blog/first-post.jpg"
@@ -39,12 +39,6 @@ Embarking on an Astro project is a seamless process:
    ```bash
    npm run dev
    ```
-4. **Explore the Project Structure**:
-    ``` js
-    src/
-    public/
-    astro.config.mjs
-    ```
 
 ## Understanding Astro's Project Structure
 

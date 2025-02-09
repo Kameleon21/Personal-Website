@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "A-Class-Barbers Website",
-      "description": "A brief description of the project and the technologies used.",
+      "description": "A website for a local barber shop that allows customers to book appointments and view the shop's services. Built with Astro.js, Tailwind CSS, and TypeScript.",
       "image": "/assets/A-Class-Barbers.jpeg",
       "link": "https://www.aclassbarbers.com",
       "githubLink": "https://github.com/Kameleon21/A-Class-Barber"
@@ -11,7 +11,7 @@
     {
       "id": 2,
       "title": "This Personal Website",
-      "description": "A brief description of the project and the technologies used.",
+      "description": "Personal website built with Astro.js, Tailwind CSS, and TypeScript. This is the website you are currently on.",
       "image": "../assets/Personal-Website.jpeg",
       "link": "https://project2.com",
       "githubLink": "https://github.com/Kameleon21/Personal-Website"

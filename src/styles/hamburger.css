@@ -1,0 +1,59 @@
+/* Hamburger button styles */
+#hamburger div {
+  transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out, background-color 0.3s ease-in-out;
+  transform-origin: center;
+}
+
+#hamburger:hover div {
+  background-color: #4F46E5; /* Indigo-600 */
+}
+
+#hamburger.active div {
+  background-color: #4F46E5;
+}
+
+#hamburger.active div:first-child {
+  transform: translateY(6px) rotate(45deg);
+}
+
+#hamburger.active div:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+
+#hamburger.active div:last-child {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Mobile navigation styles */
+#mobile-nav {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+#mobile-nav.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Mobile nav links animation */
+#mobile-nav a {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease-out;
+  transition-delay: calc(var(--index) * 0.075s);
+}
+
+#mobile-nav.active a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hover effect for mobile nav links */
+#mobile-nav a:hover {
+  background-color: #F9FAFB;
+  padding-left: 2rem;
+} 
