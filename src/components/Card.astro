@@ -1,22 +1,33 @@
 ---
-import Image from 'astro/components/Image.astro';
+import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import personalWebsite from '../assets/Personal-Website.jpeg';
+import barberShop from '../assets/A-Class-Barbers.jpeg';
+
+const images: Record<string, ImageMetadata> = {
+  'Personal-Website.jpeg': personalWebsite,
+  'A-Class-Barbers.jpeg': barberShop
+};
+
 interface Props {
   title: string;
   description: string;
   image: string;
   link: string;
+  githubLink: string;
 }
 
-const { title, description, image, link } = Astro.props;
+const { title, description, image, link, githubLink } = Astro.props;
+const imageFileName = image.split('/').pop() || '';
+const imageSource = images[imageFileName] || image;
 ---
 
 <div class="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 transform translate-y-10 slide-up">
   <div class="aspect-video rounded-2xl overflow-hidden mb-6">
     <Image 
-      src={image}
+      src={imageSource}
       width={800}
       height={450}
-      loading={'lazy'}
       alt={title}
       class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
     />
@@ -25,15 +36,28 @@ const { title, description, image, link } = Astro.props;
   <h3 class="text-2xl font-bold mb-4">{title}</h3>
   <p class="text-gray-600 mb-6">{description}</p>
   
-  <a 
-    href={link}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="inline-flex items-center text-blue-500 hover:text-blue-600 transition-colors"
-  >
-    View Project
-    <svg class="w-5 h-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-    </svg>
-  </a>
+  <div class="flex gap-4 justify-center">
+    {githubLink && (
+      <a 
+        href={githubLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center p-2 rounded-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-all cursor-pointer"
+        aria-label="View GitHub Repository"
+      >
+        <Icon name="mdi:github" class="w-6 h-6" />
+      </a>
+    )}
+    {link && (
+      <a 
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center p-2 rounded-full text-gray-700 hover:text-gray-900 hover:bg-gray-100 transition-all cursor-pointer"
+        aria-label="View Live Project"
+      >
+        <Icon name="mdi:web" class="w-6 h-6" />
+      </a>
+    )}
+  </div>
 </div> 

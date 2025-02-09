@@ -2,31 +2,19 @@
   "projects": [
     {
       "id": 1,
-      "title": "Project 1",
+      "title": "A-Class-Barbers Website",
       "description": "A brief description of the project and the technologies used.",
-      "image": "/assets/project1.jpg",
-      "link": "https://project1.com"
+      "image": "/assets/A-Class-Barbers.jpeg",
+      "link": "https://www.aclassbarbers.com",
+      "githubLink": "https://github.com/Kameleon21/A-Class-Barber"
     },
     {
       "id": 2,
-      "title": "Project 2",
+      "title": "This Personal Website",
       "description": "A brief description of the project and the technologies used.",
-      "image": "/assets/project2.jpg",
-      "link": "https://project2.com"
-    },
-    {
-      "id": 3,
-      "title": "Project 3",
-      "description": "A brief description of the project and the technologies used.",
-      "image": "/assets/project3.jpg",
-      "link": "https://project3.com"
-    },
-    {
-      "id": 4,
-      "title": "Project 4",
-      "description": "A brief description of the project and the technologies used.",
-      "image": "/assets/project4.jpg",
-      "link": "https://project4.com"
+      "image": "../assets/Personal-Website.jpeg",
+      "link": "https://project2.com",
+      "githubLink": "https://github.com/Kameleon21/Personal-Website"
     }
   ]
-} 
+}
