@@ -1,48 +1,127 @@
-# Astro Starter Kit: Basics
+# Personal Portfolio Website
 
-```sh
-npm create astro@latest -- --template basics
+A modern, responsive portfolio website built with Astro, TailwindCSS, and TypeScript. View it live at [kamilrogozinski.github.io/Personal-Website](https://kamilrogozinski.github.io/Personal-Website).
+
+## 🚀 Features
+
+- **Modern Stack**: Built with Astro for optimal performance and TailwindCSS for styling
+- **Responsive Design**: Fully responsive layout that works on all devices
+- **Performance Optimized**: 
+  - Automatic asset compression
+  - Minimal JavaScript usage
+  - Optimized images and assets
+- **Smooth Animations**: Custom animations for enhanced user experience
+- **Blog Ready**: Pre-configured blog section (coming soon)
+- **Type Safe**: Built with TypeScript for better development experience
+
+## 🛠️ Tech Stack
+
+- [Astro](https://astro.build) - Static Site Generator
+- [TailwindCSS](https://tailwindcss.com) - Styling
+- [TypeScript](https://www.typescriptlang.org/) - Type Safety
+- [GitHub Actions](https://github.com/features/actions) - CI/CD
+- [GitHub Pages](https://pages.github.com/) - Hosting
+
+## � Project Structure
+
 ```
-
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
 /
-├── public/
-│   └── favicon.svg
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── assets/         # Static assets (images, etc.)
+│   ├── components/     # Reusable Astro components
+│   ├── content/        # Blog content (markdown)
+│   ├── data/          # Static data files
+│   ├── layouts/       # Page layouts
+│   ├── pages/         # Page components
+│   ├── scripts/       # Client-side JavaScript
+│   ├── styles/        # Global styles and CSS
+│   └── utils/         # Utility functions
+├── public/            # Static files
+└── package.json       # Project dependencies
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🚀 Getting Started
 
-## 🧞 Commands
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Kameleon21/Personal-Website.git
+   ```
 
-All commands are run from the root of the project, from a terminal:
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-## 👀 Want to learn more?
+4. Build for production:
+   ```bash
+   npm run build
+   ```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🔧 Configuration
+
+- `astro.config.mjs` - Astro configuration
+- `tailwind.config.cjs` - TailwindCSS configuration
+- `.github/workflows/deploy.yml` - GitHub Actions deployment workflow
+
+## 🎨 Customization
+
+### Typography
+- Uses Merriweather for headings
+- Uses Funnel Sans for body text
+- Custom utility classes for typography in `src/styles/global.css`
+
+### Colors
+- Primary gradient: Blue to Purple
+- Accent colors: Indigo
+- Text colors: Gray scale
+
+### Components
+- Responsive navigation with hamburger menu
+- Animated hero section
+- Blog section (ready for content)
+- Contact form
+- Work showcase
+
+## 📱 Mobile Optimization
+
+- Touch-friendly navigation
+- Optimized typography for mobile screens
+- Proper spacing and padding for mobile devices
+- Improved touch targets (44px minimum)
+
+## 🚀 Deployment
+
+The site automatically deploys to GitHub Pages when pushing to the master branch. The deployment process:
+
+1. Builds the site using Astro
+2. Optimizes and compresses assets
+3. Deploys to GitHub Pages
+4. Available at kamilrogozinski.github.io/Personal-Website
+
+## 🔍 SEO
+
+- Proper meta tags
+- Semantic HTML structure
+- Optimized for search engines
+- Fast loading times
+
+## � Performance Optimizations
+
+- CSS and JavaScript minification
+- Image optimization
+- Lazy loading for images
+- Minimal JavaScript usage
+- Asset compression
+
+## 🤝 Contributing
+
+Feel free to submit issues and enhancement requests.
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
