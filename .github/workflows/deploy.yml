@@ -1,5 +1,6 @@
 name: Deploy to GitHub Pages
 
+# This workflow will deploy your project to GitHub Pages
 on:
   # Trigger the workflow every time you push to the `master` branch
   push:
