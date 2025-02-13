@@ -17,5 +17,7 @@ export default defineConfig({
       theme: 'dracula',
       wrap: true
     }
-  }
+  },
+  site: 'https://kamilrogozinski.github.io',
+  base: '/Personal-Website',
 });
