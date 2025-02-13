@@ -1,43 +1,23 @@
 ---
-import { getCollection } from 'astro:content';
-import BlogCard from './BlogCard.astro';
-
-const allPosts = await getCollection('blog');
-const latestPosts = allPosts
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3); // Only show latest 3 posts
+// Remove blog collection imports since we're not using them yet
 ---
 
 <section id="blog" class="min-h-screen bg-gray-50 py-20 px-8">
   <div class="container mx-auto">
     <div class="flex justify-between items-center mb-16">
       <h2 class="text-5xl font-bold opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
-        Latest Posts
+        Blog
       </h2>
-      <a 
-        href="/blog" 
-        class="text-blue-500 hover:text-blue-600 flex items-center group"
-      >
-        View all posts
-        <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor">
-          <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-        </svg>
-      </a>
     </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {latestPosts.map((post, index) => (
-        <div 
-          class="opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up"
-          style={`transition-delay: ${index * 200}ms`}
-        >
-          <BlogCard
-            title={post.data.title}
-            description={post.data.description}
-            slug={post.slug}
-          />
-        </div>
-      ))}
+    <div class="flex flex-col items-center justify-center py-20 opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
+      <div class="text-center max-w-2xl">
+        <h3 class="text-3xl font-bold text-gray-800 mb-4">Coming Soon</h3>
+        <p class="text-xl text-gray-600">
+          I'm working on some exciting blog posts about web development, design, and technology. 
+          Stay tuned for insightful content coming your way!
+        </p>
+      </div>
     </div>
   </div>
 </section>
