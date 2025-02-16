@@ -2,7 +2,7 @@
 title: "First Client Lessons"
 description: "Lessons learned from my first client project"
 pubDate: 2025-02-16
-image: "/src/assets/client-blog.jpeg"
+image: "public/client-blog.jpeg"
 author: "Kamil Rogozinski"
 tags: ["client","new-tech","astro"]
 ---
