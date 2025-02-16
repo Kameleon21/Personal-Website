@@ -9,7 +9,7 @@ const blogCollection = defineCollection({
     author: z.string(),
     image: z.string().optional(),
     tags: z.array(z.string()).default([]),
-  })
+  }),
 });
 
 export const collections = {

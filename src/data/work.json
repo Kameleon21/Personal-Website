@@ -1,19 +1,18 @@
 {
   "projects": [
     {
-      "id": 1,
-      "title": "A-Class-Barbers Website",
-      "description": "A website for a local barber shop that allows customers to book appointments and view the shop's services. Built with Astro.js, Tailwind CSS, and TypeScript.",
-      "image": "/assets/A-Class-Barbers.jpeg",
-      "link": "https://www.aclassbarbers.com",
-      "githubLink": "https://github.com/Kameleon21/A-Class-Barber"
+      "title": "A Class Barbers",
+      "description": "A modern website for a barbershop, featuring online booking and service showcase.",
+      "image": "/A-Class-Barbers.jpeg",
+      "link": "https://aclassbarbers.com/",
+      "githubLink": "https://github.com/Kameleon21/A-Class-Barbers"
     },
     {
       "id": 2,
       "title": "This Personal Website",
       "description": "Personal website built with Astro.js, Tailwind CSS, and TypeScript. This is the website you are currently on.",
       "image": "../assets/Personal-Website.jpeg",
-      "link": "https://project2.com",
+      "link": "https://kameleon21.github.io/Personal-Website/",
       "githubLink": "https://github.com/Kameleon21/Personal-Website"
     }
   ]
