@@ -1,7 +1,7 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import icon from 'astro-icon';
+import { defineConfig } from "astro/config";
+import tailwind from "@astrojs/tailwind";
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
@@ -9,14 +9,15 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: true,
     }),
-    icon()
+    icon(),
   ],
   markdown: {
     shikiConfig: {
-      theme: 'dracula',
-      wrap: true
-    }
+      theme: "dracula",
+      wrap: true,
+    },
   },
-  site: 'https://kamilrogozinski.github.io',
-  base: '/Personal-Website',
+  site: "https://kamilrogozinski.github.io",
+  base: "/Personal-Website/",
 });
+

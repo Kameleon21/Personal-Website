@@ -2,9 +2,9 @@
 title: "First Client Lessons"
 description: "Lessons learned from my first client project"
 pubDate: 2025-02-16
-image: "images/client-blog.jpeg"
+image: "/Personal-Website/images/client-blog.jpeg"
 author: "Kamil Rogozinski"
-tags: ["client","new-tech","astro"]
+tags: ["client", "new-tech", "astro"]
 ---
 
 # Overview of my first client project
@@ -23,7 +23,7 @@ The website needed the following sections:
 - **Community** – Highlighting the barbershop's contributions to the local community (charity drives, events, etc.).
 - **About / Meet the Team** – Images of the barbers and their roles in the shop.
 - **Contact** – Location, shop hours, and a Google Maps embed for directions.
-- **Shop** – *(Future)* A list of products and services offered by the barbers.
+- **Shop** – _(Future)_ A list of products and services offered by the barbers.
 
 Since this is a local barbershop, the goal was to create a straightforward static site that loads quickly and doesn’t bombard visitors with unnecessary scripts. In other words, it had to be simple to navigate and friendly for both desktop and mobile users.
 
@@ -98,8 +98,8 @@ Another challenge was making sure the site performed well and scored highly on L
 - **Minimal JavaScript**: Astro naturally limits client-side JS, which boosted my Lighthouse score for Performance and Best Practices.
 - **Meta Tags & Semantic HTML**: Simple SEO wins like `meta` descriptions, proper heading hierarchy, and alt text on images go a long way toward high SEO scores.
 - **Avoiding Over-Optimizing**: Chasing a perfect Lighthouse score can lead to diminishing returns. I realized that real-world user experience should take precedence over perfection in test metrics (although it’s still nice to see the 100s!).
-  
-Even after spending some time tuning the site, I still find that the site does not always rank well on google search results. I think this is an area where I need to do more research and improve in. 
+
+Even after spending some time tuning the site, I still find that the site does not always rank well on google search results. I think this is an area where I need to do more research and improve in.
 
 ---
 
@@ -122,3 +122,4 @@ This project was my first step into blending a new JavaScript framework (Astro) 
 We are currently in discussion of adding a shop section to the site for e-vouchers to the barbershop. I’ve started looking into possible solutions, but it’s a bit more complex than I initially thought. I'll be sure to write about it in a future post if we go ahead with it.
 
 Thanks for reading! If you have any questions about Astro, Netlify, or pulling data from the Google Places API, feel free to reach out using the form on the [contact page](https://kameleon21.github.io/Personal-Website/#contact).
+
