@@ -1,12 +1,12 @@
 # Personal Portfolio Website
 
-A modern, responsive portfolio website built with Astro, TailwindCSS, and TypeScript. View it live at [kamilrogozinski.github.io/Personal-Website](https://kamilrogozinski.github.io/Personal-Website).
+A modern, responsive portfolio website built with Astro, TailwindCSS, and TypeScript. View it live at [https://kameleon21.github.io/Personal-Website/].
 
 ## 🚀 Features
 
 - **Modern Stack**: Built with Astro for optimal performance and TailwindCSS for styling
 - **Responsive Design**: Fully responsive layout that works on all devices
-- **Performance Optimized**: 
+- **Performance Optimized**:
   - Automatic asset compression
   - Minimal JavaScript usage
   - Optimized images and assets
@@ -43,21 +43,25 @@ A modern, responsive portfolio website built with Astro, TailwindCSS, and TypeSc
 ## 🚀 Getting Started
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/Kameleon21/Personal-Website.git
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
 
 3. Start the development server:
+
    ```bash
    npm run dev
    ```
 
 4. Build for production:
+
    ```bash
    npm run build
    ```
@@ -71,16 +75,19 @@ A modern, responsive portfolio website built with Astro, TailwindCSS, and TypeSc
 ## 🎨 Customization
 
 ### Typography
+
 - Uses Merriweather for headings
 - Uses Funnel Sans for body text
 - Custom utility classes for typography in `src/styles/global.css`
 
 ### Colors
+
 - Primary gradient: Blue to Purple
 - Accent colors: Indigo
 - Text colors: Gray scale
 
 ### Components
+
 - Responsive navigation with hamburger menu
 - Animated hero section
 - Blog section (ready for content)
