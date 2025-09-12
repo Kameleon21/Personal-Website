@@ -3,10 +3,16 @@ import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import personalWebsite from '../assets/Personal-Website.jpeg';
 import barberShop from '../assets/A-Class-Barbers.jpeg';
+import ceEquipmentSolutions from '../assets/ce-equipment-solutions.png';
+import iso9001 from '../assets/iso9001.png';
 
 const images: Record<string, ImageMetadata> = {
   'Personal-Website.jpeg': personalWebsite,
-  'A-Class-Barbers.jpeg': barberShop
+  'A-Class-Barbers.jpeg': barberShop,
+  'CE-Equipment-Solutions.jpeg': ceEquipmentSolutions,
+  'ce-equipment-solutions.png': ceEquipmentSolutions,
+  'ARC-Management-Systems.jpeg': iso9001,
+  'iso9001.png': iso9001
 };
 
 interface Props {
@@ -15,28 +21,50 @@ interface Props {
   image: string;
   link: string;
   githubLink: string;
+  technologies?: string[];
 }
 
-const { title, description, image, link, githubLink } = Astro.props;
+const { title, description, image, link, githubLink, technologies } = Astro.props;
 const imageFileName = image.split('/').pop() || '';
-const imageSource = images[imageFileName] || image;
+const imageSource = images[imageFileName];
+const hasValidImage = imageSource !== undefined;
 ---
 
-<div class="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 transform translate-y-10 slide-up">
-  <div class="aspect-video rounded-2xl overflow-hidden mb-6">
-    <Image 
-      src={imageSource}
-      width={800}
-      height={450}
-      alt={title}
-      class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-    />
+<div class="bg-white dark:bg-gray-700 rounded-3xl p-6 shadow-lg dark:shadow-gray-600/20 hover:shadow-xl dark:hover:shadow-gray-600/30 transition-all duration-300 opacity-0 transform translate-y-10 slide-up h-full flex flex-col">
+  <div class="aspect-video rounded-2xl overflow-hidden mb-6 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+    {hasValidImage ? (
+      <Image 
+        src={imageSource}
+        width={800}
+        height={450}
+        alt={title}
+        class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+      />
+    ) : (
+      <div class="text-white text-center p-8">
+        <Icon name="mdi:web" class="w-16 h-16 mx-auto mb-4 opacity-80" />
+        <p class="text-lg font-semibold opacity-90">{title}</p>
+        <p class="text-sm opacity-70 mt-2">Project Screenshot Coming Soon</p>
+      </div>
+    )}
   </div>
   
-  <h3 class="text-2xl font-bold mb-4">{title}</h3>
-  <p class="text-gray-600 mb-6">{description}</p>
+  <div class="flex-grow flex flex-col">
+    <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{title}</h3>
+    <p class="text-gray-600 dark:text-gray-300 mb-4 flex-grow">{description}</p>
+    
+    {technologies && technologies.length > 0 && (
+      <div class="flex flex-wrap gap-2 mb-6">
+        {technologies.map((tech) => (
+          <span class="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-full font-medium">
+            {tech}
+          </span>
+        ))}
+      </div>
+    )}
+  </div>
   
-  <div class="flex gap-4 justify-center">
+  <div class="flex gap-4 justify-center mt-auto">
     {githubLink && (
       <a 
         href={githubLink}

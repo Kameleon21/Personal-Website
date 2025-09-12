@@ -1,0 +1,98 @@
+---
+import { Icon } from 'astro-icon/components';
+---
+
+<button
+  id="back-to-top"
+  class="fixed bottom-8 right-8 z-[150] p-4 rounded-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none translate-y-4"
+  aria-label="Back to top"
+  title="Back to top"
+>
+  <Icon 
+    name="mdi:chevron-up" 
+    class="w-6 h-6 transition-transform duration-300 hover:scale-110" 
+  />
+</button>
+
+<script>
+  function initBackToTop() {
+    const backToTopButton = document.getElementById('back-to-top');
+    let isVisible = false;
+    
+    function toggleVisibility() {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const shouldShow = scrollTop > 300;
+      
+      if (shouldShow && !isVisible) {
+        isVisible = true;
+        backToTopButton?.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+        backToTopButton?.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      } else if (!shouldShow && isVisible) {
+        isVisible = false;
+        backToTopButton?.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+        backToTopButton?.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+      }
+    }
+    
+    function scrollToTop() {
+      // Add click animation
+      backToTopButton?.classList.add('scale-95');
+      setTimeout(() => {
+        backToTopButton?.classList.remove('scale-95');
+      }, 150);
+      
+      // Smooth scroll to top
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // Throttled scroll listener for better performance
+    let ticking = false;
+    function handleScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          toggleVisibility();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+    
+    // Add event listeners
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    backToTopButton?.addEventListener('click', scrollToTop);
+    
+    // Initial check
+    toggleVisibility();
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBackToTop);
+  } else {
+    initBackToTop();
+  }
+</script>
+
+<style>
+  #back-to-top {
+    backdrop-filter: blur(10px);
+  }
+  
+  #back-to-top:hover {
+    transform: translateY(-2px);
+  }
+  
+  #back-to-top.scale-95 {
+    transform: scale(0.95) translateY(-2px);
+  }
+  
+  /* Ensure it doesn't interfere with dark mode toggle */
+  @media (max-width: 768px) {
+    #back-to-top {
+      bottom: 6rem;
+    }
+  }
+</style>

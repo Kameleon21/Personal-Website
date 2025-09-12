@@ -11,12 +11,12 @@
     "new-post": "node scripts/new-post.js"
   },
   "dependencies": {
-    "@astrojs/markdown-remark": "^6.1.0",
+    "@astrojs/markdown-remark": "^6.3.6",
     "@iconify-json/mdi": "^1.2.3",
-    "astro": "^5.2.3"
+    "astro": "^5.13.7"
   },
   "devDependencies": {
-    "@astrojs/tailwind": "^5.1.5",
+    "@astrojs/tailwind": "^6.0.2",
     "@iconify-json/ic": "^1.2.2",
     "@tailwindcss/typography": "^0.5.16",
     "astro-icon": "^1.1.5",

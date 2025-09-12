@@ -1,19 +1,37 @@
 {
   "projects": [
     {
-      "title": "A Class Barbers",
-      "description": "A modern website for a barbershop, featuring online booking and service showcase.",
-      "image": "/A-Class-Barbers.jpeg",
-      "link": "https://aclassbarbers.com/",
-      "githubLink": "https://github.com/Kameleon21/A-Class-Barber"
+      "title": "CE Equipment Solutions",
+      "description": "Professional B2B website for Ireland's leading CE marking consultancy. Built with Astro 5.9, React 19, and TypeScript featuring GDPR-compliant cookie system, dynamic service routing, and advanced lead generation.",
+      "image": "/ce-equipment-solutions.png",
+      "link": "https://ceequipmentsolutions.com/",
+      "githubLink": "https://github.com/Kameleon21/CE-Equipment-Solutions",
+      "technologies": ["Astro", "React", "TypeScript", "Tailwind CSS", "GDPR Compliance"]
     },
     {
-      "id": 2,
+      "title": "ARC Management Systems",
+      "description": "High-performance ISO certification consultancy website with advanced contact forms, performance optimization, and SEO. Features TypeScript throughout, WebP optimization, and Netlify integration with 95+ Lighthouse scores.",
+      "image": "/iso9001.png",
+      "link": "https://iso9001.ie/",
+      "githubLink": "https://github.com/Kameleon21/ARC-Management-Systems",
+      "technologies": ["Astro", "TypeScript", "Tailwind CSS", "Netlify", "Performance Optimization"]
+    },
+    {
+      "title": "A Class Barbers",
+      "description": "A modern website for a barbershop, featuring online booking and service showcase. Static site with Google Places API integration, Google Maps embed, and responsive design optimized for local business.",
+      "image": "/A-Class-Barbers.jpeg",
+      "link": "https://aclassbarbers.com/",
+      "githubLink": "https://github.com/Kameleon21/A-Class-Barber",
+      "technologies": ["Astro", "JavaScript", "Google Places API", "Google Maps", "Netlify"]
+    },
+    {
+      "id": 4,
       "title": "This Personal Website",
-      "description": "Personal website built with Astro.js, Tailwind CSS, and TypeScript. This is the website you are currently on.",
+      "description": "Personal website built with Astro.js, Tailwind CSS, and TypeScript. Features blog system, contact forms, responsive design, and performance optimization with WebP images.",
       "image": "../assets/Personal-Website.jpeg",
       "link": "https://kameleon21.github.io/Personal-Website/",
-      "githubLink": "https://github.com/Kameleon21/Personal-Website"
+      "githubLink": "https://github.com/Kameleon21/Personal-Website",
+      "technologies": ["Astro", "TypeScript", "Tailwind CSS", "Web3Forms", "GitHub Pages"]
     }
   ]
 }

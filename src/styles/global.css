@@ -55,32 +55,32 @@
 
 /* Add these to your existing global.css */
 .funnel-sans-light {
-  font-family: "Funnel Sans", serif;
+  font-family: "Funnel Sans", sans-serif;
   font-weight: 300;
 }
 
 .funnel-sans-regular {
-  font-family: "Funnel Sans", serif;
+  font-family: "Funnel Sans", sans-serif;
   font-weight: 400;
 }
 
 .funnel-sans-medium {
-  font-family: "Funnel Sans", serif;
+  font-family: "Funnel Sans", sans-serif;
   font-weight: 500;
 }
 
 .funnel-sans-semibold {
-  font-family: "Funnel Sans", serif;
+  font-family: "Funnel Sans", sans-serif;
   font-weight: 600;
 }
 
 .funnel-sans-bold {
-  font-family: "Funnel Sans", serif;
+  font-family: "Funnel Sans", sans-serif;
   font-weight: 700;
 }
 
 .funnel-sans-extrabold {
-  font-family: "Funnel Sans", serif;
+  font-family: "Funnel Sans", sans-serif;
   font-weight: 800;
 }
 
