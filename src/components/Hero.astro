@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import HeroImage from '../assets/Hero-Image.JPG';
 import '../styles/hero.css';
 ---
@@ -21,11 +22,14 @@ import '../styles/hero.css';
     </div>
     
     <div class="w-64 h-64 lg:w-96 lg:h-96 bg-white rounded-full flex-shrink-0">
-      <img 
-        src={HeroImage.src} 
-        alt="Kamil"
+      <Image 
+        src={HeroImage} 
+        alt="Kamil Rogozinski - Full Stack Developer"
         class="w-full h-full object-cover rounded-full"
+        width={384}
+        height={384}
         loading="eager"
+        fetchpriority="high"
       />
     </div>
   </div>
