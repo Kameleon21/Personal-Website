@@ -4,13 +4,17 @@ import { Image } from 'astro:assets';
 import personalWebsite from '../assets/Personal-Website.jpeg';
 import barberShop from '../assets/A-Class-Barbers.jpeg';
 import ceEquipmentSolutions from '../assets/ce-equipment-solutions.png';
+import groupDinnerPicker from '../assets/Group-Picker.png';
 import iso9001 from '../assets/iso9001.png';
 
 const images: Record<string, ImageMetadata> = {
   'Personal-Website.jpeg': personalWebsite,
   'A-Class-Barbers.jpeg': barberShop,
   'CE-Equipment-Solutions.jpeg': ceEquipmentSolutions,
+  'Group-Picker.png': groupDinnerPicker,
   'ce-equipment-solutions.png': ceEquipmentSolutions,
+  'group-picker.png': groupDinnerPicker,
+  'group-dinner-picker.png': groupDinnerPicker,
   'ARC-Management-Systems.jpeg': iso9001,
   'iso9001.png': iso9001
 };
@@ -30,7 +34,7 @@ const imageSource = images[imageFileName];
 const hasValidImage = imageSource !== undefined;
 ---
 
-<div class="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 transform translate-y-10 slide-up h-full flex flex-col">
+<div class="bg-white rounded-3xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 transform translate-y-10 slide-up h-full flex flex-col motion-safe:hover:-translate-y-3 motion-safe:hover:scale-[1.02] motion-safe:focus-within:-translate-y-3 motion-safe:focus-within:scale-[1.02]">
   <div class="aspect-video rounded-2xl overflow-hidden mb-6 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
     {hasValidImage ? (
       <Image 
