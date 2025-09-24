@@ -1,6 +1,14 @@
 {
   "projects": [
     {
+      "title": "Group Dinner Picker",
+      "description": "Collaborative restaurant voting platform with a retro terminal UI and Spring Boot API enforcing fair voting, locking, and live stats across web clients.",
+      "image": "/Group-Picker.png",
+      "link": "",
+      "githubLink": "https://github.com/Kameleon21/group-dinner-picker",
+      "technologies": ["Spring Boot", "React", "TypeScript", "Tailwind CSS", "Docker"]
+    },
+    {
       "title": "CE Equipment Solutions",
       "description": "Professional B2B website for Ireland's leading CE marking consultancy. Built with Astro 5.9, React 19, and TypeScript featuring GDPR-compliant cookie system, dynamic service routing, and advanced lead generation.",
       "image": "/ce-equipment-solutions.png",
