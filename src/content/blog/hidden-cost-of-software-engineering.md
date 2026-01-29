@@ -6,7 +6,7 @@ author: "Kamil Rogozinski"
 tags: ["AI", "software-engineering", "opinion"]
 ---
 
-If you're like me, you've noticed the recent surge in AI CLI tools—Claude Code, Codex, OpenCode, and others. We live in a time where anyone can build software. Got an idea to streamline your data analytics with a custom dashboard? Subscribe to a plan, guide the model, and watch it create what you need. Hit your limit? Upgrade to the next tier and keep going.
+If you're like me, you've noticed the surge in AI tools—Claude Code, Codex, OpenCode, and others. We live in a time where anyone can build software. Got an idea for a custom dashboard? Subscribe to a plan, guide the model, watch it create what you need. Hit your limit? Upgrade to the next tier and keep going.
 
 It's remarkable, really. The barrier to creating software has never been lower.
 
@@ -18,40 +18,64 @@ Now the path of least resistance runs through a subscription. And I'm not sure w
 
 ---
 
-## The Cost Shift
+## The Shifting Baseline
 
-The financial barrier to entry used to be almost nothing. A computer and an internet connection. Time was the real currency—hours spent debugging, reading documentation, building things that broke.
+The financial barrier to entry used to be almost nothing. A computer, an internet connection, and time—hours spent debugging, reading documentation, building things that broke.
 
-Now we're substituting money for that time. The learning cost hasn't disappeared; it's transformed. Instead of paying with effort, we're paying with subscriptions. And those subscriptions aren't staying still.
+Now we're substituting money for that time. The learning cost hasn't disappeared; it's transformed.
 
-Plans that started at $20 are now $100. Some have climbed to $200. What happens when they reach $500? $1,000?
+But it's not just price. It's expectations.
+
+Job posts are starting to imply these tools. Teams are integrating them into workflows. Dev Twitter is full of "I built this in 30 minutes" demos where the unspoken footnote is: with a paid AI stack.
+
+So the question shifts from "Should I use these tools?" to something harder: "If I don't, am I falling behind?"
+
+Plans that started at $20 added a $100 tier. Some have climbed to $200. And if the "standard developer setup" quietly becomes IDE, GitHub, cloud hosting, plus three or four AI subscriptions—then being unable to subscribe doesn't just mean fewer conveniences. It means fewer reps, less output, a weaker portfolio.
 
 ---
 
 ## The Apple Parallel
 
-I think about how Apple products evolved. They started at certain price points. As demand increased, so did prices. Some of that is justified—better components, more capability. But not all of it. Some of it is simply what the market will bear.
+I think about how Apple products evolved. Prices went up as demand went up. Some of that was justified—better components, more capability. Some of it was simply what the market would bear.
 
-Are AI coding tools on the same trajectory? They're becoming essential for many developers. As dependency grows, so does pricing power. And unlike an iPhone, which you buy once and own, these are subscriptions—ongoing costs that compound.
+AI coding tools feel like they're on a similar trajectory, except more aggressive—because these aren't one-time purchases. They're subscriptions. They compound.
+
+And unlike a phone, this isn't a luxury gadget. It's increasingly tied to work, learning, and momentum. As dependency grows, so does pricing power.
 
 ---
 
-## The Gap I'm Uncertain About
+## The Deeper Trade-off
 
-Here's what I keep coming back to: if new developers lean on these tools from the start, do they build the same foundational understanding? Will there be a widening divide between those who learned before AI assistance and those who learned with it?
+Here's what I keep coming back to: if developers lean on these tools from the start, do they build the same foundational understanding?
 
-And more pressing—what happens to someone who can't afford the subscription? If these tools become the expected way to develop software, does inability to pay mean getting left behind?
+There's a difference between "I fixed it, and I understand why it broke" and "It works now, and I'm not sure what changed." Both ship code. Only one builds real confidence.
 
-Companies and well-funded individuals can justify $200 or $500 a month as a business expense. But what about the teenager learning to code in their bedroom? The career-changer studying at night? The person in a country where $20 a month is already a significant expense?
+I'm not romanticizing suffering. Getting stuck for days isn't noble—it's just slow. AI can be a tutor, a debugger, a second brain. But there's a tension that's hard to resolve: use these tools too little, and you progress slowly. Use them too much, and you might progress shallowly.
+
+That tension isn't going away.
+
+---
+
+## Who Gets Left Behind?
+
+The hardest question isn't personal—it's structural.
+
+For those who can justify or afford $200 or $500 a month subscriptions we live in great times. But what about the teenager learning to code in their bedroom? The career-changer studying at night? The person in a country where $20 a month is already significant?
+
+For years, programming was one of the most accessible skills escalators available. The internet made it possible to grind your way into competence with enough time and patience.
+
+If AI becomes the default way software gets built—and if the best AI is something you rent—then we're quietly rebuilding a gate that used to be smaller. Not by making learning impossible, but by making it slower and lonelier for those who can't subscribe.
 
 ---
 
 ## I Don't Have Answers
 
-I'm not saying AI coding tools are bad. I use them. They're genuinely useful.
+I'm not writing this from the outside. I use these tools daily, and they're genuinely transformative—explaining unfamiliar codebases, catching bugs I'd miss, helping me prototype faster. This isn't a critique from someone who's opted out.
 
-But I'm uncertain about a future where the skill I valued—something learnable through effort—becomes increasingly mediated by what you can afford to pay. Where the gap between those who can subscribe and those who can't mirrors the gap between those who can build and those who can't.
+But I'm watching a skill I valued—something learnable through effort—become increasingly mediated by what you can afford. The gap between those who can subscribe and those who can't starts to mirror the gap between those who can build and those who can't.
 
-Maybe that's not where this is heading. Maybe prices will stabilize or competition will drive costs down. Maybe the fundamentals will still be learnable without these tools.
+There's real reason for hope. Kimi K2.5 just dropped with benchmarks rivaling closed models. If that trajectory continues, capable models running locally on your own hardware—no subscription required—might become the norm rather than the exception. Competition could drive prices down. Open-weight development could close the gap entirely.
 
-But right now, I'm watching the trajectory, and I'm not sure.
+Maybe the fundamentals will remain just as learnable without paying anything at all.
+
+I hope so. Right now, I'm still watching the trajectory.
