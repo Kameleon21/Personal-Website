@@ -1,0 +1,143 @@
+---
+interface Heading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+interface Props {
+  headings: Heading[];
+}
+
+const { headings } = Astro.props;
+
+// Filter to only H2 and H3
+const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
+---
+
+{tocHeadings.length > 0 && (
+  <aside class="hidden xl:block">
+    <nav
+      id="table-of-contents"
+      class="sticky top-24 w-60 max-h-[calc(100vh-8rem)] overflow-y-auto"
+      aria-label="Table of contents"
+    >
+      <h2 class="text-sm font-semibold text-text-muted uppercase tracking-wider mb-4">
+        On this page
+      </h2>
+      <ul class="space-y-2">
+        {tocHeadings.map((heading) => (
+          <li>
+            <a
+              href={`#${heading.slug}`}
+              class={`
+                toc-link block text-sm transition-all duration-200
+                ${heading.depth === 3 ? 'pl-4' : ''}
+                text-text-muted hover:text-accent
+              `}
+              data-heading={heading.slug}
+            >
+              <span class="relative">
+                {heading.text}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </aside>
+)}
+
+<script>
+  function initTocHighlight() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const headings = document.querySelectorAll('article h2[id], article h3[id]');
+
+    if (!tocLinks.length || !headings.length) return;
+
+    // Create intersection observer
+    const observerOptions = {
+      root: null,
+      rootMargin: '-80px 0px -70% 0px',
+      threshold: 0
+    };
+
+    let currentActive: Element | null = null;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          const tocLink = document.querySelector(`.toc-link[data-heading="${id}"]`);
+
+          if (currentActive) {
+            currentActive.classList.remove('text-accent', 'font-medium');
+            currentActive.classList.add('text-text-muted');
+            const indicator = currentActive.querySelector('.toc-indicator');
+            if (indicator) indicator.remove();
+          }
+
+          if (tocLink) {
+            tocLink.classList.remove('text-text-muted');
+            tocLink.classList.add('text-accent', 'font-medium');
+
+            // Add glowing indicator
+            const span = tocLink.querySelector('span');
+            if (span && !span.querySelector('.toc-indicator')) {
+              const indicator = document.createElement('span');
+              indicator.className = 'toc-indicator absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-accent';
+              indicator.style.boxShadow = '0 0 8px rgba(45, 212, 191, 0.8)';
+              span.appendChild(indicator);
+            }
+
+            currentActive = tocLink;
+          }
+        }
+      });
+    }, observerOptions);
+
+    headings.forEach((heading) => observer.observe(heading));
+
+    // Smooth scroll on click
+    tocLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = (link as HTMLAnchorElement).getAttribute('href')?.slice(1);
+        const target = document.getElementById(targetId || '');
+        if (target) {
+          const offset = 100;
+          const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTocHighlight);
+  } else {
+    initTocHighlight();
+  }
+</script>
+
+<style>
+  #table-of-contents::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  #table-of-contents::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  #table-of-contents::-webkit-scrollbar-thumb {
+    background: #27272A;
+    border-radius: 2px;
+  }
+
+  .toc-link span {
+    position: relative;
+  }
+</style>

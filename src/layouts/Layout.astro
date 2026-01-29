@@ -13,14 +13,14 @@ const { title = "Kamil Rogozinski - Portfolio", description = "Personal portfoli
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		
+
 		<!-- Primary Meta Tags -->
 		<title>{title}</title>
 		<meta name="title" content={title} />
 		<meta name="description" content={description} />
 		<meta name="author" content="Kamil Rogozinski" />
 		<meta name="keywords" content="web developer, full stack developer, astro, react, typescript, portfolio" />
-		
+
 		<!-- Open Graph / Facebook -->
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="https://kameleon21.github.io/Personal-Website/" />
@@ -28,30 +28,30 @@ const { title = "Kamil Rogozinski - Portfolio", description = "Personal portfoli
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content="https://kameleon21.github.io/Personal-Website/images/og-image.jpg" />
 		<meta property="og:site_name" content="Kamil Rogozinski Portfolio" />
-		
+
 		<!-- Twitter -->
 		<meta property="twitter:card" content="summary_large_image" />
 		<meta property="twitter:url" content="https://kameleon21.github.io/Personal-Website/" />
 		<meta property="twitter:title" content={title} />
 		<meta property="twitter:description" content={description} />
 		<meta property="twitter:image" content="https://kameleon21.github.io/Personal-Website/images/og-image.jpg" />
-		
+
 		<!-- Canonical URL -->
 		<link rel="canonical" href="https://kameleon21.github.io/Personal-Website/" />
-		
+
 		<!-- Preconnect for performance -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		
-		<!-- Add Merriweather font -->
-		<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
-		
-		<!-- Add Funnel Sans font -->
-		<link href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@300,400,500,600,700,800&display=swap" rel="stylesheet">
+		<link rel="preconnect" href="https://api.fontshare.com">
+
+		<!-- JetBrains Mono - Display/Headings -->
+		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+		<!-- Satoshi - Body text -->
+		<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
 	</head>
-	<body class="flex flex-col min-h-screen bg-white text-gray-900">
+	<body class="flex flex-col min-h-screen bg-primary text-primary">
 	 <slot />
 	 <BackToTop />
 	</body>
 </html>
-

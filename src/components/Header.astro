@@ -1,54 +1,54 @@
 ---
 ---
 
-<nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-[100] py-4 px-8 shadow-sm">
+<nav class="fixed top-0 w-full bg-primary/95 backdrop-blur-sm z-[100] py-4 px-8 border-b border-border">
   <div class="container mx-auto flex justify-between items-center relative">
-    <a href="/Personal-Website/" class="text-2xl font-bold text-gray-800 relative z-[102]">Portfolio</a>
-    
+    <a href="/Personal-Website/" class="text-2xl font-display font-bold text-text-primary relative z-[102] hover:text-accent transition-colors">Portfolio</a>
+
     <!-- Desktop Navigation -->
     <div class="hidden lg:flex gap-8">
-      <a href="/Personal-Website/#about" class="text-xl text-gray-600 hover:text-indigo-600 transition-colors">About</a>
-      <a href="/Personal-Website/#work" class="text-xl text-gray-600 hover:text-indigo-600 transition-colors">Work</a>
-      <a href="/Personal-Website/#blog" class="text-xl text-gray-600 hover:text-indigo-600 transition-colors">Blog</a>
-      <a href="/Personal-Website/#contact" class="text-xl text-gray-600 hover:text-indigo-600 transition-colors">Contact</a>
+      <a href="/Personal-Website/#about" class="text-lg text-text-secondary hover:text-accent transition-colors">About</a>
+      <a href="/Personal-Website/#work" class="text-lg text-text-secondary hover:text-accent transition-colors">Work</a>
+      <a href="/Personal-Website/#blog" class="text-lg text-text-secondary hover:text-accent transition-colors">Blog</a>
+      <a href="/Personal-Website/#contact" class="text-lg text-text-secondary hover:text-accent transition-colors">Contact</a>
     </div>
 
     <!-- Hamburger Menu Button -->
-    <button 
+    <button
       id="hamburger"
-      class="lg:hidden flex flex-col justify-center items-center w-12 h-12 relative focus:outline-none z-[102] gap-1.5 p-2.5 rounded-lg hover:bg-gray-100 transition-colors"
+      class="lg:hidden flex flex-col justify-center items-center w-12 h-12 relative focus:outline-none z-[102] gap-1.5 p-2.5 rounded-lg hover:bg-tertiary transition-colors"
       aria-label="Menu"
       aria-expanded="false"
     >
-      <div class="w-6 h-0.5 bg-gray-800"></div>
-      <div class="w-6 h-0.5 bg-gray-800"></div>
-      <div class="w-6 h-0.5 bg-gray-800"></div>
+      <div class="w-6 h-0.5 bg-text-primary transition-all"></div>
+      <div class="w-6 h-0.5 bg-text-primary transition-all"></div>
+      <div class="w-6 h-0.5 bg-text-primary transition-all"></div>
     </button>
 
     <!-- Mobile Navigation Menu -->
-    <div 
+    <div
       id="mobile-nav"
-      class="fixed left-0 right-0 top-[72px] bg-white shadow-lg z-[101] lg:hidden overflow-hidden"
+      class="fixed left-0 right-0 top-[72px] bg-secondary border-b border-border z-[101] lg:hidden overflow-hidden"
     >
       <div class="container mx-auto">
         <div class="flex flex-col px-8">
-          <a href="/Personal-Website/#about" 
-            class="py-4 text-lg text-gray-800 hover:bg-gray-50 hover:text-indigo-600 transition-all font-medium border-b border-gray-100" 
+          <a href="/Personal-Website/#about"
+            class="py-4 text-lg text-text-primary hover:bg-tertiary hover:text-accent transition-all font-medium border-b border-border"
             style="--index: 0">
             About
           </a>
-          <a href="/Personal-Website/#work" 
-            class="py-4 text-lg text-gray-800 hover:bg-gray-50 hover:text-indigo-600 transition-all font-medium border-b border-gray-100" 
+          <a href="/Personal-Website/#work"
+            class="py-4 text-lg text-text-primary hover:bg-tertiary hover:text-accent transition-all font-medium border-b border-border"
             style="--index: 1">
             Work
           </a>
-          <a href="/Personal-Website/#blog" 
-            class="py-4 text-lg text-gray-800 hover:bg-gray-50 hover:text-indigo-600 transition-all font-medium border-b border-gray-100" 
+          <a href="/Personal-Website/#blog"
+            class="py-4 text-lg text-text-primary hover:bg-tertiary hover:text-accent transition-all font-medium border-b border-border"
             style="--index: 2">
             Blog
           </a>
-          <a href="/Personal-Website/#contact" 
-            class="py-4 text-lg text-gray-800 hover:bg-gray-50 hover:text-indigo-600 transition-all font-medium border-b border-gray-100" 
+          <a href="/Personal-Website/#contact"
+            class="py-4 text-lg text-text-primary hover:bg-tertiary hover:text-accent transition-all font-medium"
             style="--index: 3">
             Contact
           </a>
@@ -63,4 +63,4 @@
   document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
   });
-</script> 
+</script>

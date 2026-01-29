@@ -2,100 +2,98 @@
 import { Icon } from 'astro-icon/components';
 ---
 
-<section id="about" class="min-h-screen bg-white py-16 px-6" aria-labelledby="about-heading">
-    <div class="container mx-auto">
-      <h2 id="about-heading" class="text-5xl font-bold mb-16 opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
-        About Me
-      </h2>
-      
-      <div class="bg-gray-50 rounded-3xl p-12 shadow-lg opacity-0 transform translate-y-10 transition-all duration-700 ease-out delay-200 slide-up">
-        <p class="font-normal text-gray-600 dark:text-gray-300 mb-6">
-        Hi there! I’m passionate about solving real-world problems through programming and coding. Whether I’m diving into complex challenges or experimenting with new CLI tools, I love finding creative solutions to hard problems. Off course that means I use vim for my day to day coding and file editing 
+<section id="about" class="min-h-screen bg-primary py-20 px-6" aria-labelledby="about-heading">
+  <div class="container mx-auto">
+    <h2 id="about-heading" class="text-5xl font-bold mb-16 text-text-primary opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
+      About Me
+    </h2>
+
+    <div class="bg-secondary rounded-2xl p-10 border border-border hover-glow opacity-0 transform translate-y-10 transition-all duration-700 ease-out delay-200 slide-up">
+      <p class="font-normal text-text-secondary mb-6 leading-relaxed">
+        Hi there! I'm passionate about solving real-world problems through programming and coding. Whether I'm diving into complex challenges or experimenting with new CLI tools, I love finding creative solutions to hard problems. Of course that means I use vim for my day to day coding and file editing
       </p>
 
-      <p class="font-normal text-gray-600 dark:text-gray-300 mb-6">
-        I’m also on a journey to hone my technical writing and design skills. I believe that clear communication and well-crafted design are just as important as the code itself—they help transform complex ideas into accessible solutions.
+      <p class="font-normal text-text-secondary mb-6 leading-relaxed">
+        I'm also on a journey to hone my technical writing and design skills. I believe that clear communication and well-crafted design are just as important as the code itself—they help transform complex ideas into accessible solutions.
       </p>
 
-      <p class="font-normal text-gray-600 dark:text-gray-300 mb-6">
-        I’m always eager to connect with businesses and individual who need a fresh perspective or innovative technical solutions. If you think my approach could be a good fit for your project or venture, let’s start a conversation and explore how we can create something amazing together!
+      <p class="font-normal text-text-secondary mb-8 leading-relaxed">
+        I'm always eager to connect with businesses and individual who need a fresh perspective or innovative technical solutions. If you think my approach could be a good fit for your project or venture, let's start a conversation and explore how we can create something amazing together!
       </p>
-                
-        <nav aria-label="Social media links">
-          <ul class="flex gap-8 items-center list-none p-0">
-            <li>
-              <a 
-                href="https://github.com/Kameleon21" 
-                class="text-gray-600 hover:text-gray-900 transition-colors" 
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Visit my GitHub profile"
-              >
-                <Icon name="mdi:github" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
-              </a>
-            </li>
-            <li>
-              <a 
-                href="https://www.linkedin.com/in/kamil-rogozinski/" 
-                class="text-gray-600 hover:text-gray-900 transition-colors" 
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Connect with me on LinkedIn"
-              >
-                <Icon name="mdi:linkedin" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
-              </a>
-            </li>
-            <li>
-              <a 
-                href="https://www.tiktok.com/@kamil_tech_life" 
-                class="text-gray-600 hover:text-gray-900 transition-colors" 
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Follow me on Instagram"
-              >
-                <Icon name="ic:outline-tiktok" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
-              </a>
-            </li>
-            <li>
-              <a 
-                href="mailto:kamilrogozinski29@gmail.com" 
-                class="text-gray-600 hover:text-gray-900 transition-colors"
-                aria-label="Send me an email"
-              >
-                <Icon name="mdi:email" class="w-8 h-8 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+
+      <nav aria-label="Social media links">
+        <ul class="flex gap-6 items-center list-none p-0">
+          <li>
+            <a
+              href="https://github.com/Kameleon21"
+              class="text-text-muted hover:text-accent transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit my GitHub profile"
+            >
+              <Icon name="mdi:github" class="w-7 h-7 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/kamil-rogozinski/"
+              class="text-text-muted hover:text-accent transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Connect with me on LinkedIn"
+            >
+              <Icon name="mdi:linkedin" class="w-7 h-7 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://x.com/KamilRogozinski"
+              class="text-text-muted hover:text-accent transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow me on X"
+            >
+              <Icon name="mdi:twitter" class="w-7 h-7 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
+            </a>
+          </li>
+          <li>
+            <a
+              href="mailto:kamilrogozinski29@gmail.com"
+              class="text-text-muted hover:text-accent transition-colors"
+              aria-label="Send me an email"
+            >
+              <Icon name="mdi:email" class="w-7 h-7 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
-  </section>
-  
-  <script>
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-  
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-  
-    // Observe elements with slide-up class
-    document.querySelectorAll('.slide-up').forEach((element) => {
-      observer.observe(element);
+  </div>
+</section>
+
+<script>
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('opacity-0', 'translate-y-10');
+        observer.unobserve(entry.target);
+      }
     });
-  </script>
-  
-  <style>
-    .slide-up {
-      will-change: transform, opacity;
-    }
-  </style>
+  }, observerOptions);
+
+  document.querySelectorAll('.slide-up').forEach((element) => {
+    observer.observe(element);
+  });
+</script>
+
+<style>
+  .slide-up {
+    will-change: transform, opacity;
+  }
+</style>

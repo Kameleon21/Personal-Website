@@ -2,23 +2,40 @@
 .typewriter-h1,
 .typewriter-p {
   position: relative;
-  width: fit-content;
+  display: inline-block;
   overflow: hidden;
   white-space: nowrap;
   margin: 0;
+  -webkit-clip-path: inset(0 100% 0 0);
+  clip-path: inset(0 100% 0 0);
 }
 
 /* Heading specific styles */
 .typewriter-h1 {
-  letter-spacing: 0.1em;
+  letter-spacing: 0.02em;
   animation: typing-h1 1.5s steps(40, end) forwards;
   line-height: 1.2;
   padding-bottom: 0.2em;
 }
 
+.typewriter-h1::after,
+.typewriter-p::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #2DD4BF;
+  animation: caret-hide 1.5s steps(1, end) forwards;
+}
+
+.typewriter-p::after {
+  animation-delay: 1.5s;
+}
+
 /* Paragraph animation - starts after heading finishes */
 .typewriter-p {
-  opacity: 0;
   animation: typing-p 1.5s steps(40, end) 1.5s forwards;
   line-height: 1.5;
 }
@@ -31,40 +48,42 @@
 
 /* Typing animation for heading */
 @keyframes typing-h1 {
-  0% { 
-    width: 0;
-    border-right: 3px solid white;
+  0% {
+    -webkit-clip-path: inset(0 100% 0 0);
+    clip-path: inset(0 100% 0 0);
   }
-  99% {
-    border-right: 3px solid white;
-  }
-  100% { 
-    width: 100%;
-    border-right: none;
+  100% {
+    -webkit-clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
 /* Typing animation for paragraph */
 @keyframes typing-p {
-  0% { 
-    width: 0;
-    opacity: 1;
-    border-right: 3px solid white;
+  0% {
+    -webkit-clip-path: inset(0 100% 0 0);
+    clip-path: inset(0 100% 0 0);
   }
-  99% {
-    border-right: 3px solid white;
-  }
-  100% { 
-    width: 100%;
-    opacity: 1;
-    border-right: none;
+  100% {
+    -webkit-clip-path: inset(0 0 0 0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
 /* Button fade in animation */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes caret-hide {
+  0%,
+  99% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* Make text non-selectable during animation */
@@ -78,20 +97,27 @@
   .typewriter-h1,
   .typewriter-p {
     white-space: normal;
+    -webkit-clip-path: none;
+    clip-path: none;
     overflow: visible;
   }
-  
+
   /* Remove animations on mobile for better readability */
   .typewriter-h1 {
     animation: none;
     width: 100%;
     opacity: 1;
   }
-  
+
   .typewriter-p {
     animation: none;
     width: 100%;
     opacity: 1;
+  }
+
+  .typewriter-h1::after,
+  .typewriter-p::after {
+    display: none;
   }
 
   /* Keep button animation but start it sooner on mobile */
@@ -110,7 +136,7 @@ section {
   .container {
     text-align: center;
   }
-  
+
   .typewriter-h1,
   .typewriter-p {
     margin: 0 auto;
@@ -121,7 +147,7 @@ section {
 .hamburger-line {
   width: 24px;
   height: 2px;
-  background-color: #1f2937;
+  background-color: #F4F4F5;
   margin: 4px 0;
   transition: 0.4s;
 }
@@ -147,4 +173,4 @@ section {
 
 #mobile-menu.translate-y-0 {
   transform: translateY(0);
-} 
+}

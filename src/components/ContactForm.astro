@@ -16,20 +16,20 @@ const { activeTab } = Astro.props;
   aria-label="Contact form">
   <input type="hidden" name="access_key" value="05b550d2-4a55-48ac-a936-b35068dbd9d6" />
   <input type="checkbox" class="hidden" style="display:none" name="botcheck" aria-hidden="true" tabindex="-1" />
-  
+
   <div class="mb-6">
     <input
       type="text"
       placeholder="Your Name"
       required
-      class="w-full px-6 py-4 bg-white rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 outline-none"
+      class="w-full px-6 py-4 bg-secondary rounded-xl border border-border text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-300 outline-none"
       name="name"
       id="name"
       aria-label="Your name"
       aria-required="true"
       aria-describedby="name-error"
     />
-    <div id="name-error" class="empty-feedback invalid-feedback text-red-500 text-sm mt-1" role="alert">
+    <div id="name-error" class="empty-feedback invalid-feedback text-red-400 text-sm mt-1" role="alert">
       Please provide your name.
     </div>
   </div>
@@ -39,17 +39,17 @@ const { activeTab } = Astro.props;
       type="email"
       placeholder="Your Email"
       required
-      class="w-full px-6 py-4 bg-white rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 outline-none"
+      class="w-full px-6 py-4 bg-secondary rounded-xl border border-border text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-300 outline-none"
       name="email"
       id="email"
       aria-label="Your email address"
       aria-required="true"
       aria-describedby="email-error email-invalid-error"
     />
-    <div id="email-error" class="empty-feedback text-red-500 text-sm mt-1" role="alert">
+    <div id="email-error" class="empty-feedback text-red-400 text-sm mt-1" role="alert">
       Please provide your email address.
     </div>
-    <div id="email-invalid-error" class="invalid-feedback text-red-500 text-sm mt-1" role="alert">
+    <div id="email-invalid-error" class="invalid-feedback text-red-400 text-sm mt-1" role="alert">
       Please provide a valid email address.
     </div>
   </div>
@@ -58,30 +58,30 @@ const { activeTab } = Astro.props;
     <textarea
       name="message"
       required
-      placeholder={activeTab === 'get-in-touch' 
-        ? "I'd like to discuss..." 
+      placeholder={activeTab === 'get-in-touch'
+        ? "I'd like to discuss..."
         : "I have a project that I'd like to discuss. Here are some details..."}
-      class="w-full px-6 py-4 bg-white rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-300 outline-none h-48 resize-none"
+      class="w-full px-6 py-4 bg-secondary rounded-xl border border-border text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all duration-300 outline-none h-48 resize-none"
       id="message"
       aria-label="Your message"
       aria-required="true"
       aria-describedby="message-error"
     ></textarea>
-    <div id="message-error" class="empty-feedback invalid-feedback text-red-500 text-sm mt-1" role="alert">
+    <div id="message-error" class="empty-feedback invalid-feedback text-red-400 text-sm mt-1" role="alert">
       Please enter your message.
     </div>
   </div>
 
   <button
     type="submit"
-    class="w-full bg-blue-500 text-white font-semibold py-4 px-8 rounded-xl hover:bg-blue-600 transition-all duration-300 transform hover:scale-[1.02]"
+    class="w-full bg-accent text-primary font-semibold py-4 px-8 rounded-xl hover:bg-accent-dim transition-all duration-300 transform hover:scale-[1.02] glow-accent-sm hover:glow-accent"
     aria-label="Send message"
   >
     Send Message
   </button>
 
   <div id="form-result" class="mt-4 text-center hidden" role="status" aria-live="polite">
-    <div class="success-message bg-green-100 text-green-700 p-4 rounded-xl">
+    <div class="success-message bg-accent/10 text-accent p-4 rounded-xl border border-accent/30">
       Thank you for your message! I'll get back to you within 24 hours.
     </div>
   </div>
@@ -103,6 +103,6 @@ const { activeTab } = Astro.props;
 
   .is-invalid,
   .was-validated :invalid {
-    border-color: #ef4444;
+    border-color: #f87171;
   }
-</style> 
+</style>
