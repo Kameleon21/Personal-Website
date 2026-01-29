@@ -1,0 +1,60 @@
+---
+---
+
+<div
+  id="reading-progress"
+  class="fixed top-0 left-0 right-0 h-[3px] bg-transparent z-[200]"
+>
+  <div
+    id="reading-progress-bar"
+    class="h-full bg-accent w-0 transition-all duration-150 ease-out"
+    style="box-shadow: 0 0 10px rgba(45, 212, 191, 0.5), 0 0 20px rgba(45, 212, 191, 0.3);"
+  ></div>
+</div>
+
+<script>
+  function initReadingProgress() {
+    const progressBar = document.getElementById('reading-progress-bar');
+    const article = document.querySelector('article');
+
+    if (!progressBar || !article) return;
+
+    function updateProgress() {
+      const articleRect = article.getBoundingClientRect();
+      const articleTop = articleRect.top + window.scrollY;
+      const articleHeight = articleRect.height;
+      const windowHeight = window.innerHeight;
+      const scrollTop = window.scrollY;
+
+      // Calculate how much of the article has been scrolled
+      const scrolled = scrollTop - articleTop + windowHeight * 0.3;
+      const total = articleHeight;
+      const progress = Math.min(Math.max((scrolled / total) * 100, 0), 100);
+
+      progressBar.style.width = `${progress}%`;
+    }
+
+    let ticking = false;
+    function handleScroll() {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateProgress();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', updateProgress, { passive: true });
+
+    // Initial calculation
+    updateProgress();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initReadingProgress);
+  } else {
+    initReadingProgress();
+  }
+</script>

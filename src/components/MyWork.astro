@@ -3,12 +3,12 @@ import Card from './Card.astro';
 import workData from '../data/work.json';
 ---
 
-<section id="work" class="min-h-screen bg-gray-50 py-20 px-8">
+<section id="work" class="min-h-screen bg-secondary py-20 px-8">
   <div class="container mx-auto">
-    <h2 class="text-5xl font-bold mb-16 opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
+    <h2 class="text-5xl font-bold mb-16 text-text-primary opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
       My Work
     </h2>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
       {workData.projects.map((project, index) => (
         <div class="transition-all duration-700 ease-out h-full" style={`animation-delay: ${index * 200}ms`}>
@@ -51,4 +51,4 @@ import workData from '../data/work.json';
   .slide-up {
     will-change: transform, opacity;
   }
-</style> 
+</style>

@@ -2,7 +2,6 @@
 title: "First Client Lessons"
 description: "Lessons learned from my first client project"
 pubDate: 2025-02-16
-image: "/Personal-Website/images/client-blog.jpeg"
 author: "Kamil Rogozinski"
 tags: ["client", "new-tech", "astro"]
 ---
@@ -122,4 +121,3 @@ This project was my first step into blending a new JavaScript framework (Astro) 
 We are currently in discussion of adding a shop section to the site for e-vouchers to the barbershop. I’ve started looking into possible solutions, but it’s a bit more complex than I initially thought. I'll be sure to write about it in a future post if we go ahead with it.
 
 Thanks for reading! If you have any questions about Astro, Netlify, or pulling data from the Google Places API, feel free to reach out using the form on the [contact page](https://kameleon21.github.io/Personal-Website/#contact).
-

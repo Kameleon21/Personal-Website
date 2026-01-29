@@ -2,89 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Additional global styles */
+/* Base layer overrides */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: #0A0A0B;
+    color: #F4F4F5;
+  }
+
+  /* Headings use display font */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+/* Prose code styling */
 .prose :where(code):not(:where([class~="not-prose"] *)) {
   font-weight: 400;
 }
 
-/* Merriweather font classes */
-.merriweather-light {
-  font-family: "Merriweather", serif;
-  font-weight: 300;
-}
-
-.merriweather-regular {
-  font-family: "Merriweather", serif;
-  font-weight: 400;
-}
-
-.merriweather-bold {
-  font-family: "Merriweather", serif;
-  font-weight: 700;
-}
-
-.merriweather-black {
-  font-family: "Merriweather", serif;
-  font-weight: 900;
-}
-
-/* Italic variants */
-.merriweather-light-italic {
-  font-family: "Merriweather", serif;
-  font-weight: 300;
-  font-style: italic;
-}
-
-.merriweather-regular-italic {
-  font-family: "Merriweather", serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.merriweather-bold-italic {
-  font-family: "Merriweather", serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-.merriweather-black-italic {
-  font-family: "Merriweather", serif;
-  font-weight: 900;
-  font-style: italic;
-}
-
-/* Add these to your existing global.css */
-.funnel-sans-light {
-  font-family: "Funnel Sans", sans-serif;
-  font-weight: 300;
-}
-
-.funnel-sans-regular {
-  font-family: "Funnel Sans", sans-serif;
-  font-weight: 400;
-}
-
-.funnel-sans-medium {
-  font-family: "Funnel Sans", sans-serif;
-  font-weight: 500;
-}
-
-.funnel-sans-semibold {
-  font-family: "Funnel Sans", sans-serif;
-  font-weight: 600;
-}
-
-.funnel-sans-bold {
-  font-family: "Funnel Sans", sans-serif;
-  font-weight: 700;
-}
-
-.funnel-sans-extrabold {
-  font-family: "Funnel Sans", sans-serif;
-  font-weight: 800;
-}
-
-/* Add nav link hover effect */
+/* Nav link hover effect */
 nav a {
   position: relative;
 }
@@ -96,10 +37,84 @@ nav a::after {
   height: 2px;
   bottom: -4px;
   left: 0;
-  background: currentColor;
+  background: #2DD4BF;
   transition: width 0.3s ease;
 }
 
 nav a:hover::after {
   width: 100%;
+}
+
+/* Accent glow effect utility */
+.glow-accent {
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
+}
+
+.glow-accent-sm {
+  box-shadow: 0 0 10px rgba(45, 212, 191, 0.2);
+}
+
+/* Text glow */
+.text-glow {
+  text-shadow: 0 0 20px rgba(45, 212, 191, 0.5);
+}
+
+/* Border glow on hover */
+.hover-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.2);
+  border-color: rgba(45, 212, 191, 0.5);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, #2DD4BF 0%, #14B8A6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(45, 212, 191, 0.3);
+  color: #F4F4F5;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0B;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2DD4BF;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid #2DD4BF;
+  outline-offset: 2px;
 }

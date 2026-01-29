@@ -4,45 +4,45 @@ import { Icon } from 'astro-icon/components';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-gray-900 text-white py-8 px-8">
+<footer class="bg-secondary text-text-primary py-8 px-8 border-t border-border">
   <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-    <p class="text-gray-400">© {currentYear} Kamil Rogozinski. All rights reserved.</p>
-    
+    <p class="text-text-muted text-sm">&copy; {currentYear} Kamil Rogozinski. All rights reserved.</p>
+
     <div class="flex gap-6 mt-4 md:mt-0">
-      <a 
-        href="https://github.com/Kameleon21" 
-        target="_blank" 
+      <a
+        href="https://github.com/Kameleon21"
+        target="_blank"
         rel="noopener noreferrer"
-        class="text-gray-400 hover:text-white transition-colors"
+        class="text-text-muted hover:text-accent transition-colors"
         aria-label="GitHub"
       >
         <Icon name="mdi:github" class="w-6 h-6" />
       </a>
-      <a 
-        href="https://www.linkedin.com/in/kamil-rogozinski/" 
-        target="_blank" 
+      <a
+        href="https://www.linkedin.com/in/kamil-rogozinski/"
+        target="_blank"
         rel="noopener noreferrer"
-        class="text-gray-400 hover:text-white transition-colors"
+        class="text-text-muted hover:text-accent transition-colors"
         aria-label="LinkedIn"
       >
         <Icon name="mdi:linkedin" class="w-6 h-6" />
       </a>
-      <a 
-        href="https://www.tiktok.com/@kamil_tech_life" 
-        target="_blank" 
+      <a
+        href="https://x.com/KamilRogozinski"
+        target="_blank"
         rel="noopener noreferrer"
-        class="text-gray-400 hover:text-white transition-colors"
-        aria-label="Instagram"
+        class="text-text-muted hover:text-accent transition-colors"
+        aria-label="X"
       >
-        <Icon name="ic:outline-tiktok" class="w-6 h-6" />
+        <Icon name="mdi:twitter" class="w-6 h-6" />
       </a>
-      <a 
-        href="mailto:kamilrogozinski29@gmail.com" 
-        class="text-gray-400 hover:text-white transition-colors"
+      <a
+        href="mailto:kamilrogozinski29@gmail.com"
+        class="text-text-muted hover:text-accent transition-colors"
         aria-label="Email"
       >
         <Icon name="mdi:email" class="w-6 h-6" />
       </a>
     </div>
   </div>
-</footer> 
+</footer>

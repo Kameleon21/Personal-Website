@@ -1,7 +1,9 @@
 ---
 import Layout from './Layout.astro';
 import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro'
+import Footer from '../components/Footer.astro';
+import ReadingProgress from '../components/ReadingProgress.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import { formatDate } from '../utils/date';
 import { getReadingTime } from '../utils/readingTime';
 import '../styles/blog-post.css';
@@ -11,38 +13,66 @@ interface Props {
   description: string;
   pubDate: Date;
   author: string;
-  image?: string;
   post: any;
 }
 
-const { title, description, pubDate, author, image, post } = Astro.props;
-const { Content } = await post.render();
+const { title, description, pubDate, author, post } = Astro.props;
+const { Content, headings } = await post.render();
 const readingTime = getReadingTime(post.body);
 ---
 
 <Layout title={title} description={description}>
+  <ReadingProgress />
   <Header />
-  <article class="max-w-3xl mx-auto px-4 py-20">
-    {image && (
-      <img 
-        src={image} 
-        alt={title} 
-        class="w-full h-[400px] object-cover rounded-2xl mb-8"
-      />
-    )}
-    <h1 class="text-4xl font-bold mb-4">{title}</h1>
-    <div class="flex flex-wrap gap-4 text-gray-500 mb-8">
-      <span>{author}</span>
-      <span>•</span>
-      <time>{formatDate(pubDate)}</time>
-      <span>•</span>
-      <span>{readingTime} min read</span>
+
+  <div class="bg-primary min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 py-20">
+      <div class="flex gap-12">
+        <!-- Table of Contents - Left Sidebar -->
+        <TableOfContents headings={headings} />
+
+        <!-- Main Content -->
+        <article class="flex-1 max-w-3xl mx-auto xl:mx-0">
+          <!-- Article Header -->
+          <header class="mb-12">
+            <h1 class="text-4xl lg:text-5xl font-bold mb-6 text-text-primary leading-tight">
+              {title}
+            </h1>
+            <div class="flex flex-wrap items-center gap-4 text-text-muted text-sm">
+              <span class="text-text-secondary">{author}</span>
+              <span class="text-border">|</span>
+              <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
+              <span class="text-border">|</span>
+              <span>{readingTime} min read</span>
+            </div>
+          </header>
+
+          <!-- Article Content -->
+          <div class="prose prose-lg prose-invert max-w-none
+            prose-headings:font-display prose-headings:font-bold prose-headings:text-text-primary
+            prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-2 prose-h2:border-b prose-h2:border-border
+            prose-h3:text-2xl prose-h3:mt-8 prose-h3:mb-4
+            prose-p:text-text-secondary prose-p:leading-relaxed
+            prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-text-primary
+            prose-code:text-accent prose-code:bg-secondary prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:font-mono prose-code:text-sm
+            prose-pre:bg-secondary prose-pre:border prose-pre:border-border prose-pre:rounded-xl
+            prose-blockquote:border-l-accent prose-blockquote:bg-secondary/50 prose-blockquote:py-1 prose-blockquote:px-6 prose-blockquote:rounded-r-lg
+            prose-ul:text-text-secondary prose-ol:text-text-secondary
+            prose-li:marker:text-accent
+            prose-hr:border-border
+          ">
+            <Content />
+          </div>
+        </article>
+
+        <!-- Spacer for right side balance on xl screens -->
+        <div class="hidden xl:block w-60"></div>
+      </div>
     </div>
-    <div class="prose prose-lg prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-blue-600 prose-code:text-blue-600 prose-code:bg-blue-50 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-white max-w-none">
-      <Content />
-    </div>
-  </article>
-  <Footer/>
+  </div>
+
+  <Footer />
 </Layout>
 
 <script src="../scripts/copy-code.js"></script>
