@@ -1,5 +1,5 @@
 ---
-title: "The Hidden Cost of New Software"
+title: "The New Hidden Cost Of Development"
 description: "What are we trading away as AI tools transform how we build software?"
 pubDate: 2026-01-29
 author: "Kamil Rogozinski"
@@ -46,13 +46,17 @@ And unlike a phone, this isn't a luxury gadget. It's increasingly tied to work, 
 
 ## The Deeper Trade-off
 
-Here's what I keep coming back to: if developers lean on these tools from the start, do they build the same foundational understanding?
+A question from a recent Anthropic study stuck with me: _Does AI provide a shortcut to both skill development and increased efficiency? Or do productivity increases from AI assistance undermine skill development?_
 
-There's a difference between "I fixed it, and I understand why it broke" and "It works now, and I'm not sure what changed." Both ship code. Only one builds real confidence.
+That tension is what prompted this post.
 
-I'm not romanticizing suffering. Getting stuck for days isn't noble—it's just slow. AI can be a tutor, a debugger, a second brain. But there's a tension that's hard to resolve: use these tools too little, and you progress slowly. Use them too much, and you might progress shallowly.
+The [study](https://www.anthropic.com/research/AI-assistance-coding-skills) found that developers using AI assistance scored 17% lower on comprehension tests—nearly two letter grades—compared to those who coded by hand. The largest gap was in debugging: understanding when code is wrong and why it fails.
 
-That tension isn't going away.
+There's a real difference between "I fixed it, and I understand why it broke" and "It works now, and I'm not sure what changed." Both ship code. Only one builds confidence.
+
+I'm not romanticizing suffering. Getting stuck for days isn't noble—it's just slow. AI can be a tutor, a debugger, a second brain. But the [study](https://www.anthropic.com/research/AI-assistance-coding-skills) points to something important: how you use these tools matters. Participants who asked follow-up questions, requested explanations, and used AI to check their understanding retained far more than those who simply delegated the work.
+
+Use these tools too little, and you progress slowly. Use them too heavily without engaging, and you might progress shallowly. That tension isn't going away.
 
 ---
 
@@ -73,6 +77,8 @@ If AI becomes the default way software gets built—and if the best AI is someth
 I'm not writing this from the outside. I use these tools daily, and they're genuinely transformative—explaining unfamiliar codebases, catching bugs I'd miss, helping me prototype faster. This isn't a critique from someone who's opted out.
 
 But I'm watching a skill I valued—something learnable through effort—become increasingly mediated by what you can afford. The gap between those who can subscribe and those who can't starts to mirror the gap between those who can build and those who can't.
+
+Then again, maybe that's only half the picture. These same tools could lower the barrier for people who never saw coding as an option—those who found the learning curve too steep or the time investment too large. They might bring ideas and perspectives we'd never have seen otherwise. The democratization could cut both ways.
 
 There's real reason for hope. Kimi K2.5 just dropped with benchmarks rivaling closed models. If that trajectory continues, capable models running locally on your own hardware—no subscription required—might become the norm rather than the exception. Competition could drive prices down. Open-weight development could close the gap entirely.
 
