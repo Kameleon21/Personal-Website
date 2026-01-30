@@ -23,13 +23,21 @@
       const articleRect = article.getBoundingClientRect();
       const articleTop = articleRect.top + window.scrollY;
       const articleHeight = articleRect.height;
+      const articleBottom = articleTop + articleHeight;
       const windowHeight = window.innerHeight;
       const scrollTop = window.scrollY;
+      const scrollable = Math.max(articleHeight - windowHeight, 1);
+      const scrolled = Math.max(scrollTop - articleTop, 0);
 
-      // Calculate how much of the article has been scrolled
-      const scrolled = scrollTop - articleTop + windowHeight * 0.3;
-      const total = articleHeight;
-      const progress = Math.min(Math.max((scrolled / total) * 100, 0), 100);
+      let progress = Math.min(Math.max((scrolled / scrollable) * 100, 0), 100);
+
+      if (scrollTop <= articleTop) {
+        progress = 0;
+      }
+
+      if (scrollTop + windowHeight >= articleBottom) {
+        progress = 100;
+      }
 
       progressBar.style.width = `${progress}%`;
     }
