@@ -12,41 +12,42 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 
 <Layout title="Blog - Kamil Rogozinski" description="Read my latest blog posts about web development, design, and technology.">
   <Header />
-  <main class="min-h-screen bg-primary pt-24 pb-20 px-8">
+  <main class="min-h-screen bg-brutal-black pt-24 pb-20 px-8">
     <div class="container mx-auto max-w-5xl">
       <header class="mb-16">
-        <h1 class="text-5xl font-bold text-text-primary mb-4">Blog</h1>
-        <p class="text-text-secondary text-lg">Thoughts on software development, design, and technology.</p>
+        <div class="text-brutal-grey text-xs uppercase tracking-widest mb-4">/blog</div>
+        <h1 class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight mb-4">Blog</h1>
+        <p class="text-brutal-grey text-sm">Thoughts on software development, design, and technology.</p>
       </header>
 
       {sortedPosts.length > 0 ? (
-        <div class="space-y-8">
+        <div class="space-y-6">
           {sortedPosts.map((post) => (
-            <article class="group bg-secondary rounded-2xl border border-border p-8 hover-glow transition-all duration-300">
+            <article class="brutal-card group">
               <a href={`/Personal-Website/blog/${post.slug}`} class="block">
                 <div class="flex flex-wrap gap-2 mb-4">
                   {post.data.tags?.map((tag: string) => (
-                    <span class="px-3 py-1 text-xs bg-accent/10 text-accent rounded-md font-medium border border-accent/20">
-                      {tag}
-                    </span>
+                    <span class="brutal-tag">{tag}</span>
                   ))}
                 </div>
 
-                <h2 class="text-2xl lg:text-3xl font-bold text-text-primary mb-3 group-hover:text-accent transition-colors">
+                <h2 class="text-xl lg:text-2xl font-bold text-brutal-white uppercase tracking-tight mb-3 group-hover:text-brutal-red transition-colors">
                   {post.data.title}
                 </h2>
 
-                <p class="text-text-secondary mb-6 leading-relaxed line-clamp-2">
+                <p class="text-brutal-grey text-sm mb-6 leading-relaxed line-clamp-2">
                   {post.data.description}
                 </p>
 
-                <div class="flex flex-wrap items-center gap-4 text-sm text-text-muted">
+                <div class="brutal-hr mb-4"></div>
+
+                <div class="flex flex-wrap items-center gap-4 text-xs text-brutal-grey uppercase tracking-widest">
                   <span>{post.data.author}</span>
-                  <span class="text-border">|</span>
+                  <span class="text-brutal-rule">|</span>
                   <time datetime={post.data.pubDate.toISOString()}>
                     {formatDate(post.data.pubDate)}
                   </time>
-                  <span class="text-border">|</span>
+                  <span class="text-brutal-rule">|</span>
                   <span>{getReadingTime(post.body)} min read</span>
                 </div>
               </a>
@@ -56,10 +57,9 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
       ) : (
         <div class="flex flex-col items-center justify-center py-20">
           <div class="text-center max-w-2xl">
-            <h2 class="text-3xl font-bold text-text-primary mb-4">No Posts Yet</h2>
-            <p class="text-xl text-text-secondary">
-              I'm working on some exciting blog posts about web development, design, and technology.
-              Stay tuned for insightful content coming your way!
+            <h2 class="text-2xl font-bold text-brutal-white uppercase tracking-tight mb-4">No Posts Yet</h2>
+            <p class="text-brutal-grey text-sm">
+              Working on some exciting blog posts about web development, design, and technology.
             </p>
           </div>
         </div>

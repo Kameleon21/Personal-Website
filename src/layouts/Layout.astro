@@ -42,16 +42,57 @@ const { title = "Kamil Rogozinski - Portfolio", description = "Personal portfoli
 		<!-- Preconnect for performance -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link rel="preconnect" href="https://api.fontshare.com">
 
-		<!-- JetBrains Mono - Display/Headings -->
-		<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-
-		<!-- Satoshi - Body text -->
-		<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet">
+		<!-- Typography -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+			rel="stylesheet"
+		>
 	</head>
-	<body class="flex flex-col min-h-screen bg-primary text-primary">
-	 <slot />
-	 <BackToTop />
+	<body class="noise font-mono flex flex-col min-h-screen bg-brutal-black text-brutal-white">
+		<!-- Grid overlay -->
+		<div class="grid-overlay" aria-hidden="true"></div>
+
+		<slot />
+		<BackToTop />
+
+		<!-- Global reveal observer -->
+		<script>
+			function initRevealAnimations() {
+				if (document.documentElement.dataset.revealInit === 'true') return;
+				document.documentElement.dataset.revealInit = 'true';
+
+				const revealElements = document.querySelectorAll('.reveal');
+				if (!revealElements.length) return;
+
+				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+				if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+					revealElements.forEach((element) => element.classList.add('visible'));
+					return;
+				}
+
+				const revealObserver = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (!entry.isIntersecting) return;
+							entry.target.classList.add('visible');
+							revealObserver.unobserve(entry.target);
+						});
+					},
+					{
+						threshold: 0.08,
+						rootMargin: '0px 0px -8% 0px'
+					}
+				);
+
+				revealElements.forEach((element) => revealObserver.observe(element));
+			}
+
+			if ('requestIdleCallback' in window) {
+				window.requestIdleCallback(initRevealAnimations, { timeout: 200 });
+			} else {
+				initRevealAnimations();
+			}
+		</script>
 	</body>
 </html>

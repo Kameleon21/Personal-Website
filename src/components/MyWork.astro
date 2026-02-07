@@ -1,54 +1,57 @@
 ---
-import Card from './Card.astro';
 import workData from '../data/work.json';
 ---
 
-<section id="work" class="min-h-screen bg-secondary py-20 px-8">
-  <div class="container mx-auto">
-    <h2 class="text-5xl font-bold mb-16 text-text-primary opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
-      My Work
+<section id="work" class="bg-brutal-black py-20 px-8 border-t border-brutal-rule">
+  <div class="container mx-auto max-w-6xl">
+    <!-- Section counter -->
+    <div class="text-brutal-grey text-xs uppercase tracking-widest mb-4 reveal">/02</div>
+    <h2 class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight mb-16 reveal">
+      Work
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+    <div class="flex flex-col gap-6">
       {workData.projects.map((project, index) => (
-        <div class="transition-all duration-700 ease-out h-full" style={`animation-delay: ${index * 200}ms`}>
-          <Card
-            title={project.title}
-            description={project.description}
-            image={project.image}
-            link={project.link || ''}
-            githubLink={project.githubLink}
-            technologies={project.technologies}
-          />
+        <div class="brutal-card reveal flex flex-col md:flex-row gap-6 items-start">
+          <!-- Large index number -->
+          <div class="text-5xl md:text-7xl font-bold text-brutal-rule/30 leading-none select-none shrink-0 w-20">
+            {String(index + 1).padStart(2, '0')}
+          </div>
+
+          <!-- Content -->
+          <div class="flex-1 min-w-0">
+            <h3 class="text-xl font-bold text-brutal-white uppercase tracking-tight mb-3">
+              {project.title}
+            </h3>
+            <p class="text-brutal-grey text-sm mb-4 leading-relaxed">
+              {project.description}
+            </p>
+
+            {project.technologies && project.technologies.length > 0 && (
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.technologies.map((tech) => (
+                  <span class="brutal-tag">{tech}</span>
+                ))}
+              </div>
+            )}
+
+            <div class="flex gap-4 text-xs uppercase tracking-widest">
+              {project.githubLink && (
+                <a href={project.githubLink} target="_blank" rel="noopener noreferrer"
+                  class="text-brutal-grey hover:text-brutal-red transition-colors">
+                  GitHub &rarr;
+                </a>
+              )}
+              {project.link && (
+                <a href={project.link} target="_blank" rel="noopener noreferrer"
+                  class="text-brutal-grey hover:text-brutal-red transition-colors">
+                  Live &rarr;
+                </a>
+              )}
+            </div>
+          </div>
         </div>
       ))}
     </div>
   </div>
 </section>
-
-<script>
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.remove('opacity-0', 'translate-y-10');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.slide-up').forEach((element) => {
-    observer.observe(element);
-  });
-</script>
-
-<style>
-  .slide-up {
-    will-change: transform, opacity;
-  }
-</style>

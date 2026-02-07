@@ -1,17 +1,13 @@
 ---
-import { Icon } from 'astro-icon/components';
 ---
 
 <button
   id="back-to-top"
-  class="fixed bottom-8 right-8 z-[150] p-4 rounded-lg bg-accent hover:bg-accent-dim text-primary shadow-lg transition-all duration-300 opacity-0 pointer-events-none translate-y-4 glow-accent-sm hover:glow-accent"
+  class="fixed bottom-8 right-8 z-[150] w-12 h-12 border border-brutal-rule bg-brutal-black text-brutal-grey text-lg font-bold flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
   aria-label="Back to top"
   title="Back to top"
 >
-  <Icon
-    name="mdi:chevron-up"
-    class="w-6 h-6 transition-transform duration-300"
-  />
+  &uarr;
 </button>
 
 <script>
@@ -25,21 +21,16 @@ import { Icon } from 'astro-icon/components';
 
       if (shouldShow && !isVisible) {
         isVisible = true;
-        backToTopButton?.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
-        backToTopButton?.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        backToTopButton?.classList.remove('opacity-0', 'pointer-events-none');
+        backToTopButton?.classList.add('opacity-100', 'pointer-events-auto');
       } else if (!shouldShow && isVisible) {
         isVisible = false;
-        backToTopButton?.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-        backToTopButton?.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+        backToTopButton?.classList.add('opacity-0', 'pointer-events-none');
+        backToTopButton?.classList.remove('opacity-100', 'pointer-events-auto');
       }
     }
 
     function scrollToTop() {
-      backToTopButton?.classList.add('scale-95');
-      setTimeout(() => {
-        backToTopButton?.classList.remove('scale-95');
-      }, 150);
-
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -71,16 +62,9 @@ import { Icon } from 'astro-icon/components';
 </script>
 
 <style>
-  #back-to-top {
-    backdrop-filter: blur(10px);
-  }
-
   #back-to-top:hover {
-    transform: translateY(-2px);
-  }
-
-  #back-to-top.scale-95 {
-    transform: scale(0.95) translateY(-2px);
+    border-color: #FF2D00;
+    color: #FF2D00;
   }
 
   @media (max-width: 768px) {

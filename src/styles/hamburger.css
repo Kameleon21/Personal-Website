@@ -1,59 +1,52 @@
-/* Hamburger button styles */
-#hamburger div {
-  transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out, background-color 0.3s ease-in-out;
-  transform-origin: center;
+/* Menu line transforms */
+.menu-line {
+  width: 24px;
+  height: 2px;
+  background: #F5F0EB;
+  transition: transform 0.2s ease, opacity 0.18s ease;
 }
 
-#hamburger:hover div {
-  background-color: #4F46E5; /* Indigo-600 */
-}
-
-#hamburger.active div {
-  background-color: #4F46E5;
-}
-
-#hamburger.active div:first-child {
+.menu-open .menu-line:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
 }
 
-#hamburger.active div:nth-child(2) {
+.menu-open .menu-line:nth-child(2) {
   opacity: 0;
-  transform: translateX(-10px);
 }
 
-#hamburger.active div:last-child {
+.menu-open .menu-line:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-/* Mobile navigation styles */
-#mobile-nav {
+/* Mobile menu animation */
+#mobile-menu {
   opacity: 0;
+  transform: translate3d(0, -10px, 0);
   visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  pointer-events: none;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    visibility 0s linear 0.2s;
+  will-change: transform, opacity;
 }
 
-#mobile-nav.active {
+#mobile-menu.menu-visible {
   opacity: 1;
+  transform: translate3d(0, 0, 0);
   visibility: visible;
-  transform: translateY(0);
+  pointer-events: auto;
+  transition-delay: 0s;
 }
 
-/* Mobile nav links animation */
-#mobile-nav a {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease-out;
-  transition-delay: calc(var(--index) * 0.075s);
-}
+@media (prefers-reduced-motion: reduce) {
+  .menu-line,
+  #mobile-menu {
+    transition: none;
+  }
 
-#mobile-nav.active a {
-  opacity: 1;
-  transform: translateY(0);
+  #mobile-menu {
+    transform: none;
+    will-change: auto;
+  }
 }
-
-/* Hover effect for mobile nav links */
-#mobile-nav a:hover {
-  background-color: #F9FAFB;
-  padding-left: 2rem;
-} 

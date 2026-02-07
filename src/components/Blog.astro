@@ -1,93 +1,55 @@
 ---
 import { getCollection } from 'astro:content';
 import { formatDate } from '../utils/date';
+import { getReadingTime } from '../utils/readingTime';
 
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<section id="blog" class="min-h-screen bg-primary py-20 px-4 md:px-8">
+<section id="blog" class="bg-brutal-black py-20 px-4 md:px-8 border-t border-brutal-rule">
   <div class="container mx-auto max-w-6xl">
-    <div class="flex justify-between items-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-text-primary opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
+    <!-- Section counter -->
+    <div class="text-brutal-grey text-xs uppercase tracking-widest mb-4 reveal">/03</div>
+    <div class="flex justify-between items-end mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight reveal">
         Blog
       </h2>
       <a
         href="/Personal-Website/blog"
-        class="hidden md:flex items-center text-lg text-accent hover:text-accent-dim transition-colors opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up"
+        class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors reveal"
       >
-        View all posts
-        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-        </svg>
+        All posts &rarr;
       </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {sortedPosts.slice(0, 3).map((post, index) => (
-        <article
-          class="bg-secondary rounded-2xl border border-border overflow-hidden hover-glow transition-all duration-300 opacity-0 transform translate-y-10 slide-up"
-          style={`animation-delay: ${index * 200}ms`}
-        >
-          <div class="p-6">
-            <div class="flex flex-wrap gap-2 mb-4">
-              {post.data.tags?.slice(0, 2).map((tag: string) => (
-                <span class="px-2 py-1 text-xs bg-accent/10 text-accent rounded-md font-medium border border-accent/20">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <h3 class="text-xl font-bold mb-3 text-text-primary line-clamp-2">
-              <a href={`/Personal-Website/blog/${post.slug}`} class="hover:text-accent transition-colors">
-                {post.data.title}
-              </a>
-            </h3>
-            <p class="text-text-secondary text-sm mb-4 line-clamp-3 leading-relaxed">{post.data.description}</p>
-            <div class="flex justify-between items-center text-xs text-text-muted pt-4 border-t border-border">
-              <span>{post.data.author}</span>
-              <time datetime={post.data.pubDate.toISOString()}>
-                {formatDate(post.data.pubDate)}
-              </time>
-            </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {sortedPosts.slice(0, 2).map((post) => (
+        <article class="brutal-card reveal">
+          <div class="flex flex-wrap gap-2 mb-4">
+            {post.data.tags?.slice(0, 2).map((tag: string) => (
+              <span class="brutal-tag">{tag}</span>
+            ))}
+          </div>
+
+          <h3 class="text-lg font-bold text-brutal-white uppercase tracking-tight mb-3">
+            <a href={`/Personal-Website/blog/${post.slug}`} class="hover:text-brutal-red transition-colors">
+              {post.data.title}
+            </a>
+          </h3>
+
+          <p class="text-brutal-grey text-sm mb-4 leading-relaxed line-clamp-2">{post.data.description}</p>
+
+          <div class="brutal-hr mb-4"></div>
+
+          <div class="flex justify-between items-center text-xs text-brutal-grey uppercase tracking-widest">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {formatDate(post.data.pubDate)}
+            </time>
+            <span>{getReadingTime(post.body)} min read</span>
           </div>
         </article>
       ))}
     </div>
-
-    <div class="mt-8 text-center md:hidden">
-      <a
-        href="/Personal-Website/blog"
-        class="inline-block px-6 py-3 text-lg text-accent hover:text-accent-dim transition-colors"
-      >
-        View all posts
-      </a>
-    </div>
   </div>
 </section>
-
-<script>
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.remove('opacity-0', 'translate-y-10');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.slide-up').forEach((element) => {
-    observer.observe(element);
-  });
-</script>
-
-<style>
-  .slide-up {
-    will-change: transform, opacity;
-  }
-</style>

@@ -6,18 +6,45 @@ interface Props {
   title?: string;
 }
 
-const { title = "Get in Touch" } = Astro.props;
+const { title = "Contact" } = Astro.props;
 ---
 
-<section id="contact" class="min-h-screen bg-secondary py-20 px-8">
-  <div class="container mx-auto max-w-3xl">
-    <h2 class="text-5xl font-bold mb-16 text-text-primary opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
+<section id="contact" class="bg-brutal-black py-20 px-8 border-t border-brutal-rule">
+  <div class="container mx-auto max-w-6xl">
+    <!-- Section counter -->
+    <div class="text-brutal-grey text-xs uppercase tracking-widest mb-4 reveal">/04</div>
+    <h2 class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight mb-16 reveal">
       {title}
     </h2>
 
-    <div class="bg-tertiary rounded-2xl p-8 md:p-12 border border-border hover-glow opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
-      <ContactTabs activeTab="get-in-touch" />
-      <ContactForm activeTab="get-in-touch" />
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <!-- Contact info -->
+      <div class="lg:col-span-4 reveal">
+        <div class="space-y-6">
+          <div>
+            <div class="text-brutal-grey text-xs uppercase tracking-widest mb-2">Email</div>
+            <a href="mailto:kamilrogozinski29@gmail.com" class="text-brutal-white hover:text-brutal-red transition-colors text-sm break-all">
+              kamilrogozinski29@gmail.com
+            </a>
+          </div>
+          <div>
+            <div class="text-brutal-grey text-xs uppercase tracking-widest mb-2">Location</div>
+            <span class="text-brutal-white text-sm">Ireland</span>
+          </div>
+          <div>
+            <div class="text-brutal-grey text-xs uppercase tracking-widest mb-2">Status</div>
+            <span class="text-brutal-red text-sm flex items-center gap-2">
+              <span class="status-dot"></span> Available for work
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="lg:col-span-8 reveal">
+        <ContactTabs activeTab="get-in-touch" />
+        <ContactForm activeTab="get-in-touch" />
+      </div>
     </div>
   </div>
 </section>

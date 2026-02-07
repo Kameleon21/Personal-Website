@@ -79,7 +79,6 @@ I'm not writing this from the outside. I use these tools daily, and they're genu
 But I'm watching a skill I valued—something learnable through effort—become increasingly mediated by what you can afford. The gap between those who can subscribe and those who can't starts to mirror the gap between those who can build and those who can't.
 
 Then again, maybe that's only half the picture. These same tools could lower the barrier for people who never saw coding as an option—those who found the learning curve too steep or the time investment too large. They might bring ideas and perspectives we'd never have seen otherwise. The democratization could cut both ways.
-
 There's real reason for hope. Kimi K2.5 just dropped with benchmarks rivaling closed models. If that trajectory continues, capable models running locally on your own hardware—no subscription required—might become the norm rather than the exception. Competition could drive prices down. Open-weight development could close the gap entirely.
 
 Maybe the fundamentals will remain just as learnable without paying anything at all.
