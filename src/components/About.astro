@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import ProfilePhoto from '../assets/Hero-Image.JPG';
 ---
 
 <section id="about" class="bg-brutal-black py-20 px-6" aria-labelledby="about-heading">
@@ -10,10 +12,19 @@
     </h2>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-      <!-- Photo placeholder -->
+      <!-- Profile photo -->
       <div class="lg:col-span-4 reveal">
-        <div class="border border-brutal-rule aspect-square flex items-center justify-center relative overflow-hidden">
-          <span class="text-[8rem] font-bold text-brutal-rule/20 select-none">K</span>
+        <div class="border border-brutal-rule aspect-[3/4] relative overflow-hidden bg-brutal-black">
+          <Image
+            src={ProfilePhoto}
+            alt="Kamil Rogozinski standing in a city square"
+            class="w-full h-full object-cover"
+            width={576}
+            height={768}
+            sizes="(min-width: 1024px) 30vw, 80vw"
+            loading="lazy"
+            format="webp"
+          />
           <div class="absolute bottom-0 left-0 right-0 h-1 bg-brutal-red"></div>
         </div>
       </div>
@@ -21,15 +32,15 @@
       <!-- Bio -->
       <div class="lg:col-span-8 reveal">
         <p class="text-brutal-white/80 mb-6 leading-relaxed">
-          Hi there! I'm passionate about solving real-world problems through programming and coding. Whether I'm diving into complex challenges or experimenting with new CLI tools, I love finding creative solutions to hard problems. Of course that means I use vim for my day to day coding and file editing.
+          I build things for the web and I like hard problems. Most of my time is spent deep in a terminal&mdash;writing code, breaking things on purpose, and wiring up systems that actually work. Vim is my editor. The CLI is my home. If there's a harder way to do something that teaches me more, I'll probably take it.
         </p>
 
         <p class="text-brutal-white/80 mb-6 leading-relaxed">
-          I'm also on a journey to hone my technical writing and design skills. I believe that clear communication and well-crafted design are just as important as the code itself&mdash;they help transform complex ideas into accessible solutions.
+          Lately I've been sharpening my technical writing and design eye. Good code deserves clear explanation, and a well-designed interface does half the communication for you. I care about the craft on both sides of the screen.
         </p>
 
         <p class="text-brutal-white/80 mb-8 leading-relaxed">
-          I'm always eager to connect with businesses and individuals who need a fresh perspective or innovative technical solutions. If you think my approach could be a good fit for your project or venture, let's start a conversation.
+          If you're working on something interesting and need someone who can ship clean code and think through the details&mdash;let's talk.
         </p>
 
         <!-- Tech stack grid -->
@@ -55,13 +66,13 @@
         <!-- Social links (text-based) -->
         <nav aria-label="Social media links" class="flex flex-wrap gap-6 text-xs uppercase tracking-widest">
           <a href="https://github.com/Kameleon21" target="_blank" rel="noopener noreferrer"
-            class="text-brutal-grey hover:text-brutal-red transition-colors">GitHub &rarr;</a>
+            class="text-brutal-grey hover:text-brutal-red transition-colors">GitHub</a>
           <a href="https://www.linkedin.com/in/kamil-rogozinski/" target="_blank" rel="noopener noreferrer"
-            class="text-brutal-grey hover:text-brutal-red transition-colors">LinkedIn &rarr;</a>
+            class="text-brutal-grey hover:text-brutal-red transition-colors">LinkedIn</a>
           <a href="https://x.com/KamilRogozinski" target="_blank" rel="noopener noreferrer"
-            class="text-brutal-grey hover:text-brutal-red transition-colors">X / Twitter &rarr;</a>
+            class="text-brutal-grey hover:text-brutal-red transition-colors">X</a>
           <a href="mailto:kamilrogozinski29@gmail.com"
-            class="text-brutal-grey hover:text-brutal-red transition-colors">Email &rarr;</a>
+            class="text-brutal-grey hover:text-brutal-red transition-colors">Email</a>
         </nav>
       </div>
     </div>
