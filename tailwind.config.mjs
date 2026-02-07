@@ -4,46 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Backgrounds
-        primary: "#0A0A0B",
-        secondary: "#141416",
-        tertiary: "#1C1C1F",
-        // Accent - Electric Teal
-        accent: {
-          DEFAULT: "#2DD4BF",
-          dim: "#14B8A6",
-          glow: "rgba(45, 212, 191, 0.15)",
-          "glow-strong": "rgba(45, 212, 191, 0.3)",
-        },
-        // Text
-        text: {
-          primary: "#F4F4F5",
-          secondary: "#A1A1AA",
-          muted: "#71717A",
-        },
-        // Borders
-        border: {
-          DEFAULT: "#27272A",
-          accent: "rgba(45, 212, 191, 0.3)",
+        brutal: {
+          black: "#0A0A0A",
+          white: "#F5F0EB",
+          red: "#FF2D00",
+          grey: "#888888",
+          rule: "#333333",
         },
       },
       fontFamily: {
-        sans: ["Satoshi", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
-        display: ["JetBrains Mono", "monospace"],
-      },
-      backgroundColor: {
-        primary: "#0A0A0B",
-        secondary: "#141416",
-        tertiary: "#1C1C1F",
-      },
-      textColor: {
-        primary: "#F4F4F5",
-        secondary: "#A1A1AA",
-        muted: "#71717A",
-      },
-      borderColor: {
-        DEFAULT: "#27272A",
+        mono: ['"Space Mono"', "monospace"],
+        serif: ['"Instrument Serif"', "serif"],
       },
       typography: {
         DEFAULT: {
@@ -56,24 +27,24 @@ export default {
             },
           },
         },
-        invert: {
+        brutal: {
           css: {
-            "--tw-prose-body": "#A1A1AA",
-            "--tw-prose-headings": "#F4F4F5",
-            "--tw-prose-lead": "#A1A1AA",
-            "--tw-prose-links": "#2DD4BF",
-            "--tw-prose-bold": "#F4F4F5",
-            "--tw-prose-counters": "#71717A",
-            "--tw-prose-bullets": "#71717A",
-            "--tw-prose-hr": "#27272A",
-            "--tw-prose-quotes": "#F4F4F5",
-            "--tw-prose-quote-borders": "#2DD4BF",
-            "--tw-prose-captions": "#71717A",
-            "--tw-prose-code": "#2DD4BF",
-            "--tw-prose-pre-code": "#F4F4F5",
-            "--tw-prose-pre-bg": "#141416",
-            "--tw-prose-th-borders": "#27272A",
-            "--tw-prose-td-borders": "#27272A",
+            "--tw-prose-body": "#F5F0EB",
+            "--tw-prose-headings": "#F5F0EB",
+            "--tw-prose-lead": "#888888",
+            "--tw-prose-links": "#FF2D00",
+            "--tw-prose-bold": "#F5F0EB",
+            "--tw-prose-counters": "#888888",
+            "--tw-prose-bullets": "#FF2D00",
+            "--tw-prose-hr": "#333333",
+            "--tw-prose-quotes": "#F5F0EB",
+            "--tw-prose-quote-borders": "#FF2D00",
+            "--tw-prose-captions": "#888888",
+            "--tw-prose-code": "#FF2D00",
+            "--tw-prose-pre-code": "#F5F0EB",
+            "--tw-prose-pre-bg": "#111111",
+            "--tw-prose-th-borders": "#333333",
+            "--tw-prose-td-borders": "#333333",
           },
         },
       },

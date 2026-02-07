@@ -1,41 +1,42 @@
 ---
-import { Image } from 'astro:assets';
-import HeroImage from '../assets/Hero-Image.JPG';
-import '../styles/hero.css';
 ---
 
-<section class="min-h-screen bg-primary relative overflow-hidden flex items-center px-8">
-  <!-- Subtle gradient glow -->
-  <div class="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent"></div>
-  <div class="absolute top-1/4 -right-32 w-96 h-96 bg-accent/10 rounded-full blur-3xl"></div>
-  <div class="absolute bottom-1/4 -left-32 w-64 h-64 bg-accent/5 rounded-full blur-3xl"></div>
+<section class="min-h-screen bg-brutal-black relative flex items-center px-8">
+  <div class="container mx-auto relative z-10">
+    <!-- Giant title -->
+    <h1 class="text-[clamp(3rem,10vw,8rem)] font-bold leading-[0.9] uppercase tracking-tighter mb-8">
+      <span class="text-brutal-white">Full Stack</span><br>
+      <span class="text-brutal-red">Developer</span><span class="cursor-blink"></span>
+    </h1>
 
-  <div class="container mx-auto flex flex-col-reverse lg:flex-row justify-between items-center gap-12 relative z-10">
-    <div class="max-w-2xl">
-      <h1 class="text-5xl lg:text-6xl font-bold mb-6 text-text-primary typewriter-h1">
-        Hey, I'm <span class="gradient-text">Kamil</span>
-      </h1>
-      <h2 class="text-xl lg:text-2xl font-normal mb-8 text-text-secondary typewriter-p">
-        Full Stack Developer & Technical Writer & Designer
-      </h2>
+    <!-- Metadata line -->
+    <div class="flex flex-wrap gap-6 text-xs uppercase tracking-widest text-brutal-grey mb-12 border-t border-brutal-rule pt-6">
+      <span>Portfolio &mdash; 2026</span>
+      <span class="text-brutal-rule">|</span>
+      <span>Based in Ireland</span>
+      <span class="text-brutal-rule">|</span>
+      <span class="flex items-center gap-2"><span class="status-dot"></span> Available for work</span>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="flex flex-wrap gap-4">
       <a
         href={`${import.meta.env.BASE_URL}#contact`}
-        class="inline-block bg-accent text-primary mt-4 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-accent-dim transition-all opacity-0 button-appear glow-accent-sm hover:glow-accent"
+        class="px-8 py-3 bg-brutal-red text-brutal-black text-xs uppercase tracking-widest font-bold hover:bg-brutal-white transition-colors"
       >
         Get in touch
       </a>
+      <a
+        href={`${import.meta.env.BASE_URL}#work`}
+        class="px-8 py-3 border border-brutal-rule text-brutal-grey text-xs uppercase tracking-widest font-bold hover:border-brutal-red hover:text-brutal-red transition-colors"
+      >
+        View work
+      </a>
     </div>
 
-    <div class="w-64 h-64 lg:w-80 lg:h-80 rounded-full flex-shrink-0 ring-2 ring-accent/30 ring-offset-4 ring-offset-primary">
-      <Image
-        src={HeroImage}
-        alt="Kamil Rogozinski - Full Stack Developer"
-        class="w-full h-full object-cover rounded-full"
-        width={320}
-        height={320}
-        loading="eager"
-        fetchpriority="high"
-      />
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-brutal-grey text-xs uppercase tracking-widest hidden lg:block">
+      <span class="inline-block motion-safe:animate-bounce">&darr;</span> Scroll
     </div>
   </div>
 </section>

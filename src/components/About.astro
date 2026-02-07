@@ -1,99 +1,80 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import ProfilePhoto from '../assets/Hero-Image.JPG';
 ---
 
-<section id="about" class="min-h-screen bg-primary py-20 px-6" aria-labelledby="about-heading">
-  <div class="container mx-auto">
-    <h2 id="about-heading" class="text-5xl font-bold mb-16 text-text-primary opacity-0 transform translate-y-10 transition-all duration-700 ease-out slide-up">
-      About Me
+<section id="about" class="bg-brutal-black py-20 px-6" aria-labelledby="about-heading">
+  <div class="container mx-auto max-w-6xl">
+    <!-- Section counter -->
+    <div class="text-brutal-grey text-xs uppercase tracking-widest mb-4 reveal">/01</div>
+    <h2 id="about-heading" class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight mb-16 reveal">
+      About
     </h2>
 
-    <div class="bg-secondary rounded-2xl p-10 border border-border hover-glow opacity-0 transform translate-y-10 transition-all duration-700 ease-out delay-200 slide-up">
-      <p class="font-normal text-text-secondary mb-6 leading-relaxed">
-        Hi there! I'm passionate about solving real-world problems through programming and coding. Whether I'm diving into complex challenges or experimenting with new CLI tools, I love finding creative solutions to hard problems. Of course that means I use vim for my day to day coding and file editing
-      </p>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      <!-- Profile photo -->
+      <div class="lg:col-span-4 reveal">
+        <div class="border border-brutal-rule aspect-[3/4] relative overflow-hidden bg-brutal-black">
+          <Image
+            src={ProfilePhoto}
+            alt="Kamil Rogozinski standing in a city square"
+            class="w-full h-full object-cover"
+            width={576}
+            height={768}
+            sizes="(min-width: 1024px) 30vw, 80vw"
+            loading="lazy"
+            format="webp"
+          />
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-brutal-red"></div>
+        </div>
+      </div>
 
-      <p class="font-normal text-text-secondary mb-6 leading-relaxed">
-        I'm also on a journey to hone my technical writing and design skills. I believe that clear communication and well-crafted design are just as important as the code itself—they help transform complex ideas into accessible solutions.
-      </p>
+      <!-- Bio -->
+      <div class="lg:col-span-8 reveal">
+        <p class="text-brutal-white/80 mb-6 leading-relaxed">
+          I build things for the web and I like hard problems. Most of my time is spent deep in a terminal&mdash;writing code, breaking things on purpose, and wiring up systems that actually work. Vim is my editor. The CLI is my home. If there's a harder way to do something that teaches me more, I'll probably take it.
+        </p>
 
-      <p class="font-normal text-text-secondary mb-8 leading-relaxed">
-        I'm always eager to connect with businesses and individual who need a fresh perspective or innovative technical solutions. If you think my approach could be a good fit for your project or venture, let's start a conversation and explore how we can create something amazing together!
-      </p>
+        <p class="text-brutal-white/80 mb-6 leading-relaxed">
+          Lately I've been sharpening my technical writing and design eye. Good code deserves clear explanation, and a well-designed interface does half the communication for you. I care about the craft on both sides of the screen.
+        </p>
 
-      <nav aria-label="Social media links">
-        <ul class="flex gap-6 items-center list-none p-0">
-          <li>
-            <a
-              href="https://github.com/Kameleon21"
-              class="text-text-muted hover:text-accent transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit my GitHub profile"
-            >
-              <Icon name="mdi:github" class="w-7 h-7 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.linkedin.com/in/kamil-rogozinski/"
-              class="text-text-muted hover:text-accent transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Connect with me on LinkedIn"
-            >
-              <Icon name="mdi:linkedin" class="w-7 h-7 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://x.com/KamilRogozinski"
-              class="text-text-muted hover:text-accent transition-colors"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Follow me on X"
-            >
-              <Icon name="mdi:twitter" class="w-7 h-7 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
-            </a>
-          </li>
-          <li>
-            <a
-              href="mailto:kamilrogozinski29@gmail.com"
-              class="text-text-muted hover:text-accent transition-colors"
-              aria-label="Send me an email"
-            >
-              <Icon name="mdi:email" class="w-7 h-7 hover:scale-110 transition-all duration-300 ease-in-out" aria-hidden="true"/>
-            </a>
-          </li>
-        </ul>
-      </nav>
+        <p class="text-brutal-white/80 mb-8 leading-relaxed">
+          If you're working on something interesting and need someone who can ship clean code and think through the details&mdash;let's talk.
+        </p>
+
+        <!-- Tech stack grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="brutal-card !p-4 text-center">
+            <div class="text-brutal-red text-2xl font-bold mb-1">FE</div>
+            <div class="text-brutal-grey text-xs uppercase tracking-widest">React / Astro</div>
+          </div>
+          <div class="brutal-card !p-4 text-center">
+            <div class="text-brutal-red text-2xl font-bold mb-1">BE</div>
+            <div class="text-brutal-grey text-xs uppercase tracking-widest">Node / Spring</div>
+          </div>
+          <div class="brutal-card !p-4 text-center">
+            <div class="text-brutal-red text-2xl font-bold mb-1">TS</div>
+            <div class="text-brutal-grey text-xs uppercase tracking-widest">TypeScript</div>
+          </div>
+          <div class="brutal-card !p-4 text-center">
+            <div class="text-brutal-red text-2xl font-bold mb-1">DB</div>
+            <div class="text-brutal-grey text-xs uppercase tracking-widest">SQL / NoSQL</div>
+          </div>
+        </div>
+
+        <!-- Social links (text-based) -->
+        <nav aria-label="Social media links" class="flex flex-wrap gap-6 text-xs uppercase tracking-widest">
+          <a href="https://github.com/Kameleon21" target="_blank" rel="noopener noreferrer"
+            class="text-brutal-grey hover:text-brutal-red transition-colors">GitHub</a>
+          <a href="https://www.linkedin.com/in/kamil-rogozinski/" target="_blank" rel="noopener noreferrer"
+            class="text-brutal-grey hover:text-brutal-red transition-colors">LinkedIn</a>
+          <a href="https://x.com/KamilRogozinski" target="_blank" rel="noopener noreferrer"
+            class="text-brutal-grey hover:text-brutal-red transition-colors">X</a>
+          <a href="mailto:kamilrogozinski29@gmail.com"
+            class="text-brutal-grey hover:text-brutal-red transition-colors">Email</a>
+        </nav>
+      </div>
     </div>
   </div>
 </section>
-
-<script>
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.remove('opacity-0', 'translate-y-10');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-
-  document.querySelectorAll('.slide-up').forEach((element) => {
-    observer.observe(element);
-  });
-</script>
-
-<style>
-  .slide-up {
-    will-change: transform, opacity;
-  }
-</style>

@@ -22,7 +22,7 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
       class="sticky top-24 w-60 max-h-[calc(100vh-8rem)] overflow-y-auto"
       aria-label="Table of contents"
     >
-      <h2 class="text-sm font-semibold text-text-muted uppercase tracking-wider mb-4">
+      <h2 class="text-xs font-bold text-brutal-grey uppercase tracking-widest mb-4">
         On this page
       </h2>
       <ul class="space-y-2">
@@ -31,9 +31,9 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
             <a
               href={`#${heading.slug}`}
               class={`
-                toc-link block text-sm transition-all duration-200
+                toc-link block text-xs uppercase tracking-widest transition-colors duration-150
                 ${heading.depth === 3 ? 'pl-4' : ''}
-                text-text-muted hover:text-accent
+                text-brutal-grey hover:text-brutal-red
               `}
               data-heading={heading.slug}
             >
@@ -55,7 +55,6 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
 
     if (!tocLinks.length || !headings.length) return;
 
-    // Create intersection observer
     const observerOptions = {
       root: null,
       rootMargin: '-80px 0px -70% 0px',
@@ -71,22 +70,21 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
           const tocLink = document.querySelector(`.toc-link[data-heading="${id}"]`);
 
           if (currentActive) {
-            currentActive.classList.remove('text-accent', 'font-medium');
-            currentActive.classList.add('text-text-muted');
+            currentActive.classList.remove('text-brutal-red', 'font-bold');
+            currentActive.classList.add('text-brutal-grey');
             const indicator = currentActive.querySelector('.toc-indicator');
             if (indicator) indicator.remove();
           }
 
           if (tocLink) {
-            tocLink.classList.remove('text-text-muted');
-            tocLink.classList.add('text-accent', 'font-medium');
+            tocLink.classList.remove('text-brutal-grey');
+            tocLink.classList.add('text-brutal-red', 'font-bold');
 
-            // Add glowing indicator
+            // Add red indicator dot
             const span = tocLink.querySelector('span');
             if (span && !span.querySelector('.toc-indicator')) {
               const indicator = document.createElement('span');
-              indicator.className = 'toc-indicator absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-accent';
-              indicator.style.boxShadow = '0 0 8px rgba(45, 212, 191, 0.8)';
+              indicator.className = 'toc-indicator absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-brutal-red';
               span.appendChild(indicator);
             }
 
@@ -133,8 +131,7 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
   }
 
   #table-of-contents::-webkit-scrollbar-thumb {
-    background: #27272A;
-    border-radius: 2px;
+    background: #333;
   }
 
   .toc-link span {

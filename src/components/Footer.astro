@@ -1,48 +1,29 @@
 ---
-import { Icon } from 'astro-icon/components';
-
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-secondary text-text-primary py-8 px-8 border-t border-border">
-  <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-    <p class="text-text-muted text-sm">&copy; {currentYear} Kamil Rogozinski. All rights reserved.</p>
+<footer class="bg-brutal-black border-t border-brutal-rule overflow-hidden">
+  <!-- Footer content -->
+  <div class="container mx-auto px-8 py-8">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+      <p class="text-brutal-grey text-xs uppercase tracking-widest">
+        &copy; {currentYear} Kamil Rogozinski
+      </p>
 
-    <div class="flex gap-6 mt-4 md:mt-0">
-      <a
-        href="https://github.com/Kameleon21"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-text-muted hover:text-accent transition-colors"
-        aria-label="GitHub"
-      >
-        <Icon name="mdi:github" class="w-6 h-6" />
-      </a>
-      <a
-        href="https://www.linkedin.com/in/kamil-rogozinski/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-text-muted hover:text-accent transition-colors"
-        aria-label="LinkedIn"
-      >
-        <Icon name="mdi:linkedin" class="w-6 h-6" />
-      </a>
-      <a
-        href="https://x.com/KamilRogozinski"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="text-text-muted hover:text-accent transition-colors"
-        aria-label="X"
-      >
-        <Icon name="mdi:twitter" class="w-6 h-6" />
-      </a>
-      <a
-        href="mailto:kamilrogozinski29@gmail.com"
-        class="text-text-muted hover:text-accent transition-colors"
-        aria-label="Email"
-      >
-        <Icon name="mdi:email" class="w-6 h-6" />
-      </a>
+      <div class="flex gap-6 text-xs uppercase tracking-widest">
+        <a href="https://github.com/Kameleon21" target="_blank" rel="noopener noreferrer"
+          class="text-brutal-grey hover:text-brutal-red transition-colors">GitHub</a>
+        <a href="https://www.linkedin.com/in/kamil-rogozinski/" target="_blank" rel="noopener noreferrer"
+          class="text-brutal-grey hover:text-brutal-red transition-colors">LinkedIn</a>
+        <a href="https://x.com/KamilRogozinski" target="_blank" rel="noopener noreferrer"
+          class="text-brutal-grey hover:text-brutal-red transition-colors">X</a>
+        <a href="mailto:kamilrogozinski29@gmail.com"
+          class="text-brutal-grey hover:text-brutal-red transition-colors">Email</a>
+      </div>
+
+      <p class="text-brutal-grey/50 text-xs uppercase tracking-widest">
+        Built with Astro + Tailwind
+      </p>
     </div>
   </div>
 </footer>

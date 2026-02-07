@@ -6,9 +6,9 @@ interface Props {
 const { activeTab } = Astro.props;
 ---
 
-<div class="flex gap-4 mb-8" role="tablist" aria-label="Contact options">
+<div class="flex gap-0 mb-8 border-b border-brutal-rule" role="tablist" aria-label="Contact options">
   <button
-    class={`flex-1 py-3 px-6 rounded-lg transition-all duration-300 text-center contact-tab ${activeTab === 'get-in-touch' ? 'active' : ''}`}
+    class={`flex-1 py-3 text-xs uppercase tracking-widest text-center transition-colors contact-tab ${activeTab === 'get-in-touch' ? 'active' : ''}`}
     data-tab="get-in-touch"
     role="tab"
     aria-selected={activeTab === 'get-in-touch'}
@@ -17,7 +17,7 @@ const { activeTab } = Astro.props;
     Get in Touch
   </button>
   <button
-    class={`flex-1 py-3 px-6 rounded-lg transition-all duration-300 text-center contact-tab ${activeTab === 'work-together' ? 'active' : ''}`}
+    class={`flex-1 py-3 text-xs uppercase tracking-widest text-center transition-colors contact-tab ${activeTab === 'work-together' ? 'active' : ''}`}
     data-tab="work-together"
     role="tab"
     aria-selected={activeTab === 'work-together'}
@@ -29,19 +29,17 @@ const { activeTab } = Astro.props;
 
 <style>
   .contact-tab {
-    background-color: #141416;
-    color: #71717A;
-    border: 1px solid #27272A;
+    color: #888;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
   }
 
   .contact-tab:hover {
-    color: #A1A1AA;
-    border-color: rgba(45, 212, 191, 0.3);
+    color: #F5F0EB;
   }
 
   .contact-tab.active {
-    background-color: #2DD4BF;
-    color: #0A0A0B;
-    border-color: #2DD4BF;
+    color: #FF2D00;
+    border-bottom-color: #FF2D00;
   }
 </style>
