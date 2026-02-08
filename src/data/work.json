@@ -1,6 +1,22 @@
 {
   "projects": [
     {
+      "title": "FirstDevJob",
+      "description": "Open-source job board helping developers land their first role in tech. Features job search with role-level and location filtering, application tracking dashboard, job posting with admin approval, and role-based access control. Fully documented with a dedicated /docs site.",
+      "image": "",
+      "link": "https://www.first-dev-job.com/",
+      "githubLink": "https://github.com/Kameleon21/firstdevjob",
+      "technologies": ["Next.js", "Convex", "Clerk", "TypeScript", "Tailwind CSS"]
+    },
+    {
+      "title": "OKU",
+      "description": "Terminal companion for Hardcover that lets you track what you're reading, update progress, and manage shelves without leaving the terminal. Offers both a scriptable CLI and a full interactive TUI dashboard, with local SQLite caching and Hardcover GraphQL API integration.",
+      "image": "",
+      "link": "",
+      "githubLink": "https://github.com/Kameleon21/oku",
+      "technologies": ["Go", "SQLite", "GraphQL", "Cobra", "TUI"]
+    },
+    {
       "title": "Group Dinner Picker",
       "description": "Collaborative restaurant voting platform with a retro terminal UI and Spring Boot API enforcing fair voting, locking, and live stats across web clients.",
       "image": "/Group-Picker.png",
