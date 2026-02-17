@@ -7,13 +7,13 @@ import ProfilePhoto from '../assets/Hero-Image.JPG';
   <div class="container mx-auto max-w-6xl">
     <!-- Section counter -->
     <div class="text-brutal-grey text-xs uppercase tracking-widest mb-4 reveal">/01</div>
-    <h2 id="about-heading" class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight mb-16 reveal">
+    <h2 id="about-heading" class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight mb-16 reveal" data-delay="1">
       About
     </h2>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <!-- Profile photo -->
-      <div class="lg:col-span-4 reveal">
+      <div class="lg:col-span-4 reveal" data-delay="2">
         <div class="border border-brutal-rule aspect-[3/4] relative overflow-hidden bg-brutal-black">
           <Image
             src={ProfilePhoto}
@@ -30,7 +30,7 @@ import ProfilePhoto from '../assets/Hero-Image.JPG';
       </div>
 
       <!-- Bio -->
-      <div class="lg:col-span-8 reveal">
+      <div class="lg:col-span-8 reveal" data-delay="3">
         <p class="text-brutal-white/80 mb-6 leading-relaxed">
           I build things for the web and I like hard problems. Most of my time is spent deep in a terminal&mdash;writing code, breaking things on purpose, and wiring up systems that actually work. Vim is my editor. The CLI is my home. If there's a harder way to do something that teaches me more, I'll probably take it.
         </p>

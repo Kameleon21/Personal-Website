@@ -3,15 +3,21 @@
     {
       "title": "FirstDevJob",
       "description": "Open-source job board helping developers land their first role in tech. Features job search with role-level and location filtering, application tracking dashboard, job posting with admin approval, and role-based access control. Fully documented with a dedicated /docs site.",
-      "image": "",
+      "image": "../assets/firstdevjob-demo.mov",
       "link": "https://www.first-dev-job.com/",
       "githubLink": "https://github.com/Kameleon21/firstdevjob",
-      "technologies": ["Next.js", "Convex", "Clerk", "TypeScript", "Tailwind CSS"]
+      "technologies": [
+        "Next.js",
+        "Convex",
+        "Clerk",
+        "TypeScript",
+        "Tailwind CSS"
+      ]
     },
     {
       "title": "OKU",
       "description": "Terminal companion for Hardcover that lets you track what you're reading, update progress, and manage shelves without leaving the terminal. Offers both a scriptable CLI and a full interactive TUI dashboard, with local SQLite caching and Hardcover GraphQL API integration.",
-      "image": "",
+      "image": "../assets/oku-demo.gif",
       "link": "",
       "githubLink": "https://github.com/Kameleon21/oku",
       "technologies": ["Go", "SQLite", "GraphQL", "Cobra", "TUI"]
@@ -22,15 +28,27 @@
       "image": "/Group-Picker.png",
       "link": "",
       "githubLink": "https://github.com/Kameleon21/group-dinner-picker",
-      "technologies": ["Spring Boot", "React", "TypeScript", "Tailwind CSS", "Docker"]
+      "technologies": [
+        "Spring Boot",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Docker"
+      ]
     },
     {
       "title": "CE Equipment Solutions",
       "description": "Professional B2B website for Ireland's leading CE marking consultancy. Built with Astro 5.9, React 19, and TypeScript featuring GDPR-compliant cookie system, dynamic service routing, and advanced lead generation.",
-      "image": "/ce-equipment-solutions.png",
+      "image": "../assets/ce-equipment-solutions.png",
       "link": "https://ceequipmentsolutions.com/",
       "githubLink": "https://github.com/Kameleon21/CE-Equipment-Solutions",
-      "technologies": ["Astro", "React", "TypeScript", "Tailwind CSS", "GDPR Compliance"]
+      "technologies": [
+        "Astro",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "GDPR Compliance"
+      ]
     },
     {
       "title": "ARC Management Systems",
@@ -38,7 +56,13 @@
       "image": "/iso9001.png",
       "link": "https://iso9001.ie/",
       "githubLink": "https://github.com/Kameleon21/ARC-Management-Systems",
-      "technologies": ["Astro", "TypeScript", "Tailwind CSS", "Netlify", "Performance Optimization"]
+      "technologies": [
+        "Astro",
+        "TypeScript",
+        "Tailwind CSS",
+        "Netlify",
+        "Performance Optimization"
+      ]
     },
     {
       "title": "A Class Barbers",
@@ -46,7 +70,13 @@
       "image": "/A-Class-Barbers.jpeg",
       "link": "https://aclassbarbers.com/",
       "githubLink": "https://github.com/Kameleon21/A-Class-Barber",
-      "technologies": ["Astro", "JavaScript", "Google Places API", "Google Maps", "Netlify"]
+      "technologies": [
+        "Astro",
+        "JavaScript",
+        "Google Places API",
+        "Google Maps",
+        "Netlify"
+      ]
     },
     {
       "id": 4,
@@ -55,7 +85,13 @@
       "image": "../assets/Personal-Website.jpeg",
       "link": "https://kameleon21.github.io/Personal-Website/",
       "githubLink": "https://github.com/Kameleon21/Personal-Website",
-      "technologies": ["Astro", "TypeScript", "Tailwind CSS", "Web3Forms", "GitHub Pages"]
+      "technologies": [
+        "Astro",
+        "TypeScript",
+        "Tailwind CSS",
+        "Web3Forms",
+        "GitHub Pages"
+      ]
     }
   ]
 }

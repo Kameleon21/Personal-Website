@@ -9,17 +9,18 @@ interface Props {
 const { title = "Contact" } = Astro.props;
 ---
 
-<section id="contact" class="bg-brutal-black py-20 px-8 border-t border-brutal-rule">
+<section id="contact" class="bg-brutal-black py-20 px-8">
+  <div class="section-scan" aria-hidden="true"></div>
   <div class="container mx-auto max-w-6xl">
     <!-- Section counter -->
     <div class="text-brutal-grey text-xs uppercase tracking-widest mb-4 reveal">/04</div>
-    <h2 class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight mb-16 reveal">
+    <h2 class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight mb-16 reveal" data-delay="1">
       {title}
     </h2>
 
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
       <!-- Contact info -->
-      <div class="lg:col-span-4 reveal">
+      <div class="lg:col-span-4 reveal" data-delay="2">
         <div class="space-y-6">
           <div>
             <div class="text-brutal-grey text-xs uppercase tracking-widest mb-2">Email</div>
@@ -41,7 +42,7 @@ const { title = "Contact" } = Astro.props;
       </div>
 
       <!-- Form -->
-      <div class="lg:col-span-8 reveal">
+      <div class="lg:col-span-8 reveal" data-delay="3">
         <ContactTabs activeTab="get-in-touch" />
         <ContactForm activeTab="get-in-touch" />
       </div>

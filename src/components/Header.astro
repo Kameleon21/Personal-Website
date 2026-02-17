@@ -15,10 +15,10 @@
 
     <!-- Desktop Navigation -->
     <div class="hidden lg:flex gap-8">
-      <a href="/Personal-Website/#about" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">About</a>
-      <a href="/Personal-Website/#work" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">Work</a>
-      <a href="/Personal-Website/#blog" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">Blog</a>
-      <a href="/Personal-Website/#contact" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">Contact</a>
+      <a href="/Personal-Website/#about" data-nav-section="about" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">About</a>
+      <a href="/Personal-Website/#work" data-nav-section="work" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">Work</a>
+      <a href="/Personal-Website/#blog" data-nav-section="blog" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">Blog</a>
+      <a href="/Personal-Website/#contact" data-nav-section="contact" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">Contact</a>
     </div>
 
     <!-- Hamburger Menu Button -->
@@ -41,19 +41,19 @@
       inert
     >
       <div class="flex flex-col px-8 py-4">
-        <a href="/Personal-Website/#about"
+        <a href="/Personal-Website/#about" data-nav-section="about"
           class="py-3 text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors border-b border-brutal-rule">
           About
         </a>
-        <a href="/Personal-Website/#work"
+        <a href="/Personal-Website/#work" data-nav-section="work"
           class="py-3 text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors border-b border-brutal-rule">
           Work
         </a>
-        <a href="/Personal-Website/#blog"
+        <a href="/Personal-Website/#blog" data-nav-section="blog"
           class="py-3 text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors border-b border-brutal-rule">
           Blog
         </a>
-        <a href="/Personal-Website/#contact"
+        <a href="/Personal-Website/#contact" data-nav-section="contact"
           class="py-3 text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">
           Contact
         </a>
@@ -69,5 +69,43 @@
     document.addEventListener('DOMContentLoaded', initMobileMenu, { once: true });
   } else {
     initMobileMenu();
+  }
+</script>
+
+<script>
+  function initScrollSpy() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('[data-nav-section]');
+
+    if (!sections.length || !navLinks.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const sectionId = entry.target.id;
+          navLinks.forEach((link) => {
+            if (link.dataset.navSection === sectionId) {
+              link.classList.add('nav-active');
+            } else {
+              link.classList.remove('nav-active');
+            }
+          });
+        });
+      },
+      {
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollSpy, { once: true });
+  } else {
+    initScrollSpy();
   }
 </script>

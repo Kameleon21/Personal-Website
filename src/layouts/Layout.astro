@@ -56,20 +56,23 @@ const { title = "Kamil Rogozinski - Portfolio", description = "Personal portfoli
 		<slot />
 		<BackToTop />
 
-		<!-- Global reveal observer -->
+		<!-- Global reveal + scan line observer -->
 		<script>
 			function initRevealAnimations() {
 				if (document.documentElement.dataset.revealInit === 'true') return;
 				document.documentElement.dataset.revealInit = 'true';
 
 				const revealElements = document.querySelectorAll('.reveal');
-				if (!revealElements.length) return;
+				const scanElements = document.querySelectorAll('.section-scan');
 
 				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 				if (prefersReducedMotion || !('IntersectionObserver' in window)) {
 					revealElements.forEach((element) => element.classList.add('visible'));
+					scanElements.forEach((element) => element.classList.add('scanned'));
 					return;
 				}
+
+				if (!revealElements.length && !scanElements.length) return;
 
 				const revealObserver = new IntersectionObserver(
 					(entries) => {
@@ -86,6 +89,20 @@ const { title = "Kamil Rogozinski - Portfolio", description = "Personal portfoli
 				);
 
 				revealElements.forEach((element) => revealObserver.observe(element));
+
+				if (scanElements.length) {
+					const scanObserver = new IntersectionObserver(
+						(entries) => {
+							entries.forEach((entry) => {
+								if (!entry.isIntersecting) return;
+								entry.target.classList.add('scanned');
+								scanObserver.unobserve(entry.target);
+							});
+						},
+						{ threshold: 0.1, rootMargin: '0px 0px -5% 0px' }
+					);
+					scanElements.forEach((element) => scanObserver.observe(element));
+				}
 			}
 
 			if ('requestIdleCallback' in window) {

@@ -1,56 +1,169 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import workData from '../data/work.json';
+
+const featuredProjectTitles = ['OKU', 'FirstDevJob', 'CE Equipment Solutions'];
+
+const featuredProjects = featuredProjectTitles.flatMap((title) => {
+  const project = workData.projects.find((item) => item.title === title);
+  return project ? [project] : [];
+});
+
+const isVideoAsset = (mediaPath: string) => /\.(mp4|webm|ogg|mov)$/i.test(mediaPath);
+const isGifAsset = (mediaPath: string) => /\.gif$/i.test(mediaPath);
+
+const assetModules = import.meta.glob<ImageMetadata>('../assets/*.{png,jpg,jpeg,webp,svg,avif}', { eager: true, import: 'default' });
+const otherAssetModules = import.meta.glob('../assets/*.{gif,mp4,webm,ogg,mov}', { eager: true, import: 'default' });
+
+const resolveAsset = (mediaPath: string): { type: 'image'; data: ImageMetadata } | { type: 'src'; data: string } | null => {
+  if (!mediaPath) return null;
+
+  if (/^https?:\/\//i.test(mediaPath)) {
+    return { type: 'src', data: mediaPath };
+  }
+
+  const fileName = mediaPath.replace(/\\/g, '/').split('/').pop();
+  if (!fileName) return null;
+
+  const assetKey = `../assets/${fileName}`;
+
+  // Check optimizable images first (png, jpg, etc.)
+  const imageAsset = assetModules[assetKey];
+  if (imageAsset && typeof imageAsset === 'object' && 'src' in imageAsset) {
+    return { type: 'image', data: imageAsset };
+  }
+
+  // Check other assets (gif, video)
+  const otherAsset = otherAssetModules[assetKey];
+  if (typeof otherAsset === 'string') {
+    return { type: 'src', data: otherAsset };
+  }
+  if (otherAsset && typeof otherAsset === 'object' && 'src' in otherAsset) {
+    return { type: 'src', data: (otherAsset as { src: string }).src };
+  }
+
+  return { type: 'src', data: mediaPath };
+};
+
+const getFileName = (mediaPath: string) => {
+  if (!mediaPath) return '';
+  return mediaPath.replace(/\\/g, '/').split('/').pop() ?? '';
+};
 ---
 
-<section id="work" class="bg-brutal-black py-20 px-8 border-t border-brutal-rule">
+<section id="work" class="bg-brutal-black px-8 py-20">
+  <div class="section-scan" aria-hidden="true"></div>
   <div class="container mx-auto max-w-6xl">
-    <!-- Section counter -->
-    <div class="text-brutal-grey text-xs uppercase tracking-widest mb-4 reveal">/02</div>
-    <h2 class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight mb-16 reveal">
+    <div class="reveal mb-4 text-xs uppercase tracking-widest text-brutal-grey">/02</div>
+    <h2 class="reveal mb-16 text-4xl font-bold uppercase tracking-tight text-brutal-white md:text-5xl" data-delay="1">
       Work
     </h2>
 
-    <div class="flex flex-col gap-6">
-      {workData.projects.map((project, index) => (
-        <div class="brutal-card reveal flex flex-col md:flex-row gap-6 items-start">
-          <!-- Large index number -->
-          <div class="text-5xl md:text-7xl font-bold text-brutal-rule/30 leading-none select-none shrink-0 w-20">
+    <div class="flex flex-col gap-16 lg:gap-20">
+      {featuredProjects.map((project, index) => (
+        (() => {
+          const asset = resolveAsset(project.image);
+          const fileName = getFileName(project.image);
+          const isVideo = isVideoAsset(project.image);
+          const isGif = isGifAsset(project.image);
+          return (
+        <article class="brutal-card reveal">
+          <div class="mb-6 text-xs uppercase tracking-widest text-brutal-grey">
             {String(index + 1).padStart(2, '0')}
           </div>
 
-          <!-- Content -->
-          <div class="flex-1 min-w-0">
-            <h3 class="text-xl font-bold text-brutal-white uppercase tracking-tight mb-3">
-              {project.title}
-            </h3>
-            <p class="text-brutal-grey text-sm mb-4 leading-relaxed">
-              {project.description}
-            </p>
+          <div class="flex flex-col gap-8 lg:flex-row">
+            {/* Terminal media panel */}
+            <div class="w-full lg:w-[62%]">
+              <div class="overflow-hidden border border-brutal-rule">
+                {/* Terminal title bar */}
+                <div class="flex items-center gap-2 px-3 py-2" style="background:#141414">
+                  <span class="h-2.5 w-2.5 rounded-full bg-brutal-red"></span>
+                  <span class="h-2.5 w-2.5 rounded-full" style="background:#555"></span>
+                  <span class="h-2.5 w-2.5 rounded-full" style="background:#555"></span>
+                  {fileName && (
+                    <span class="ml-2 text-[10px] uppercase tracking-widest text-brutal-grey">
+                      {fileName}
+                    </span>
+                  )}
+                </div>
 
-            {project.technologies && project.technologies.length > 0 && (
-              <div class="flex flex-wrap gap-2 mb-4">
-                {project.technologies.map((tech) => (
-                  <span class="brutal-tag">{tech}</span>
-                ))}
+                {/* Media */}
+                {asset ? (
+                  isVideo && asset.type === 'src' ? (
+                    <video
+                      class="aspect-video w-full object-cover"
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      preload="metadata"
+                    >
+                      <source src={asset.data} />
+                    </video>
+                  ) : asset.type === 'image' && !isGif ? (
+                    <Image
+                      src={asset.data}
+                      alt={`${project.title} preview`}
+                      class="aspect-video w-full object-cover"
+                      width={800}
+                      loading="lazy"
+                      format="webp"
+                    />
+                  ) : (
+                    <img
+                      src={asset.type === 'src' ? asset.data : asset.data.src}
+                      alt={`${project.title} preview`}
+                      class="aspect-video w-full object-cover"
+                      loading="lazy"
+                    />
+                  )
+                ) : (
+                  <div class="flex aspect-video w-full items-center justify-center border-t border-brutal-rule text-xs uppercase tracking-widest text-brutal-grey">
+                    Add media
+                  </div>
+                )}
+
+                {/* Red accent bar */}
+                <div class="h-1 bg-brutal-red"></div>
               </div>
-            )}
+            </div>
 
-            <div class="flex gap-4 text-xs uppercase tracking-widest">
-              {project.githubLink && (
-                <a href={project.githubLink} target="_blank" rel="noopener noreferrer"
-                  class="text-brutal-grey hover:text-brutal-red transition-colors">
-                  GitHub &rarr;
-                </a>
+            {/* Info panel */}
+            <div class="flex min-w-0 flex-1 flex-col justify-center">
+              <h3 class="mb-3 text-2xl font-bold uppercase tracking-tight text-brutal-white lg:text-3xl">
+                {project.title}
+              </h3>
+              <p class="mb-4 text-sm leading-relaxed text-brutal-grey">
+                {project.description}
+              </p>
+
+              {project.technologies && project.technologies.length > 0 && (
+                <div class="mb-4 flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span class="brutal-tag">{tech}</span>
+                  ))}
+                </div>
               )}
-              {project.link && (
-                <a href={project.link} target="_blank" rel="noopener noreferrer"
-                  class="text-brutal-grey hover:text-brutal-red transition-colors">
-                  Live
-                </a>
-              )}
+
+              <div class="flex gap-4 text-xs uppercase tracking-widest">
+                {project.githubLink && (
+                  <a href={project.githubLink} target="_blank" rel="noopener noreferrer" class="text-brutal-grey transition-colors hover:text-brutal-red">
+                    GitHub &rarr;
+                  </a>
+                )}
+                {project.link && (
+                  <a href={project.link} target="_blank" rel="noopener noreferrer" class="text-brutal-grey transition-colors hover:text-brutal-red">
+                    Live &rarr;
+                  </a>
+                )}
+              </div>
             </div>
           </div>
-        </div>
+        </article>
+          );
+        })()
       ))}
     </div>
   </div>

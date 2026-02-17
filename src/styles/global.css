@@ -124,6 +124,24 @@
   transform: translate3d(0, 0, 0);
   will-change: auto;
 }
+.reveal[data-delay="1"] { transition-delay: 80ms; }
+.reveal[data-delay="2"] { transition-delay: 160ms; }
+.reveal[data-delay="3"] { transition-delay: 240ms; }
+.reveal[data-delay="4"] { transition-delay: 320ms; }
+
+/* ── Section scan line ── */
+.section-scan {
+  height: 1px;
+  background: linear-gradient(to right, #333 92%, #FF2D00 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+.section-scan.scanned {
+  transform: scaleX(1);
+  will-change: auto;
+}
 
 /* ── Cursor blink ── */
 @keyframes cursor-blink {
@@ -166,6 +184,12 @@ nav a::after {
   transition: transform 0.22s cubic-bezier(0.2, 0.9, 0.2, 1);
 }
 nav a:hover::after {
+  transform: scaleX(1);
+}
+nav a.nav-active {
+  color: #FF2D00;
+}
+nav a.nav-active::after {
   transform: scaleX(1);
 }
 
@@ -232,6 +256,12 @@ nav a:hover::after {
   .status-dot,
   .ticker-strip {
     animation: none;
+  }
+
+  .section-scan {
+    transform: scaleX(1);
+    transition: none;
+    will-change: auto;
   }
 
   nav a::after {

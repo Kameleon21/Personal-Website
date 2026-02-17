@@ -7,17 +7,18 @@ const posts = await getCollection('blog');
 const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<section id="blog" class="bg-brutal-black py-20 px-4 md:px-8 border-t border-brutal-rule">
+<section id="blog" class="bg-brutal-black py-20 px-4 md:px-8">
+  <div class="section-scan" aria-hidden="true"></div>
   <div class="container mx-auto max-w-6xl">
     <!-- Section counter -->
     <div class="text-brutal-grey text-xs uppercase tracking-widest mb-4 reveal">/03</div>
     <div class="flex justify-between items-end mb-16">
-      <h2 class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight reveal">
+      <h2 class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight reveal" data-delay="1">
         Blog
       </h2>
       <a
         href="/Personal-Website/blog"
-        class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors reveal"
+        class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors reveal" data-delay="1"
       >
         All posts &rarr;
       </a>
