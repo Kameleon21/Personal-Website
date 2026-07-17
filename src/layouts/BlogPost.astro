@@ -25,7 +25,7 @@ const readingTime = getReadingTime(post.body);
   <ReadingProgress />
   <Header />
 
-  <div class="bg-brutal-black min-h-screen">
+  <div class="min-h-screen">
     <div class="max-w-7xl mx-auto px-4 py-20">
       <div class="flex gap-12">
         <!-- Table of Contents - Left Sidebar -->
@@ -35,14 +35,14 @@ const readingTime = getReadingTime(post.body);
         <article class="flex-1 max-w-3xl mx-auto xl:mx-0">
           <!-- Article Header -->
           <header class="mb-12">
-            <h1 class="text-3xl lg:text-5xl font-bold mb-6 text-brutal-white uppercase leading-tight tracking-tight">
+            <h1 class="text-3xl lg:text-5xl font-bold mb-6 text-ink leading-tight tracking-tight">
               {title}
             </h1>
-            <div class="flex flex-wrap items-center gap-4 text-brutal-grey text-xs uppercase tracking-widest">
-              <span class="text-brutal-white">{author}</span>
-              <span class="text-brutal-rule">|</span>
+            <div class="flex flex-wrap items-center gap-4 text-faint font-mono text-xs">
+              <span class="text-ink">{author}</span>
+              <span class="text-dot">|</span>
               <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
-              <span class="text-brutal-rule">|</span>
+              <span class="text-dot">|</span>
               <span>{readingTime} min read</span>
             </div>
             <div class="brutal-hr mt-6"></div>
@@ -50,18 +50,18 @@ const readingTime = getReadingTime(post.body);
 
           <!-- Article Content -->
           <div class="prose prose-lg prose-brutal max-w-none
-            prose-headings:font-mono prose-headings:font-bold prose-headings:text-brutal-white prose-headings:uppercase prose-headings:tracking-tight
-            prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-2 prose-h2:border-b prose-h2:border-brutal-rule
+            prose-headings:font-sans prose-headings:font-bold prose-headings:text-ink prose-headings:tracking-tight
+            prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-2 prose-h2:border-b prose-h2:border-dot
             prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-4
-            prose-p:text-brutal-white/80 prose-p:leading-relaxed
-            prose-a:text-brutal-red prose-a:no-underline hover:prose-a:underline
-            prose-strong:text-brutal-white
-            prose-code:text-brutal-red prose-code:bg-[#111] prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:border prose-code:border-brutal-rule
-            prose-pre:bg-[#111] prose-pre:border prose-pre:border-brutal-rule
-            prose-blockquote:border-l-brutal-red prose-blockquote:bg-[#111]/50 prose-blockquote:py-1 prose-blockquote:px-6
-            prose-ul:text-brutal-white/80 prose-ol:text-brutal-white/80
-            prose-li:marker:text-brutal-red
-            prose-hr:border-brutal-rule
+            prose-p:text-ink/80 prose-p:leading-relaxed
+            prose-a:text-accent prose-a:no-underline hover:prose-a:underline
+            prose-strong:text-ink
+            prose-code:text-accent prose-code:bg-white prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:border prose-code:border-dot prose-code:rounded
+            prose-pre:bg-ink prose-pre:border-2 prose-pre:border-ink prose-pre:rounded-lg
+            prose-blockquote:border-l-accent prose-blockquote:bg-white/70 prose-blockquote:py-1 prose-blockquote:px-6
+            prose-ul:text-ink/80 prose-ol:text-ink/80
+            prose-li:marker:text-accent
+            prose-hr:border-dot
           ">
             <Content />
           </div>

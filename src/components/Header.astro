@@ -1,24 +1,30 @@
 ---
+const base = '/Personal-Website';
+const routes = [
+  { label: '/experience', href: `${base}/#experience` },
+  { label: '/projects', href: `${base}/#projects` },
+  { label: '/stack', href: `${base}/#stack` },
+  { label: '/blog', href: `${base}/blog` },
+];
 ---
 
-<nav class="fixed top-0 w-full bg-brutal-black z-[100] py-4 px-8 border-b border-brutal-rule">
-  <div class="container mx-auto flex justify-between items-center relative">
-    <a href="/Personal-Website/" class="text-xl font-bold text-brutal-white relative z-[102] tracking-tight">
-      <span class="text-brutal-red">K</span>AMIL_R.
+<nav class="sticky top-0 z-[100] border-b-2 border-ink bg-paper/[.92] backdrop-blur-[6px]">
+  <div class="flex justify-between items-center py-3.5 px-5 sm:px-10 relative">
+    <a href={`${base}/`} class="font-mono text-[13px] font-bold text-ink relative z-[102]">
+      kamil-system-design.md
     </a>
 
-    <!-- Status badge -->
-    <div class="hidden lg:flex items-center gap-2 text-xs uppercase tracking-widest text-brutal-grey">
-      <span class="status-dot"></span>
-      Available
-    </div>
-
     <!-- Desktop Navigation -->
-    <div class="hidden lg:flex gap-8">
-      <a href="/Personal-Website/#about" data-nav-section="about" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">About</a>
-      <a href="/Personal-Website/#work" data-nav-section="work" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">Work</a>
-      <a href="/Personal-Website/#blog" data-nav-section="blog" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">Blog</a>
-      <a href="/Personal-Website/#contact" data-nav-section="contact" class="text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">Contact</a>
+    <div class="hidden lg:flex gap-2 items-center">
+      {routes.map((route) => (
+        <a href={route.href} class="nav-route">{route.label}</a>
+      ))}
+      <a
+        href={`${base}/#contact`}
+        class="font-mono text-xs font-bold bg-accent text-white px-4 py-[7px] rounded-md shadow-offset-sm hover:bg-ink transition-colors ml-2"
+      >
+        POST /contact
+      </a>
     </div>
 
     <!-- Hamburger Menu Button -->
@@ -36,26 +42,19 @@
     <!-- Mobile Navigation Menu -->
     <div
       id="mobile-menu"
-      class="fixed left-0 right-0 top-[65px] bg-brutal-black border-b border-brutal-rule z-[101] lg:hidden"
+      class="fixed left-0 right-0 top-[58px] bg-paper border-b-2 border-ink z-[101] lg:hidden"
       aria-hidden="true"
       inert
     >
-      <div class="flex flex-col px-8 py-4">
-        <a href="/Personal-Website/#about" data-nav-section="about"
-          class="py-3 text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors border-b border-brutal-rule">
-          About
-        </a>
-        <a href="/Personal-Website/#work" data-nav-section="work"
-          class="py-3 text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors border-b border-brutal-rule">
-          Work
-        </a>
-        <a href="/Personal-Website/#blog" data-nav-section="blog"
-          class="py-3 text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors border-b border-brutal-rule">
-          Blog
-        </a>
-        <a href="/Personal-Website/#contact" data-nav-section="contact"
-          class="py-3 text-xs uppercase tracking-widest text-brutal-grey hover:text-brutal-red transition-colors">
-          Contact
+      <div class="flex flex-col px-5 py-4 gap-1">
+        {routes.map((route) => (
+          <a href={route.href} class="nav-route py-3 border-b border-dot">{route.label}</a>
+        ))}
+        <a
+          href={`${base}/#contact`}
+          class="font-mono text-xs font-bold bg-accent text-white px-4 py-3 rounded-md shadow-offset-sm text-center mt-3"
+        >
+          POST /contact
         </a>
       </div>
     </div>
@@ -69,43 +68,5 @@
     document.addEventListener('DOMContentLoaded', initMobileMenu, { once: true });
   } else {
     initMobileMenu();
-  }
-</script>
-
-<script>
-  function initScrollSpy() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('[data-nav-section]');
-
-    if (!sections.length || !navLinks.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const sectionId = entry.target.id;
-          navLinks.forEach((link) => {
-            if (link.dataset.navSection === sectionId) {
-              link.classList.add('nav-active');
-            } else {
-              link.classList.remove('nav-active');
-            }
-          });
-        });
-      },
-      {
-        rootMargin: '-20% 0px -60% 0px',
-        threshold: 0,
-      }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollSpy, { once: true });
-  } else {
-    initScrollSpy();
   }
 </script>

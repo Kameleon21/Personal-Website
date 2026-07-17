@@ -1,0 +1,35 @@
+---
+const skills = [
+  'Java',
+  'Spring Boot',
+  'Go',
+  'TypeScript',
+  'JavaScript',
+  'Angular',
+  'Python',
+  'MySQL',
+  'REST APIs',
+  'Docker',
+  'OpenShift',
+  'Git',
+  'CI/CD',
+  'Agile',
+];
+---
+
+<section id="stack" class="w-full max-w-[1100px] mx-auto px-5 sm:px-10 pt-14 md:pt-[60px] pb-5">
+  <div class="section-head">
+    <span class="section-label">SVC / STACK</span>
+    <span class="font-bold text-[28px]">All checks have passed</span>
+    <span class="font-mono text-[11px] text-faint sm:ml-auto">{skills.length} / {skills.length} required checks</span>
+  </div>
+
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+    {skills.map((skill) => (
+      <div class="flex items-center gap-2.5 bg-white border-2 border-ink rounded-[10px] px-4 py-3 shadow-chip">
+        <span class="w-5 h-5 rounded-full bg-ghgreen text-white flex items-center justify-center text-[11px] flex-none">✓</span>
+        <span class="font-mono text-[12.5px] font-medium">{skill}</span>
+      </div>
+    ))}
+  </div>
+</section>

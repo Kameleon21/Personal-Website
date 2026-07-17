@@ -22,7 +22,7 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
       class="sticky top-24 w-60 max-h-[calc(100vh-8rem)] overflow-y-auto"
       aria-label="Table of contents"
     >
-      <h2 class="text-xs font-bold text-brutal-grey uppercase tracking-widest mb-4">
+      <h2 class="font-mono text-[11px] font-bold text-faint tracking-[0.12em] mb-4">
         On this page
       </h2>
       <ul class="space-y-2">
@@ -31,9 +31,9 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
             <a
               href={`#${heading.slug}`}
               class={`
-                toc-link block text-xs uppercase tracking-widest transition-colors duration-150
+                toc-link block font-mono text-xs transition-colors duration-150
                 ${heading.depth === 3 ? 'pl-4' : ''}
-                text-brutal-grey hover:text-brutal-red
+                text-muted hover:text-accent
               `}
               data-heading={heading.slug}
             >
@@ -70,21 +70,21 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
           const tocLink = document.querySelector(`.toc-link[data-heading="${id}"]`);
 
           if (currentActive) {
-            currentActive.classList.remove('text-brutal-red', 'font-bold');
-            currentActive.classList.add('text-brutal-grey');
+            currentActive.classList.remove('text-accent', 'font-bold');
+            currentActive.classList.add('text-muted');
             const indicator = currentActive.querySelector('.toc-indicator');
             if (indicator) indicator.remove();
           }
 
           if (tocLink) {
-            tocLink.classList.remove('text-brutal-grey');
-            tocLink.classList.add('text-brutal-red', 'font-bold');
+            tocLink.classList.remove('text-muted');
+            tocLink.classList.add('text-accent', 'font-bold');
 
             // Add red indicator dot
             const span = tocLink.querySelector('span');
             if (span && !span.querySelector('.toc-indicator')) {
               const indicator = document.createElement('span');
-              indicator.className = 'toc-indicator absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-brutal-red';
+              indicator.className = 'toc-indicator absolute -left-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-accent';
               span.appendChild(indicator);
             }
 
@@ -131,7 +131,7 @@ const tocHeadings = headings.filter(h => h.depth === 2 || h.depth === 3);
   }
 
   #table-of-contents::-webkit-scrollbar-thumb {
-    background: #333;
+    background: #d8d4c8;
   }
 
   .toc-link span {
