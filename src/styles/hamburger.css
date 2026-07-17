@@ -2,7 +2,7 @@
 .menu-line {
   width: 24px;
   height: 2px;
-  background: #F5F0EB;
+  background: #1a1712;
   transition: transform 0.2s ease, opacity 0.18s ease;
 }
 

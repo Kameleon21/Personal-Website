@@ -2,28 +2,7 @@
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-brutal-black border-t border-brutal-rule overflow-hidden">
-  <!-- Footer content -->
-  <div class="container mx-auto px-8 py-8">
-    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-      <p class="text-brutal-grey text-xs uppercase tracking-widest">
-        &copy; {currentYear} Kamil Rogozinski
-      </p>
-
-      <div class="flex gap-6 text-xs uppercase tracking-widest">
-        <a href="https://github.com/Kameleon21" target="_blank" rel="noopener noreferrer"
-          class="text-brutal-grey hover:text-brutal-red transition-colors">GitHub</a>
-        <a href="https://www.linkedin.com/in/kamil-rogozinski/" target="_blank" rel="noopener noreferrer"
-          class="text-brutal-grey hover:text-brutal-red transition-colors">LinkedIn</a>
-        <a href="https://x.com/KamilRogozinski" target="_blank" rel="noopener noreferrer"
-          class="text-brutal-grey hover:text-brutal-red transition-colors">X</a>
-        <a href="mailto:kamilrogozinski29@gmail.com"
-          class="text-brutal-grey hover:text-brutal-red transition-colors">Email</a>
-      </div>
-
-      <p class="text-brutal-grey/50 text-xs uppercase tracking-widest">
-        Built with Astro + Tailwind
-      </p>
-    </div>
-  </div>
+<footer class="max-w-[1100px] mx-auto w-full px-5 sm:px-10 py-7 mt-auto flex flex-col sm:flex-row justify-between gap-1.5 font-mono text-[11px] text-faint">
+  <span>© {currentYear} kamil rogozinski · waterford, ireland</span>
+  <span>// built different, deploys the same</span>
 </footer>

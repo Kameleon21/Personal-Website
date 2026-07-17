@@ -1,42 +1,271 @@
 ---
+const today = new Date().toISOString().slice(0, 10);
+
+const services = [
+  {
+    label: 'SVC / EXPERIENCE',
+    title: 'Citi Dublin',
+    desc: 'Spring Boot APIs · Angular · Docker / OpenShift · mentoring',
+    get: 'GET /experience →',
+    href: '#experience',
+    pos: 'left-[14%] -translate-x-1/2 hero-node-left land-1',
+  },
+  {
+    label: 'SVC / PROJECTS',
+    title: '3 deployments',
+    desc: 'Oku (Go TUI) · FirstDevJob · CE Equipment',
+    get: 'GET /projects →',
+    href: '#projects',
+    pos: 'left-1/2 -translate-x-1/2 hero-node-left land-2',
+  },
+  {
+    label: 'SVC / STACK',
+    title: 'Polyglot',
+    desc: 'Java · Go · TypeScript · MySQL · CI/CD',
+    get: 'GET /stack →',
+    href: '#stack',
+    pos: 'right-[14%] translate-x-1/2 hero-node-right land-3',
+  },
+];
 ---
 
-<section class="min-h-screen bg-brutal-black relative flex items-center px-8">
-  <div class="container mx-auto relative z-10">
-    <!-- Giant title -->
-    <h1 class="text-[clamp(3rem,10vw,8rem)] font-bold leading-[0.9] uppercase tracking-tighter mb-8">
-      <span class="text-brutal-white">Full Stack</span><br>
-      <span class="text-brutal-red">Developer</span><span class="cursor-blink"></span>
-    </h1>
+<section id="top" class="w-full max-w-[1100px] mx-auto px-5 sm:px-10 pt-10 md:pt-12 pb-8">
+  <div class="flex justify-between items-baseline font-mono text-[11px] text-faint mb-6 gap-4 flex-wrap">
+    <span>// system design doc · last deploy: {today}</span>
+    <span class="hidden sm:inline">click any node to zoom in ↓</span>
+  </div>
 
-    <!-- Metadata line -->
-    <div class="flex flex-wrap gap-6 text-xs uppercase tracking-widest text-brutal-grey mb-12 border-t border-brutal-rule pt-6">
-      <span>Portfolio &mdash; 2026</span>
-      <span class="text-brutal-rule">|</span>
-      <span>Based in Ireland</span>
-      <span class="text-brutal-rule">|</span>
-      <span class="flex items-center gap-2"><span class="status-dot"></span> Available for work</span>
+  <!-- Desktop: architecture diagram -->
+  <div class="relative h-[470px] hidden md:block">
+    <!-- Root node -->
+    <div class="absolute left-1/2 top-0 -translate-x-1/2 text-center bg-ink text-paper rounded-xl px-11 py-[22px] shadow-offset-lg">
+      <div class="font-bold text-3xl tracking-[-0.5px] whitespace-nowrap">KAMIL ROGOZINSKI</div>
+      <div class="font-mono text-[11px] text-inkmuted mt-1.5 whitespace-nowrap">core service · software engineer @ Citi Dublin · v25.9</div>
+      <div class="flex gap-2 justify-center mt-3">
+        <span class="font-mono text-[10px] font-bold bg-mint text-ink rounded-full px-2.5 py-[3px] pulse-ring">● HEALTHY</span>
+        <span class="font-mono text-[10px] font-bold bg-hire text-ink rounded-full px-2.5 py-[3px]">HIREABLE</span>
+        <span class="font-mono text-[10px] font-bold bg-paper text-ink rounded-full px-2.5 py-[3px]">JAVA · GO · TS</span>
+      </div>
     </div>
 
-    <!-- CTA Buttons -->
-    <div class="flex flex-wrap gap-4">
-      <a
-        href={`${import.meta.env.BASE_URL}#contact`}
-        class="px-8 py-3 bg-brutal-red text-brutal-black text-xs uppercase tracking-widest font-bold hover:bg-brutal-white transition-colors"
-      >
-        Get in touch
+    <!-- Connectors -->
+    <div class="connector-v signal-drop absolute left-1/2 top-[124px] h-14" aria-hidden="true"></div>
+    <div class="bus-flash absolute left-[14%] right-[14%] top-[180px] h-0.5 bg-connector" aria-hidden="true"></div>
+    <div class="bus-flash absolute left-[14%] top-[180px] w-0.5 h-[30px] bg-connector" aria-hidden="true"></div>
+    <div class="bus-flash absolute left-1/2 top-[180px] w-0.5 h-[30px] bg-connector" aria-hidden="true"></div>
+    <div class="bus-flash absolute right-[14%] top-[180px] w-0.5 h-[30px] bg-connector" aria-hidden="true"></div>
+
+    <!-- Service nodes -->
+    {services.map((s) => (
+      <a href={s.href} class={`absolute top-[210px] w-[230px] node-card block px-5 py-[18px] no-underline hero-node ${s.pos}`}>
+        <div class="font-mono text-[9px] text-accent tracking-[0.12em]">{s.label}</div>
+        <div class="font-bold text-[17px] text-ink my-[5px]">{s.title}</div>
+        <div class="text-[12.5px] text-muted leading-[1.55]">{s.desc}</div>
+        <div class="font-mono text-[10px] text-faint mt-2.5">{s.get}</div>
       </a>
-      <a
-        href={`${import.meta.env.BASE_URL}#work`}
-        class="px-8 py-3 border border-brutal-rule text-brutal-grey text-xs uppercase tracking-widest font-bold hover:border-brutal-red hover:text-brutal-red transition-colors"
-      >
-        View work
-      </a>
+    ))}
+
+    <!-- Connector to CTA -->
+    <div class="connector-v signal-drop signal-drop-late absolute left-1/2 top-[352px] h-10" aria-hidden="true"></div>
+
+    <!-- Contact CTA node -->
+    <a
+      href="#contact"
+      class="cta-land absolute left-1/2 top-[392px] -translate-x-1/2 flex items-center gap-3.5 bg-accent text-white rounded-xl px-[30px] py-4 shadow-offset-lg no-underline transition-transform duration-150 hover:scale-[1.03]"
+    >
+      <span class="font-bold text-base whitespace-nowrap">→ POST /contact</span>
+      <span class="font-mono text-[11px] opacity-85 whitespace-nowrap">202 Accepted · replies fast</span>
+    </a>
+
+    <!-- Sticky note (draggable) -->
+    <div
+      data-drag-note
+      class="hero-note note-sticky absolute -right-1.5 top-2 font-mono text-[11px] bg-note border border-noteline px-3.5 py-3 text-muted leading-[1.6] shadow-[2px_3px_8px_rgba(0,0,0,.08)] select-none"
+    >
+      note: single point of<br />failure — hire him<br />before someone else does
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-brutal-grey text-xs uppercase tracking-widest hidden lg:block">
-      <span class="inline-block motion-safe:animate-bounce">&darr;</span> Scroll
+    <!-- Deps note (draggable) -->
+    <div
+      data-drag-note
+      class="hero-note note-deps absolute -left-1.5 bottom-[30px] font-mono text-[11px] bg-white border-2 border-ink rounded-lg px-3.5 py-2.5 text-muted leading-[1.6] shadow-[3px_3px_0_rgba(26,23,18,.12)] select-none"
+    >
+      deps: coffee ☕<br />uptime: since 2001<br />region: waterford, ie
+    </div>
+  </div>
+
+  <!-- Mobile: stacked flow -->
+  <div class="md:hidden flex flex-col items-center">
+    <div class="text-center bg-ink text-paper rounded-xl px-6 py-5 shadow-offset-lg w-full">
+      <div class="font-bold text-2xl tracking-[-0.5px]">KAMIL ROGOZINSKI</div>
+      <div class="font-mono text-[11px] text-inkmuted mt-1.5">core service · software engineer<br />@ Citi Dublin · v25.9</div>
+      <div class="flex gap-2 justify-center mt-3 flex-wrap">
+        <span class="font-mono text-[10px] font-bold bg-mint text-ink rounded-full px-2.5 py-[3px] pulse-ring">● HEALTHY</span>
+        <span class="font-mono text-[10px] font-bold bg-hire text-ink rounded-full px-2.5 py-[3px]">HIREABLE</span>
+        <span class="font-mono text-[10px] font-bold bg-paper text-ink rounded-full px-2.5 py-[3px]">JAVA · GO · TS</span>
+      </div>
+    </div>
+
+    {services.map((s) => (
+      <>
+        <div class="connector-v h-9" aria-hidden="true"></div>
+        <a href={s.href} class="node-card node-card-hover block w-full px-5 py-[18px] no-underline">
+          <div class="font-mono text-[9px] text-accent tracking-[0.12em]">{s.label}</div>
+          <div class="font-bold text-[17px] text-ink my-[5px]">{s.title}</div>
+          <div class="text-[12.5px] text-muted leading-[1.55]">{s.desc}</div>
+          <div class="font-mono text-[10px] text-faint mt-2.5">{s.get}</div>
+        </a>
+      </>
+    ))}
+
+    <div class="connector-v h-9" aria-hidden="true"></div>
+    <a
+      href="#contact"
+      class="flex flex-col items-center gap-1 bg-accent text-white rounded-xl px-7 py-4 shadow-offset-lg no-underline w-full text-center"
+    >
+      <span class="font-bold text-base">→ POST /contact</span>
+      <span class="font-mono text-[11px] opacity-85">202 Accepted · replies fast</span>
+    </a>
+
+    <div class="mt-6 -rotate-1 font-mono text-[11px] bg-note border border-noteline px-3.5 py-3 text-muted leading-[1.6] shadow-[2px_3px_8px_rgba(0,0,0,.08)] self-start">
+      note: single point of failure —<br />hire him before someone else does
     </div>
   </div>
 </section>
+
+<style>
+  /* Hover lift that composes with the horizontal centering transforms */
+  .hero-node {
+    transition: transform 0.15s;
+  }
+  .hero-node.hero-node-left:hover {
+    transform: translateX(-50%) translateY(-4px);
+    box-shadow: 6px 8px 0 rgba(26, 23, 18, 0.18);
+  }
+  .hero-node.hero-node-right:hover {
+    transform: translateX(50%) translateY(-4px);
+    box-shadow: 6px 8px 0 rgba(26, 23, 18, 0.18);
+  }
+
+  /* ── Landing cascade: root → bus → nodes → contact ── */
+  .signal-drop::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    border-radius: 50%;
+    background: #3fdd8f;
+    opacity: 0;
+    animation: signal-drop 0.5s ease-in 0.35s 1 both;
+  }
+  .signal-drop-late::after {
+    animation-delay: 1.55s;
+    animation-duration: 0.4s;
+  }
+  @keyframes signal-drop {
+    0% { top: 0; opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { top: calc(100% - 8px); opacity: 0; }
+  }
+
+  .bus-flash {
+    animation: bus-flash 0.5s ease-out 0.82s 1;
+  }
+  @keyframes bus-flash {
+    0%, 100% { background-color: #3c3a34; }
+    45% { background-color: #3fdd8f; }
+  }
+
+  .land-1, .land-2, .land-3 {
+    animation: node-land 0.7s ease-out both;
+  }
+  .land-1 { animation-delay: 1s; }
+  .land-2 { animation-delay: 1.14s; }
+  .land-3 { animation-delay: 1.28s; }
+  @keyframes node-land {
+    0% { box-shadow: 4px 4px 0 rgba(26, 23, 18, 0.12), 0 0 0 0 rgba(63, 221, 143, 0.55); }
+    100% { box-shadow: 4px 4px 0 rgba(26, 23, 18, 0.12), 0 0 0 14px rgba(63, 221, 143, 0); }
+  }
+
+  .cta-land {
+    animation: cta-land 0.7s ease-out 1.95s both;
+  }
+  @keyframes cta-land {
+    0% { box-shadow: 6px 6px 0 rgba(26, 23, 18, 0.15), 0 0 0 0 rgba(63, 221, 143, 0.55); }
+    100% { box-shadow: 6px 6px 0 rgba(26, 23, 18, 0.15), 0 0 0 14px rgba(63, 221, 143, 0); }
+  }
+
+  /* ── Draggable notes ── */
+  .hero-note {
+    cursor: grab;
+    touch-action: none;
+    z-index: 10;
+  }
+  .hero-note.dragging {
+    cursor: grabbing;
+    z-index: 20;
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.14);
+  }
+  .note-sticky {
+    transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(3deg);
+  }
+  .note-deps {
+    transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-2deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .signal-drop::after,
+    .bus-flash,
+    .land-1, .land-2, .land-3,
+    .cta-land {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  function initDragNotes() {
+    const MAX_OFFSET = 70;
+    const clamp = (v: number) => Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, v));
+
+    document.querySelectorAll<HTMLElement>('[data-drag-note]').forEach((note) => {
+      let offsetX = 0;
+      let offsetY = 0;
+
+      note.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        note.setPointerCapture(e.pointerId);
+        note.classList.add('dragging');
+
+        const originX = e.clientX - offsetX;
+        const originY = e.clientY - offsetY;
+
+        const onMove = (ev: PointerEvent) => {
+          offsetX = clamp(ev.clientX - originX);
+          offsetY = clamp(ev.clientY - originY);
+          note.style.setProperty('--dx', `${offsetX}px`);
+          note.style.setProperty('--dy', `${offsetY}px`);
+        };
+
+        const onUp = () => {
+          note.classList.remove('dragging');
+          note.removeEventListener('pointermove', onMove);
+        };
+
+        note.addEventListener('pointermove', onMove);
+        note.addEventListener('pointerup', onUp, { once: true });
+        note.addEventListener('pointercancel', onUp, { once: true });
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDragNotes, { once: true });
+  } else {
+    initDragNotes();
+  }
+</script>

@@ -1,51 +1,49 @@
 ---
 import ContactForm from './ContactForm.astro';
-import ContactTabs from './ContactTabs.astro';
-
-interface Props {
-  title?: string;
-}
-
-const { title = "Contact" } = Astro.props;
 ---
 
-<section id="contact" class="bg-brutal-black py-20 px-8">
-  <div class="section-scan" aria-hidden="true"></div>
-  <div class="container mx-auto max-w-6xl">
-    <!-- Section counter -->
-    <div class="text-brutal-grey text-xs uppercase tracking-widest mb-4 reveal">/04</div>
-    <h2 class="text-4xl md:text-5xl font-bold text-brutal-white uppercase tracking-tight mb-16 reveal" data-delay="1">
-      {title}
-    </h2>
+<section id="contact" class="max-w-[1100px] mx-auto px-5 sm:px-10 pt-16 md:pt-[70px] pb-4 w-full">
+  <div class="bg-white border-2 border-ink rounded-[14px] overflow-hidden shadow-offset-lg">
+    <!-- PR header -->
+    <div class="dark-bar px-5 sm:px-7 py-4 gap-3 flex-wrap">
+      <span class="bg-ghgreen text-white px-3 py-1 rounded-full font-mono text-[11px] font-bold whitespace-nowrap">⎇ Open</span>
+      <span class="font-bold text-lg">Merge Kamil into your team <span class="text-faint font-normal">#2026</span></span>
+      <span class="font-mono text-[11px] text-mint sm:ml-auto">+8,542 skills · −0 red flags</span>
+    </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-      <!-- Contact info -->
-      <div class="lg:col-span-4 reveal" data-delay="2">
-        <div class="space-y-6">
-          <div>
-            <div class="text-brutal-grey text-xs uppercase tracking-widest mb-2">Email</div>
-            <a href="mailto:kamilrogozinski29@gmail.com" class="text-brutal-white hover:text-brutal-red transition-colors text-sm break-all">
-              kamilrogozinski29@gmail.com
-            </a>
-          </div>
-          <div>
-            <div class="text-brutal-grey text-xs uppercase tracking-widest mb-2">Location</div>
-            <span class="text-brutal-white text-sm">Ireland</span>
-          </div>
-          <div>
-            <div class="text-brutal-grey text-xs uppercase tracking-widest mb-2">Status</div>
-            <span class="text-brutal-red text-sm flex items-center gap-2">
-              <span class="status-dot"></span> Available for work
-            </span>
-          </div>
+    <!-- Checks row -->
+    <div class="px-5 sm:px-7 py-6 flex items-center gap-5 flex-wrap">
+      <div class="flex-1 min-w-[260px]">
+        <div class="flex items-center gap-2.5 mb-1.5">
+          <span class="w-[26px] h-[26px] rounded-full bg-ghgreen text-white flex items-center justify-center text-[13px] flex-none">✓</span>
+          <span class="font-bold text-base">All checks have passed — no conflicts with your team</span>
         </div>
+        <div class="text-[13px] text-muted sm:pl-9">BSc (Hons) 1.1 · 2 yrs at Citi · 3 shipped projects · fluent EN / PL</div>
       </div>
+      <div class="flex gap-2.5 items-center flex-wrap">
+        <a
+          href="https://github.com/Kameleon21"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-mono text-xs border-2 border-ink rounded-lg px-4 py-2.5 text-ink font-bold hover:bg-ink hover:text-paper transition-colors"
+        >GitHub</a>
+        <a
+          href="https://www.linkedin.com/in/kamil-rogozinski/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-mono text-xs border-2 border-ink rounded-lg px-4 py-2.5 text-ink font-bold hover:bg-ink hover:text-paper transition-colors"
+        >LinkedIn</a>
+        <a
+          href="mailto:kamilrogozinski29@gmail.com"
+          class="bg-ghgreen text-white font-bold text-[15px] px-6 py-3 rounded-lg shadow-offset-sm hover:bg-ink transition-colors"
+        >Merge — get in touch</a>
+      </div>
+    </div>
 
-      <!-- Form -->
-      <div class="lg:col-span-8 reveal" data-delay="3">
-        <ContactTabs activeTab="get-in-touch" />
-        <ContactForm activeTab="get-in-touch" />
-      </div>
+    <!-- Comment box (contact form) -->
+    <div class="border-t-2 border-ink px-5 sm:px-7 py-6 bg-paper/60">
+      <div class="font-mono text-[11px] text-faint mb-4">// or leave a comment — opens a conversation</div>
+      <ContactForm />
     </div>
   </div>
 </section>

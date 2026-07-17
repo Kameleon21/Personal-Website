@@ -106,12 +106,12 @@ export function initContactForm() {
   function showMessage(message: string, type: 'error' | 'success' | 'info') {
     if (!result) return;
 
-    const borderColor = type === 'error' ? 'border-brutal-red' : type === 'success' ? 'border-brutal-red' : 'border-brutal-rule';
-    const textColor = type === 'error' ? 'text-brutal-red' : type === 'success' ? 'text-brutal-red' : 'text-brutal-grey';
+    const borderColor = type === 'error' ? 'border-accent' : type === 'success' ? 'border-ghgreen' : 'border-dot';
+    const textColor = type === 'error' ? 'text-accent' : type === 'success' ? 'text-ghgreen' : 'text-muted';
     const msgClass = type === 'success' ? 'msg-success' : '';
 
     result.innerHTML = `
-      <div class="border ${borderColor} ${textColor} ${msgClass} p-4 text-xs uppercase tracking-widest">
+      <div class="border-2 ${borderColor} ${textColor} ${msgClass} p-4 font-mono text-xs rounded-lg bg-white">
         ${message}
       </div>
     `;
