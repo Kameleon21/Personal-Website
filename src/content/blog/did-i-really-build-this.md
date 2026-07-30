@@ -10,13 +10,13 @@ Lately I've been thinking about the things we build with AI. And I keep landing 
 
 ## Chapter 1 — Confusion
 
-The steps are always the same. I get an idea, or I see something online and think "I bet I could make that, or at least put my own spin on it." New project, Neovim, agent pane on the side. You know the drill.
+The steps are always the same. I get an idea, or I see something online and think "I bet I could make that, or at least put my own spin on it." New project, Neovim, agent pane on the side.
 
 And then I sit there.
 
 I stare at the empty screen and the blinking cursor for a while, and eventually I give in and explain the idea to Claude Code, and watch it try to build something out of a prompt I hadn't really thought through yet.
 
-While it Ponders and Ruminates, I get this vague, uncomfortable feeling. Am I the creator of this project? Can I say it's mine? I'm in the passenger seat doing the directing, sure. Making the calls on what goes in and what stays out. But at what point do I stop being the creator, or even the orchestrator, and start being the approver of a machine's output?
+While it Ponders and Ruminates, I get this vague feeling. Am I the creator of this project? Can I say it's mine? I'm in the passenger seat doing the directing, sure. Making the calls on what goes in and what stays out. But at what point do I stop being the creator, or even the orchestrator, and start being the approver of a machine's output?
 
 Some of you will say that's just the nature of coding with AI now. Less about writing code, more about understanding the system behind it. Fair enough. An agent writes more code in a minute than I could in thirty and I'm not going to sit here and argue with that.
 
