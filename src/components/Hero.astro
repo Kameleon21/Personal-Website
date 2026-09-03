@@ -3,93 +3,136 @@ const today = new Date().toISOString().slice(0, 10);
 
 const services = [
   {
+    id: 'exp',
     label: 'SVC / EXPERIENCE',
     title: 'Citi Dublin',
     desc: 'Spring Boot APIs · Angular · Docker / OpenShift · mentoring',
     get: 'GET /experience →',
     href: '#experience',
-    pos: 'left-[14%] -translate-x-1/2 hero-node-left land-1',
+    pos: 'left-[14%] hnode-center land-1',
   },
   {
+    id: 'proj',
     label: 'SVC / PROJECTS',
     title: '3 deployments',
     desc: 'Oku (Go TUI) · FirstDevJob · CE Equipment',
     get: 'GET /projects →',
     href: '#projects',
-    pos: 'left-1/2 -translate-x-1/2 hero-node-left land-2',
+    pos: 'left-1/2 hnode-center land-2',
   },
   {
+    id: 'stack',
     label: 'SVC / STACK',
     title: 'Polyglot',
     desc: 'Java · Go · TypeScript · MySQL · CI/CD',
     get: 'GET /stack →',
     href: '#stack',
-    pos: 'right-[14%] translate-x-1/2 hero-node-right land-3',
+    pos: 'right-[14%] hnode-right land-3',
   },
+];
+
+// Cables: root → each service, projects → contact
+const edges = [
+  { from: 'root', to: 'exp' },
+  { from: 'root', to: 'proj' },
+  { from: 'root', to: 'stack' },
+  { from: 'proj', to: 'cta' },
 ];
 ---
 
 <section id="top" class="w-full max-w-[1100px] mx-auto px-5 sm:px-10 pt-10 md:pt-12 pb-8">
   <div class="flex justify-between items-baseline font-mono text-[11px] text-faint mb-6 gap-4 flex-wrap">
     <span>// system design doc · last deploy: {today}</span>
-    <span class="hidden sm:inline">click any node to zoom in ↓</span>
+    <span class="hidden sm:inline md:hidden">click any node to zoom in ↓</span>
+    <span class="hidden md:inline-flex items-center gap-3">
+      <span>drag any node · click to zoom in ↓</span>
+      <button type="button" class="hero-tool" data-hero-chaos>chaos monkey</button>
+      <button type="button" class="hero-tool" data-hero-reset>reset layout</button>
+    </span>
   </div>
 
-  <!-- Desktop: architecture diagram -->
-  <div class="relative h-[470px] hidden md:block">
+  <!-- Desktop: live-wire architecture diagram -->
+  <div class="hero-stage relative h-[500px] hidden md:block" data-hero-stage>
+    <!-- Cables -->
+    <svg class="hero-wires" aria-hidden="true">
+      <defs>
+        <filter id="hero-glow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="2.2" result="b"></feGaussianBlur>
+          <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+        </filter>
+      </defs>
+      {edges.map((e, i) => (
+        <g data-edge={`${e.from}:${e.to}`}>
+          <path class="wire-glow" data-glow></path>
+          <path id={`hero-wire-${i}`} class="wire" pathLength="1" style={`animation-delay:${(0.35 + i * 0.15).toFixed(2)}s`} data-wire></path>
+          <circle class="plug" r="4" data-plug-a></circle>
+          <circle class="plug" r="4" data-plug-b></circle>
+          <circle class="pulse" r="4" data-pulse>
+            <animateMotion dur="2.4s" repeatCount="indefinite" begin={`${(1 + i * 0.4).toFixed(1)}s`} calcMode="spline" keyTimes="0;1" keySplines=".4 0 .6 1">
+              <mpath href={`#hero-wire-${i}`}></mpath>
+            </animateMotion>
+          </circle>
+        </g>
+      ))}
+    </svg>
+
     <!-- Root node -->
-    <div class="absolute left-1/2 top-0 -translate-x-1/2 text-center bg-ink text-paper rounded-xl px-11 py-[22px] shadow-offset-lg">
+    <div
+      class="hnode hnode-center hnode-root absolute left-1/2 top-0 text-center bg-ink text-paper rounded-xl px-11 py-[22px] shadow-offset-lg select-none"
+      data-node="root"
+      data-mass="4"
+    >
       <div class="font-bold text-3xl tracking-[-0.5px] whitespace-nowrap">KAMIL ROGOZINSKI</div>
       <div class="font-mono text-[11px] text-inkmuted mt-1.5 whitespace-nowrap">core service · software engineer @ Citi Dublin · v25.9</div>
       <div class="flex gap-2 justify-center mt-3">
-        <span class="font-mono text-[10px] font-bold bg-mint text-ink rounded-full px-2.5 py-[3px] pulse-ring">● HEALTHY</span>
+        <span class="pill-health font-mono text-[10px] font-bold bg-mint text-ink rounded-full px-2.5 py-[3px] pulse-ring" data-health>● HEALTHY</span>
         <span class="font-mono text-[10px] font-bold bg-hire text-ink rounded-full px-2.5 py-[3px]">HIREABLE</span>
         <span class="font-mono text-[10px] font-bold bg-paper text-ink rounded-full px-2.5 py-[3px]">JAVA · GO · TS</span>
       </div>
     </div>
 
-    <!-- Connectors -->
-    <div class="connector-v signal-drop absolute left-1/2 top-[124px] h-14" aria-hidden="true"></div>
-    <div class="bus-flash absolute left-[14%] right-[14%] top-[180px] h-0.5 bg-connector" aria-hidden="true"></div>
-    <div class="bus-flash absolute left-[14%] top-[180px] w-0.5 h-[30px] bg-connector" aria-hidden="true"></div>
-    <div class="bus-flash absolute left-1/2 top-[180px] w-0.5 h-[30px] bg-connector" aria-hidden="true"></div>
-    <div class="bus-flash absolute right-[14%] top-[180px] w-0.5 h-[30px] bg-connector" aria-hidden="true"></div>
-
     <!-- Service nodes -->
     {services.map((s) => (
-      <a href={s.href} class={`absolute top-[210px] w-[230px] node-card block px-5 py-[18px] no-underline hero-node ${s.pos}`}>
+      <a
+        href={s.href}
+        class={`hnode hnode-lift absolute top-[210px] w-[230px] node-card block px-5 py-[18px] no-underline select-none ${s.pos}`}
+        data-node={s.id}
+      >
         <div class="font-mono text-[9px] text-accent tracking-[0.12em]">{s.label}</div>
         <div class="font-bold text-[17px] text-ink my-[5px]">{s.title}</div>
         <div class="text-[12.5px] text-muted leading-[1.55]">{s.desc}</div>
         <div class="font-mono text-[10px] text-faint mt-2.5">{s.get}</div>
+        <div class="svc-status font-mono text-[9.5px] mt-2 pt-2 border-t border-dashed border-dot tabular-nums" data-status>● probing…</div>
       </a>
     ))}
-
-    <!-- Connector to CTA -->
-    <div class="connector-v signal-drop signal-drop-late absolute left-1/2 top-[352px] h-10" aria-hidden="true"></div>
 
     <!-- Contact CTA node -->
     <a
       href="#contact"
-      class="cta-land absolute left-1/2 top-[392px] -translate-x-1/2 flex items-center gap-3.5 bg-accent text-white rounded-xl px-[30px] py-4 shadow-offset-lg no-underline transition-transform duration-150 hover:scale-[1.03]"
+      class="hnode hnode-center hnode-cta cta-land absolute left-1/2 top-[420px] flex items-center gap-3.5 bg-accent text-white rounded-xl px-[30px] py-4 shadow-offset-lg no-underline select-none"
+      data-node="cta"
     >
       <span class="font-bold text-base whitespace-nowrap">→ POST /contact</span>
       <span class="font-mono text-[11px] opacity-85 whitespace-nowrap">202 Accepted · replies fast</span>
     </a>
 
-    <!-- Sticky note (draggable) -->
+    <!-- Sticky note (pinned) -->
     <div
-      data-drag-note
-      class="hero-note note-sticky absolute -right-1.5 top-2 font-mono text-[11px] bg-note border border-noteline px-3.5 py-3 text-muted leading-[1.6] shadow-[2px_3px_8px_rgba(0,0,0,.08)] select-none"
+      class="hnode note-sticky absolute -right-1.5 top-2 font-mono text-[11px] bg-note border border-noteline px-3.5 pt-[18px] pb-3 text-muted leading-[1.6] shadow-[2px_3px_8px_rgba(0,0,0,.08)] select-none"
+      data-node="sticky"
+      data-physics="off"
     >
+      <span class="note-pin" aria-hidden="true"></span>
       note: single point of<br />failure — hire him<br />before someone else does
     </div>
 
-    <!-- Deps note (draggable) -->
+    <!-- Deps note (pinned) -->
     <div
-      data-drag-note
-      class="hero-note note-deps absolute -left-1.5 bottom-[30px] font-mono text-[11px] bg-white border-2 border-ink rounded-lg px-3.5 py-2.5 text-muted leading-[1.6] shadow-[3px_3px_0_rgba(26,23,18,.12)] select-none"
+      class="hnode note-deps absolute -left-1.5 bottom-[22px] font-mono text-[11px] bg-white border-2 border-ink rounded-lg px-3.5 pt-[18px] pb-2.5 text-muted leading-[1.6] shadow-[3px_3px_0_rgba(26,23,18,.12)] select-none"
+      data-node="deps"
+      data-physics="off"
     >
+      <span class="note-pin" aria-hidden="true"></span>
       deps: coffee ☕<br />uptime: since 2001<br />region: waterford, ie
     </div>
   </div>
@@ -133,55 +176,160 @@ const services = [
   </div>
 </section>
 
+<style is:global>
+  /* Registered so the settle / lift transitions animate instead of snapping. */
+  @property --dx { syntax: '<length>'; inherits: false; initial-value: 0px; }
+  @property --dy { syntax: '<length>'; inherits: false; initial-value: 0px; }
+  @property --rot { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
+  @property --scl { syntax: '<number>'; inherits: false; initial-value: 1; }
+  @property --lift { syntax: '<length>'; inherits: false; initial-value: 0px; }
+</style>
+
 <style>
-  /* Hover lift that composes with the horizontal centering transforms */
-  .hero-node {
-    transition: transform 0.15s;
+  /* ── Meta-row tools ── */
+  .hero-tool {
+    font: inherit;
+    color: #1a1712;
+    border: 1px solid #1a1712;
+    border-radius: 4px;
+    padding: 2px 8px;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
   }
-  .hero-node.hero-node-left:hover {
-    transform: translateX(-50%) translateY(-4px);
-    box-shadow: 6px 8px 0 rgba(26, 23, 18, 0.18);
-  }
-  .hero-node.hero-node-right:hover {
-    transform: translateX(50%) translateY(-4px);
-    box-shadow: 6px 8px 0 rgba(26, 23, 18, 0.18);
+  .hero-tool:hover {
+    background: #1a1712;
+    color: #f7f5f0;
   }
 
-  /* ── Landing cascade: root → bus → nodes → contact ── */
-  .signal-drop::after {
+  /* ── Nodes ──
+     CSS keeps the responsive base position (left/top + --tx centring);
+     the script only adds a delta (--dx/--dy), a tilt (--rot) and a scale. */
+  .hnode {
+    --tx: 0%;
+    transform: translate(var(--tx), var(--lift)) translate(var(--dx), var(--dy)) rotate(calc(var(--base-rot, 0deg) + var(--rot))) scale(var(--scl));
+    transform-origin: 50% 50%;
+    touch-action: none;
+    cursor: grab;
+    will-change: transform;
+    z-index: 2;
+    transition: --lift 0.15s, --scl 0.15s, box-shadow 0.15s;
+  }
+  .hnode-center { --tx: -50%; }
+  .hnode-right { --tx: 50%; }
+  .hnode-root { z-index: 5; }
+  .note-sticky, .note-deps { z-index: 10; }
+  .note-sticky { --base-rot: 3deg; }
+  .note-deps { --base-rot: -2deg; }
+
+  .hnode.settling {
+    transition: --dx 0.55s cubic-bezier(0.22, 1, 0.36, 1), --dy 0.55s cubic-bezier(0.22, 1, 0.36, 1), --rot 0.55s;
+  }
+  .hnode.dragging {
+    cursor: grabbing;
+    z-index: 30;
+    --scl: 1.02;
+  }
+  .hnode-lift:not(.dragging):hover {
+    --lift: -4px;
+    box-shadow: 6px 8px 0 rgba(26, 23, 18, 0.18);
+  }
+  .hnode-cta:not(.dragging):hover { --scl: 1.03; }
+  .hnode.dragging:not(.note-sticky):not(.note-deps) {
+    box-shadow: 8px 12px 0 rgba(26, 23, 18, 0.16), 0 18px 30px -12px rgba(26, 23, 18, 0.35);
+  }
+  .hnode.dragging.note-sticky,
+  .hnode.dragging.note-deps {
+    box-shadow: 4px 8px 18px rgba(0, 0, 0, 0.16);
+  }
+  .hero-stage.is-dragging { cursor: grabbing; }
+
+  /* ── Pins on the notes ── */
+  .note-pin {
+    position: absolute;
+    left: 50%;
+    top: -9px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle at 35% 35%, #ff7a5c, #c2401b 60%, #8a2a10);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.35);
+  }
+  .note-pin::after {
     content: '';
     position: absolute;
     left: 50%;
-    top: 0;
-    width: 8px;
-    height: 8px;
-    margin-left: -4px;
-    border-radius: 50%;
-    background: #3fdd8f;
+    top: 100%;
+    width: 2px;
+    height: 7px;
+    background: #555;
+    transform: translateX(-50%);
+  }
+
+  /* ── Health readout on service cards ── */
+  .svc-status { color: #8a8578; }
+  .svc-status[data-tone='ok'] { color: #2da44e; }
+  .svc-status[data-tone='bad'] { color: #c2401b; }
+
+  /* ── Root health pill during chaos ── */
+  .pill-health.degraded {
+    background: #f0b429;
+    animation: pulse-warn 1s ease-out infinite;
+  }
+  @keyframes pulse-warn {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(240, 180, 41, 0.6); }
+    50% { box-shadow: 0 0 0 6px rgba(240, 180, 41, 0); }
+  }
+  .hnode-root.jolt { animation: jolt 0.5s ease-out 1; }
+  @keyframes jolt {
+    0% { --rot: 0deg; }
+    25% { --rot: -1.5deg; }
+    50% { --rot: 1.2deg; }
+    75% { --rot: -0.6deg; }
+    100% { --rot: 0deg; }
+  }
+
+  /* ── Cables ── */
+  .hero-wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
     opacity: 0;
-    animation: signal-drop 0.5s ease-in 0.35s 1 both;
+    z-index: 1;
   }
-  .signal-drop-late::after {
-    animation-delay: 1.55s;
-    animation-duration: 0.4s;
+  .hero-stage.is-live .hero-wires { opacity: 1; }
+  .wire {
+    fill: none;
+    stroke: #3c3a34;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: wire-draw 0.6s ease-out forwards;
   }
-  @keyframes signal-drop {
-    0% { top: 0; opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { top: calc(100% - 8px); opacity: 0; }
+  .wire.taut { stroke: #1a1712; }
+  .wire-glow {
+    fill: none;
+    stroke: #3fdd8f;
+    stroke-width: 6;
+    stroke-linecap: round;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .wire-glow.taut { opacity: 0.35; }
+  .plug { fill: #1a1712; }
+  .pulse { fill: #3fdd8f; filter: url(#hero-glow); }
+  @keyframes wire-draw {
+    to { stroke-dashoffset: 0; }
   }
 
-  .bus-flash {
-    animation: bus-flash 0.5s ease-out 0.82s 1;
-  }
-  @keyframes bus-flash {
-    0%, 100% { background-color: #3c3a34; }
-    45% { background-color: #3fdd8f; }
-  }
-
+  /* ── Landing cascade: cables draw → nodes land → contact lands ── */
   .land-1, .land-2, .land-3 {
-    animation: node-land 0.7s ease-out both;
+    animation: node-land 0.7s ease-out backwards;
   }
   .land-1 { animation-delay: 1s; }
   .land-2 { animation-delay: 1.14s; }
@@ -190,82 +338,27 @@ const services = [
     0% { box-shadow: 4px 4px 0 rgba(26, 23, 18, 0.12), 0 0 0 0 rgba(63, 221, 143, 0.55); }
     100% { box-shadow: 4px 4px 0 rgba(26, 23, 18, 0.12), 0 0 0 14px rgba(63, 221, 143, 0); }
   }
-
   .cta-land {
-    animation: cta-land 0.7s ease-out 1.95s both;
+    animation: cta-land 0.7s ease-out 1.95s backwards;
   }
   @keyframes cta-land {
     0% { box-shadow: 6px 6px 0 rgba(26, 23, 18, 0.15), 0 0 0 0 rgba(63, 221, 143, 0.55); }
     100% { box-shadow: 6px 6px 0 rgba(26, 23, 18, 0.15), 0 0 0 14px rgba(63, 221, 143, 0); }
   }
 
-  /* ── Draggable notes ── */
-  .hero-note {
-    cursor: grab;
-    touch-action: none;
-    z-index: 10;
-  }
-  .hero-note.dragging {
-    cursor: grabbing;
-    z-index: 20;
-    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.14);
-  }
-  .note-sticky {
-    transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(3deg);
-  }
-  .note-deps {
-    transform: translate(var(--dx, 0px), var(--dy, 0px)) rotate(-2deg);
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .signal-drop::after,
-    .bus-flash,
-    .land-1, .land-2, .land-3,
-    .cta-land {
-      animation: none;
-    }
+    .wire { animation: none; stroke-dashoffset: 0; }
+    .land-1, .land-2, .land-3, .cta-land, .pill-health.degraded, .hnode-root.jolt { animation: none; }
+    .hnode, .hnode.settling { transition: none; }
   }
 </style>
 
 <script>
-  function initDragNotes() {
-    const MAX_OFFSET = 70;
-    const clamp = (v: number) => Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, v));
-
-    document.querySelectorAll<HTMLElement>('[data-drag-note]').forEach((note) => {
-      let offsetX = 0;
-      let offsetY = 0;
-
-      note.addEventListener('pointerdown', (e) => {
-        e.preventDefault();
-        note.setPointerCapture(e.pointerId);
-        note.classList.add('dragging');
-
-        const originX = e.clientX - offsetX;
-        const originY = e.clientY - offsetY;
-
-        const onMove = (ev: PointerEvent) => {
-          offsetX = clamp(ev.clientX - originX);
-          offsetY = clamp(ev.clientY - originY);
-          note.style.setProperty('--dx', `${offsetX}px`);
-          note.style.setProperty('--dy', `${offsetY}px`);
-        };
-
-        const onUp = () => {
-          note.classList.remove('dragging');
-          note.removeEventListener('pointermove', onMove);
-        };
-
-        note.addEventListener('pointermove', onMove);
-        note.addEventListener('pointerup', onUp, { once: true });
-        note.addEventListener('pointercancel', onUp, { once: true });
-      });
-    });
-  }
+  import { initHeroCanvas } from '../scripts/hero-canvas';
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initDragNotes, { once: true });
+    document.addEventListener('DOMContentLoaded', initHeroCanvas, { once: true });
   } else {
-    initDragNotes();
+    initHeroCanvas();
   }
 </script>

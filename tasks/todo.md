@@ -1,26 +1,19 @@
-# Artifact redesign — todo
+# Drag-based sketch hero — Live wire
 
-Plan: `plan/artifact-redesign-plan.md`
+Plan: `plan/drag-sketch-variations-plan.md`
+Prototype (3 variations): https://claude.ai/code/artifact/1071f876-e139-42e6-957b-02d319c710cb
 
-- [x] Tokens: tailwind.config.mjs (palette, fonts, shadows, light prose theme)
-- [x] global.css: light base, dot grid, keyframes (pulse/dash), retoned component classes
-- [x] Layout.astro: fonts swap, cream body, drop noise/grid overlay
-- [x] Header.astro: sticky system-doc nav + mobile menu restyle
-- [x] Hero.astro: system diagram (desktop absolute + mobile stacked) + landing pulse cascade + draggable notes
-- [x] Experience.astro (new): diff card + side cards
-- [x] MyWork.astro: "Deployments" terminal cards (real links from work.json)
-- [x] Stack.astro (new): checks grid
-- [x] Contact.astro + ContactForm.astro: PR card + comment-style form
-- [x] Footer.astro: mono footer row
-- [x] index.astro: recompose; deleted About/Blog/ContactTabs/ScrollProgress/BlogCard
-- [x] Blog compatibility pass (listing + post layout + shared bits)
-- [x] Verify: build clean, desktop 1280 + mobile screenshots match artifact
+- [x] Read current hero, tokens, lessons
+- [x] Build interactive prototype page with 3 variations (Whiteboard / Blueprint / Live wire)
+- [x] Kamil picked **Live wire**
+- [x] `src/scripts/hero-canvas.ts`: drag controller (4px click threshold, keyboard nudge), spring physics (edge + home springs, fling, soft bounds), cable routing, health pulses, chaos monkey, reset
+- [x] `src/components/Hero.astro`: SVG cables + pulses in the template, nodes keep CSS base position and get `--dx/--dy` deltas, pinned notes, status line on service cards, chaos/reset buttons in the meta row, cable draw-in replaces the old signal-drop/bus-flash cascade
+- [x] Verify: `bun run build` clean; headless-Chrome DevTools script (scratchpad `cdp-test.ts`) drags the projects card → contact + root are tugged, release settles, no navigation on drag, plain click navigates to `#experience`, chaos flips root to DEGRADED and back, reset zeroes every delta, no console errors from the hero
+- [ ] Commit (not requested yet)
 
 ## Review
 
-- Root cause of an early layout bug: body is `flex flex-col`, and `mx-auto` on a flex
-  item cancels cross-axis stretch, so sections collapsed to fit-content. Fixed by
-  adding `w-full` to every `max-w-[1100px] mx-auto` section.
-- Mobile "overflow" during verification was a headless-Chrome artifact (window
-  clamps to ~500px while the screenshot canvas stays 390) — real layout is fluid.
-- Full blog redesign deferred; blog got a light-theme token pass only.
+- Service cards grew ~26px with the health line, which put the projects card's bottom level with the contact node's top and made the cable route sideways. Fixed by stage 470→500px, contact node 392→420px, deps note bottom 30→22px, and a smaller minimum cable sag. Same fix applied to the prototype.
+- When two boxes overlap on both axes the side-anchor routing looped behind them; overlapping boxes now plug straight through vertically.
+- Node positions stay CSS-driven (`left/top` + `--tx`), the script only adds a delta, so the no-JS state is the plain static layout and resizing needs no bespoke logic.
+- Pre-existing, unrelated: `images/og-image.jpg` referenced by the OG meta tags 404s.
