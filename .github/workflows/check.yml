@@ -1,0 +1,22 @@
+name: Portfolio checks
+
+on:
+  pull_request:
+    branches: [Master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.5"
+      - run: bun install --frozen-lockfile
+      - name: Check portfolio TypeScript
+        run: bunx tsc --noEmit --skipLibCheck --target ES2022 --module ESNext --moduleResolution bundler --lib ES2022,DOM src/scripts/keyboard.ts src/scripts/portfolio.ts
+      - name: Build portfolio and blog
+        run: bun run build
