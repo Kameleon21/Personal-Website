@@ -1,6 +1,20 @@
 {
   "projects": [
     {
+      "title": "Tokenlens",
+      "description": "Terminal dashboard for coding-agent token usage and estimated costs. Compare agents and models, filter and compare date ranges, cache reports for fast reloads, switch themes, and export to JSON, CSV, SVG, or PNG. Built on Bubble Tea with ccusage as the backend.",
+      "image": "",
+      "link": "",
+      "githubLink": "https://github.com/Kameleon21/tokenlens",
+      "technologies": [
+        "Go",
+        "Bubble Tea",
+        "Lip Gloss",
+        "TUI",
+        "ccusage"
+      ]
+    },
+    {
       "title": "FirstDevJob",
       "description": "Open-source job board helping developers land their first role in tech. Features job search with role-level and location filtering, application tracking dashboard, job posting with admin approval, and role-based access control. Fully documented with a dedicated /docs site.",
       "image": "../assets/firstdevjob-demo.mov",
