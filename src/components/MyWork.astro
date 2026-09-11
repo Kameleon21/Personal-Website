@@ -4,11 +4,20 @@ import workData from '../data/work.json';
 const findProject = (title: string) =>
   workData.projects.find((item) => item.title === title);
 
+const tokenlens = findProject('Tokenlens');
 const oku = findProject('OKU');
 const firstDevJob = findProject('FirstDevJob');
 const ceEquipment = findProject('CE Equipment Solutions');
 
 const deployments = [
+  {
+    repo: 'tokenlens/',
+    kind: 'open source',
+    name: 'Tokenlens',
+    desc: 'See what your coding agents actually cost. A terminal dashboard for token usage and estimated spend across agents and models, with date filters, period comparisons, cached reports, themes, and JSON/CSV/SVG/PNG exports.',
+    tags: ['Go', 'Bubble Tea', 'TUI', 'ccusage'],
+    links: [{ label: 'view source →', href: tokenlens?.githubLink }],
+  },
   {
     repo: 'oku/',
     kind: 'open source',
@@ -46,7 +55,7 @@ const deployments = [
     <span class="font-mono text-[11px] text-faint sm:ml-auto">source available — review the code yourself</span>
   </div>
 
-  <div class="grid md:grid-cols-3 gap-5">
+  <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-5">
     {deployments.map((project) => (
       <div class="node-card node-card-hover overflow-hidden flex flex-col">
         <div class="dark-bar px-[18px] py-2.5 font-mono text-[11px] gap-2">
