@@ -11,7 +11,9 @@ const { title = "Kamil Rogozinski - Portfolio", description = "Personal portfoli
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href={`${import.meta.env.BASE_URL}favicon.ico`} />
+		<link rel="icon" type="image/svg+xml" sizes="any" href={`${import.meta.env.BASE_URL}favicon.svg`} />
+		<link rel="apple-touch-icon" sizes="180x180" href={`${import.meta.env.BASE_URL}apple-touch-icon.png`} />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="theme-color" content="#f7f5f0" />
 
