@@ -6,6 +6,7 @@
       "name": "Tokenlens",
       "desc": "See what your coding agents actually cost. A terminal dashboard for token usage and estimated spend across agents and models, with date filters, period comparisons, cached reports, themes, and JSON/CSV/SVG/PNG exports.",
       "tags": ["Go", "Bubble Tea", "TUI", "ccusage"],
+      "demo": { "src": "tokenlens", "title": "~/tokenlens — zsh" },
       "links": [
         { "label": "view source →", "href": "https://github.com/Kameleon21/tokenlens" }
       ]
@@ -16,6 +17,7 @@
       "name": "Oku",
       "desc": "A book tracker that lives in your terminal. Manage a Hardcover reading library with lazygit-style modal panels, discovery search across books, authors and genres, and density modes. Built for devs who live in tmux.",
       "tags": ["Go", "Bubble Tea", "Lip Gloss", "TUI"],
+      "demo": { "src": "oku", "title": "~/oku — zsh" },
       "links": [
         { "label": "view source →", "href": "https://github.com/Kameleon21/oku" }
       ]
