@@ -1,7 +1,12 @@
 ---
 import workData from '../data/work.json';
 
-const deployments = workData.deployments;
+type Deployment = (typeof workData.deployments)[number] & {
+  demo?: { src: string; title: string };
+};
+
+const deployments: Deployment[] = workData.deployments;
+const media = `${import.meta.env.BASE_URL}media`;
 ---
 
 <section id="projects" class="w-full max-w-[1100px] mx-auto px-5 sm:px-10 pt-14 md:pt-[60px] pb-5">
@@ -11,38 +16,175 @@ const deployments = workData.deployments;
     <span class="font-mono text-[11px] text-faint sm:ml-auto">source available — review the code yourself</span>
   </div>
 
-  <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-5">
-    {deployments.map((project) => (
-      <div class="node-card node-card-hover overflow-hidden flex flex-col">
-        <div class="dark-bar px-[18px] py-2.5 font-mono text-[11px] gap-2">
-          <span class="w-2 h-2 rounded-full bg-mint flex-none"></span>
-          <span>{project.repo}</span>
-          <span class="ml-auto text-inkmuted">{project.kind}</span>
-        </div>
-        <div class="px-[22px] py-5 flex-1 flex flex-col">
-          <div class="font-bold text-xl mb-2">{project.name}</div>
-          <div class="text-[13.5px] text-muted leading-[1.6] flex-1">{project.desc}</div>
-          <div class="flex flex-wrap gap-1.5 mt-4 mb-3.5">
-            {project.tags.map((tag) => (
-              <span class="font-mono text-[10px] border border-ink rounded-full px-2.5 py-[3px]">{tag}</span>
-            ))}
-          </div>
-          <div class="flex flex-wrap gap-x-4 gap-y-1">
-            {project.links
-              .filter((link) => link.href)
-              .map((link) => (
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="font-mono text-[11px] text-accent font-bold hover:text-ink hover:underline"
+  <div class="grid sm:grid-cols-2 gap-5">
+    {deployments.map((project) => {
+      const demo = project.demo;
+      const [cwd, shell] = demo ? demo.title.split(' — ') : [];
+      return (
+        <article class="node-card node-card-hover overflow-hidden flex flex-col" data-demo-card={demo ? '' : undefined}>
+          {demo ? (
+            <>
+              <div class="dark-bar px-3.5 py-[9px] font-mono text-[11px]">
+                <span class="flex gap-1.5 flex-none" aria-hidden="true">
+                  <i class="light bg-[#e0684a]"></i>
+                  <i class="light bg-hire"></i>
+                  <i class="light bg-mint"></i>
+                </span>
+                <span class="flex-1 min-w-0 truncate">
+                  {cwd}{shell && <span class="text-faint"> — {shell}</span>}
+                </span>
+                <span class="live-badge flex-none flex items-center gap-[5px] font-bold text-[9.5px] tracking-[0.08em] text-mint" aria-hidden="true">
+                  <i class="w-1.5 h-1.5 rounded-full bg-mint pulse-ring"></i>live
+                </span>
+              </div>
+              <div class="term-screen relative aspect-[1200/680] bg-ink border-b-2 border-ink overflow-hidden" data-demo={project.name}>
+                <div class="absolute inset-0 flex flex-col px-3.5 py-3 font-mono text-[10.5px] leading-[1.7] text-[#d8d0c0]" aria-hidden="true">
+                  <div><span class="text-mint">{cwd} $</span> {demo.src} <span class="cursor"></span></div>
+                  <div class="fake-tui mt-2 grid gap-[5px] border border-[#3a3428] rounded-sm px-2 py-1.5">
+                    <i class="w-[70%] bg-[#5a5346]"></i>
+                    <i class="w-[92%]"></i>
+                    <i class="w-[54%] bg-[#7a5f2b]"></i>
+                    <i class="w-4/5"></i>
+                  </div>
+                </div>
+                <video
+                  class="absolute inset-0 w-full h-full object-cover"
+                  muted
+                  loop
+                  playsinline
+                  preload="none"
+                  poster={`${media}/${demo.src}-poster.jpg`}
+                  aria-label={`Screen recording of ${project.name} running in a terminal`}
                 >
-                  {link.label}
-                </a>
+                  <source src={`${media}/${demo.src}.webm`} type="video/webm" />
+                  <source src={`${media}/${demo.src}.mp4`} type="video/mp4" />
+                </video>
+                <button class="term-ctl" type="button" aria-label={`Play ${project.name} recording`} data-demo-toggle>
+                  <svg class="icon-play" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z" fill="currentColor" /></svg>
+                  <svg class="icon-pause" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 1.5h2.5v9H2.5zM7 1.5h2.5v9H7z" fill="currentColor" /></svg>
+                </button>
+              </div>
+            </>
+          ) : (
+            <div class="dark-bar px-[18px] py-2.5 font-mono text-[11px] gap-2">
+              <span class="w-2 h-2 rounded-full bg-mint flex-none"></span>
+              <span>{project.repo}</span>
+              <span class="ml-auto text-inkmuted">{project.kind}</span>
+            </div>
+          )}
+          <div class="px-[22px] py-5 flex-1 flex flex-col">
+            {demo && <div class="font-mono text-[10px] text-faint tracking-[0.06em] uppercase mb-1.5">{project.kind}</div>}
+            <div class="font-bold text-xl mb-2">{project.name}</div>
+            <div class="text-[13.5px] text-muted leading-[1.6] flex-1">{project.desc}</div>
+            <div class="flex flex-wrap gap-1.5 mt-4 mb-3.5">
+              {project.tags.map((tag) => (
+                <span class="font-mono text-[10px] border border-ink rounded-full px-2.5 py-[3px]">{tag}</span>
               ))}
+            </div>
+            <div class="flex flex-wrap gap-x-4 gap-y-1">
+              {project.links
+                .filter((link) => link.href)
+                .map((link) => (
+                  <a
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-mono text-[11px] text-accent font-bold hover:text-ink hover:underline"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+            </div>
           </div>
-        </div>
-      </div>
-    ))}
+        </article>
+      );
+    })}
   </div>
 </section>
+
+<style>
+  .light {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+  }
+
+  /* Live badge only while the recording is actually playing */
+  .live-badge {
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  [data-demo-card][data-state='playing'] .live-badge { opacity: 1; }
+
+  /* Faux terminal behind the video: shows through until the poster loads,
+     and stays if the recording is missing. */
+  .fake-tui i {
+    display: block;
+    height: 5px;
+    border-radius: 2px;
+    background: #3a3428;
+  }
+  .cursor {
+    display: inline-block;
+    width: 6px;
+    height: 12px;
+    vertical-align: -2px;
+    background: #f0b429;
+    animation: cursor-blink 1.1s steps(2, start) infinite;
+  }
+  @keyframes cursor-blink {
+    to { visibility: hidden; }
+  }
+  .term-screen.broken video,
+  .term-screen.broken .term-ctl { display: none; }
+
+  /* Play / pause control: corner button on hover, big centred play when paused */
+  .term-ctl {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    color: #1a1712;
+    background: rgba(247, 245, 240, 0.92);
+    border: 1.5px solid #1a1712;
+    border-radius: 50%;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .term-screen:hover .term-ctl,
+  .term-ctl:focus-visible,
+  [data-state='paused'] .term-ctl { opacity: 1; }
+  [data-state='paused'] .term-ctl {
+    right: 50%;
+    bottom: 50%;
+    width: 44px;
+    height: 44px;
+    transform: translate(50%, 50%);
+    background: #3fdd8f;
+  }
+  [data-state='paused'] .term-ctl svg { width: 15px; height: 15px; }
+  .icon-pause,
+  [data-state='playing'] .icon-play { display: none; }
+  [data-state='playing'] .icon-pause { display: block; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor { animation: none; }
+  }
+</style>
+
+<script>
+  import { initTerminalDemos } from '../scripts/terminal-demos';
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTerminalDemos, { once: true });
+  } else {
+    initTerminalDemos();
+  }
+</script>

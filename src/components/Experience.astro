@@ -1,66 +1,652 @@
 ---
-const diffLines = [
-  { text: 'ships Spring Boot REST services across multiple apps' },
-  { text: 'builds modular Angular front-end components' },
-  { text: 'designs MySQL schemas for query efficiency' },
-  { text: 'deploys via Docker + OpenShift, improves CI/CD' },
-  { text: 'mentors(intern)', comment: '// onboarding, reviews, guidance' },
+type Svc = 'kamil' | 'setu' | 'citi';
+type Tag = { k: string; v: string; status?: 'ok' | 'live' | 'redir' };
+type Log = { text: string; comment?: string };
+type Span = {
+  id: string;
+  op: string;
+  svc: Svc;
+  depth: 0 | 1;
+  start: number;
+  end: number | null;
+  from: string;
+  to: string;
+  durLabel?: string;
+  title: string;
+  tags: Tag[];
+  logs: Log[];
+  logsTitle?: string;
+};
+
+// Months as fractional years so every span shares one time axis.
+const ym = (y: number, m: number) => y + (m - 1) / 12;
+
+const spans: Span[] = [
+  {
+    id: 'career',
+    op: 'kamil.career',
+    svc: 'kamil',
+    depth: 0,
+    start: ym(2022, 9),
+    end: null,
+    from: '2022',
+    to: 'now',
+    title: 'Kamil Rogozinski — software engineer',
+    tags: [
+      { k: 'service', v: 'kamil-rogozinski' },
+      { k: 'region', v: 'waterford, ie' },
+      { k: 'stack', v: 'java · go · typescript' },
+      { k: 'languages', v: 'polish (native) · english (fluent)' },
+      { k: 'status', v: '200 · HEALTHY', status: 'live' },
+    ],
+    logs: [],
+  },
+  {
+    id: 'setu',
+    op: 'setu.bsc',
+    svc: 'setu',
+    depth: 1,
+    start: ym(2022, 9),
+    end: ym(2025, 6),
+    from: '2022',
+    to: '2025',
+    durLabel: '3y',
+    title: 'BSc (Hons) Software Systems',
+    tags: [
+      { k: 'org', v: 'SETU Waterford' },
+      { k: 'degree', v: 'BSc (Hons) Software Systems' },
+      { k: 'result', v: 'First Class Honours (1.1)' },
+      { k: 'status', v: '200 · graduated', status: 'ok' },
+    ],
+    logs: [{ text: 'First Class Honours (1.1)' }],
+  },
+  {
+    id: 'intern',
+    op: 'citi.intern',
+    svc: 'citi',
+    depth: 1,
+    start: ym(2024, 6),
+    end: ym(2024, 12),
+    from: '2024.06',
+    to: '2024.12',
+    title: 'SWE Intern — Citi Dublin',
+    tags: [
+      { k: 'org', v: 'Citi Dublin' },
+      { k: 'role', v: 'SWE Intern' },
+      { k: 'stack', v: 'Java · .NET' },
+      { k: 'scope', v: 'APIs · microservices' },
+      { k: 'team', v: 'Agile teams · code reviews' },
+      { k: 'status', v: '301 → citi.swe', status: 'redir' },
+    ],
+    logs: [
+      { text: 'Java + .NET, APIs and microservices' },
+      { text: 'Agile teams, code reviews' },
+      { text: 'converted to full-time', comment: '// 301 Moved Permanently' },
+    ],
+  },
+  {
+    id: 'swe',
+    op: 'citi.swe',
+    svc: 'citi',
+    depth: 1,
+    start: ym(2025, 9),
+    end: null,
+    from: '2025.09',
+    to: 'now',
+    title: 'Software Engineer — Citi Dublin',
+    tags: [
+      { k: 'org', v: 'Citi Dublin' },
+      { k: 'role', v: 'Software Engineer' },
+      { k: 'stack', v: 'Spring Boot · Angular · MySQL' },
+      { k: 'infra', v: 'Docker · OpenShift · CI/CD' },
+      { k: 'ref', v: 'follows_from → citi.intern' },
+      { k: 'status', v: '200 · span open', status: 'live' },
+    ],
+    logs: [
+      { text: 'ships Spring Boot REST services across multiple apps' },
+      { text: 'builds modular Angular front-end components' },
+      { text: 'designs MySQL schemas for query efficiency' },
+      { text: 'deploys via Docker + OpenShift, improves CI/CD' },
+      { text: 'mentors(intern)', comment: '// onboarding, reviews, guidance' },
+    ],
+    logsTitle: 'logs · diff',
+  },
 ];
+
+const DEFAULT_OPEN = 'swe';
+
+// "now" at build time; the trace script re-measures it in the browser.
+const d = new Date();
+const daysInMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+const now = d.getFullYear() + (d.getMonth() + (d.getDate() - 1) / daysInMonth) / 12;
+const domain: [number, number] = [2022.5, Math.max(2027, Math.ceil(now + 0.2))];
+
+const pct = (t: number) => ((t - domain[0]) / (domain[1] - domain[0])) * 100;
+const endOf = (s: Span) => s.end ?? now;
+const duration = (s: Span) => {
+  if (s.durLabel) return s.durLabel;
+  const months = Math.round((endOf(s) - s.start) * 12);
+  const y = Math.floor(months / 12);
+  const m = months % 12;
+  return y ? `${y}y${m ? ` ${m}m` : ''}` : `${m}mo`;
+};
+
+const years: number[] = [];
+for (let y = Math.ceil(domain[0]); y < domain[1]; y++) {
+  if (Math.abs(y - now) > 0.3) years.push(y);
+}
+
+const root = spans[0];
+const childIds = spans
+  .filter((s) => s.depth === 1)
+  .map((s) => `trace-${s.id}`)
+  .join(' ');
+const statusClass = { ok: 'st-ok', live: 'st-live', redir: 'st-redir' };
 ---
 
 <section id="experience" class="w-full max-w-[1100px] mx-auto px-5 sm:px-10 pt-14 md:pt-[60px] pb-5">
   <div class="section-head">
     <span class="section-label">SVC / EXPERIENCE</span>
-    <span class="font-bold text-[28px]">Deploy history</span>
-    <span class="font-mono text-[11px] text-faint sm:ml-auto">0 incidents · 0 rollbacks</span>
+    <span class="font-bold text-[28px]">Career trace</span>
+    <span class="font-mono text-[11px] text-faint sm:ml-auto">0 errors · 0 rollbacks · 1 redirect (301)</span>
   </div>
 
-  <div class="grid md:grid-cols-[1.35fr_1fr] gap-5 items-start">
-    <!-- Diff card -->
-    <div class="node-card overflow-hidden !rounded-xl">
-      <div class="dark-bar px-5 py-3">
-        <span class="font-mono text-xs">experience/citi-dublin.java</span>
-        <span class="font-mono text-[11px] text-mint ml-auto">+412 −0</span>
+  <div class="trace node-card overflow-hidden" data-trace data-domain={domain.join(',')}>
+    <div class="dark-bar flex-wrap px-5 py-[11px] font-mono text-xs">
+      <span>● trace</span>
+      <span class="text-inkmuted">4b1d9e7c…c21f</span>
+      <span>{root.op}</span>
+      <span class="text-mint ml-auto">0 errors</span>
+    </div>
+
+    <div class="flex flex-wrap gap-x-4 sm:gap-x-[26px] gap-y-1 px-5 py-3 border-b-2 border-ink font-mono text-[11px] text-faint">
+      <span>trace start<b class="text-ink ml-1.5">2022</b></span>
+      <span>duration<b class="text-ink ml-1.5" data-dur-of={root.id}>{duration(root)}</b></span>
+      <span>services<b class="text-ink ml-1.5">3</b></span>
+      <span>depth<b class="text-ink ml-1.5">2</b></span>
+      <span>total spans<b class="text-ink ml-1.5">{spans.length}</b></span>
+    </div>
+
+    <div class="trace-cols border-b border-dot bg-paper/50" aria-hidden="true">
+      <div class="hidden sm:block px-5 py-[9px] font-mono text-[9.5px] tracking-[0.14em] uppercase text-faint border-r border-dot">
+        service · operation
       </div>
-      <div class="px-5 sm:px-6 py-5">
-        <div class="flex flex-wrap justify-between items-baseline gap-x-4 mb-1.5">
-          <span class="font-bold text-[19px]">Software Engineer — Citi Dublin</span>
-          <span class="font-mono text-[11px] text-faint">2025.09 → now</span>
-        </div>
-        <div class="font-mono text-[12.5px] leading-8 mt-2.5">
-          {diffLines.map((line) => (
-            <div class="bg-diffbg px-3 rounded mb-[3px] last:mb-0">
-              <span class="text-ghgreen">+</span> {line.text}
-              {line.comment && <span class="text-[#8b949e]"> {line.comment}</span>}
-            </div>
+      <div class="relative h-[34px]">
+        <div class="lane">
+          {years.map((y) => (
+            <span class="tick" style={`left:${pct(y)}%`}>{y}</span>
           ))}
+          <span class="now-flag" style={`left:${pct(now)}%`} data-now><span>now</span></span>
         </div>
       </div>
     </div>
 
-    <!-- Side cards -->
-    <div class="flex flex-col gap-3.5">
-      <div class="node-card px-5 py-[18px]">
-        <div class="flex flex-wrap justify-between items-baseline gap-x-4">
-          <span class="font-bold text-[15px]">SWE Intern — Citi Dublin</span>
-          <span class="font-mono text-[10px] text-faint">2024.06 → 12</span>
-        </div>
-        <div class="text-[13px] text-muted leading-[1.55] mt-1.5">
-          Java + .NET, APIs and microservices, Agile teams, code reviews. Converted to full-time.
-        </div>
+    <div class="trace-body relative" data-trace-body>
+      <div class="gridlines" aria-hidden="true">
+        {years.map((y) => <i style={`left:${pct(y)}%`}></i>)}
+        <i class="now" style={`left:${pct(now)}%`} data-now></i>
       </div>
 
-      <div class="node-card px-5 py-[18px]">
-        <div class="flex flex-wrap justify-between items-baseline gap-x-4">
-          <span class="font-bold text-[15px]">BSc (Hons) Software Systems</span>
-          <span class="font-mono text-[10px] text-faint">2022 → 25</span>
-        </div>
-        <div class="text-[13px] text-muted leading-[1.55] mt-1.5">
-          SETU Waterford — First Class Honours (1.1).
-        </div>
-      </div>
+      {spans.map((s, i) => {
+        const left = pct(s.start);
+        const width = pct(endOf(s)) - left;
+        return (
+          <div
+            class:list={['trace-item', `svc-${s.svc}`, { open: s.id === DEFAULT_OPEN, last: i === spans.length - 1 }]}
+            id={`trace-${s.id}`}
+            style={`--depth:${s.depth}`}
+            data-trace-item={s.id}
+            data-depth={s.depth}
+            data-start={s.start}
+          >
+            <div class="trace-row" data-trace-row>
+              <div class="trace-label">
+                {s.depth === 0 && (
+                  <button
+                    class="trace-twist"
+                    type="button"
+                    aria-expanded="true"
+                    aria-controls={childIds}
+                    aria-label="Collapse child spans"
+                    data-trace-twist
+                  >
+                    <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                      <path d="M2 3.5 5 6.5 8 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </button>
+                )}
+                <button class="trace-span" type="button" aria-expanded="true" aria-controls={`trace-d-${s.id}`} data-trace-span>
+                  <span class="sw"></span>
+                  <span class="flex flex-col min-w-0">
+                    <span class="font-mono font-bold text-[12.5px] truncate">{s.op}</span>
+                    <span class="font-mono text-[10.5px] text-faint truncate">{s.from} → {s.to}</span>
+                  </span>
+                  <span class="chev" aria-hidden="true">›</span>
+                </button>
+              </div>
+              <div class="relative" aria-hidden="true">
+                <div class="lane">
+                  <div
+                    class:list={['bar', { inside: width > 18, running: s.end === null }]}
+                    style={`left:${left}%;width:${width}%`}
+                    data-bar
+                  >
+                    <span class="dur" data-dur-of={s.id}>{duration(s)}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-      <div class="font-mono text-[11px] text-faint px-1">// languages: Polish (native) · English (fluent)</div>
+            <div class="trace-drawer" id={`trace-d-${s.id}`}>
+              <div data-trace-panel>
+                <div class="drawer-in">
+                  <div class="col-span-full mb-1.5 font-mono">
+                    <div class="flex flex-wrap items-center gap-2">
+                      <span class="sw"></span>
+                      <span class="font-bold text-sm">{s.op}</span>
+                      <span class="ml-auto text-[11px] text-faint whitespace-nowrap">
+                        {s.from} → {s.to} · <span data-dur-of={s.id}>{duration(s)}</span>
+                      </span>
+                    </div>
+                    <div class="font-sans font-bold text-[17px] mt-1">{s.title}</div>
+                  </div>
+
+                  <div>
+                    <div class="sec">tags</div>
+                    <dl class="tags">
+                      {s.tags.map((t) => (
+                        <>
+                          <dt>{t.k}</dt>
+                          <dd>{t.status ? <span class:list={['st', statusClass[t.status]]}>{t.v}</span> : t.v}</dd>
+                        </>
+                      ))}
+                    </dl>
+                  </div>
+
+                  <div>
+                    <div class="sec">{s.logsTitle ?? 'logs'}</div>
+                    {s.logs.length ? (
+                      <div class="font-mono text-xs leading-normal">
+                        {s.logs.map((log) => (
+                          <div class="bg-diffbg px-2.5 py-[5px] rounded mb-[3px]">
+                            <span class="text-ghgreen mr-1.5">+</span>{log.text}
+                            {log.comment && <span class="text-[#8b949e]"> {log.comment}</span>}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div class="font-mono text-[11px] text-faint">// span.start {s.from} · still running</div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <div class="flex flex-wrap justify-between gap-x-4 gap-y-1.5 px-5 py-[11px] font-mono text-[11px] text-faint bg-paper/50">
+      <span>// click a span for tags + logs</span>
+      <span class="hidden sm:inline"><kbd>↑</kbd><kbd>↓</kbd> move · <kbd>enter</kbd> open · <kbd>←</kbd> collapse</span>
     </div>
   </div>
+
+  <div class="font-mono text-[11px] text-faint mt-3.5 px-1">// languages: Polish (native) · English (fluent)</div>
 </section>
+
+<style>
+  /* Span colours: swatch / bar fill (--c) and the duration label drawn on it (--on). */
+  .svc-kamil { --c: #1a1712; --on: #f7f5f0; }
+  .svc-setu { --c: #f0b429; --on: #1a1712; }
+  .svc-citi { --c: #c2401b; --on: #fff; }
+
+  /* Label column width; the track takes the rest. Stacks below sm. */
+  .trace { --lw: 0px; }
+  .trace-cols,
+  .trace-row {
+    display: grid;
+    grid-template-columns: var(--lw) minmax(0, 1fr);
+  }
+  @media (min-width: 640px) {
+    .trace { --lw: 286px; }
+  }
+
+  /* Track lane: inset so the bar end-caps and duration labels never clip. */
+  .lane {
+    position: absolute;
+    inset: 0 44px 0 18px;
+  }
+  .tick,
+  .now-flag {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font: 10px 'JetBrains Mono', monospace;
+    color: #8a8578;
+  }
+  .now-flag span {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: #1a1712;
+    background: #3fdd8f;
+    border: 1.5px solid #1a1712;
+    border-radius: 999px;
+    padding: 2px 6px;
+  }
+
+  .gridlines {
+    position: absolute;
+    top: 0;
+    bottom: 3px;
+    left: calc(var(--lw) + 18px);
+    right: 44px;
+    pointer-events: none;
+  }
+  .gridlines i {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    border-left: 1px dashed #e4dfd3;
+  }
+  .gridlines i.now {
+    border-left: 2px solid #3fdd8f;
+    box-shadow: 0 0 0 2px rgba(63, 221, 143, 0.18);
+  }
+
+  /* ── Rows ── */
+  .trace-row {
+    position: relative;
+    min-height: 52px;
+    border-bottom: 1px solid #ece8de;
+    cursor: pointer;
+    transition: background-color 0.15s;
+  }
+  .trace-row:hover { background: rgba(251, 248, 241, 0.8); }
+  .trace-item.open > .trace-row { background: #fdf6ee; }
+  .trace-item.open > .trace-row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #c2401b;
+  }
+  .trace-item[hidden] { display: none; }
+
+  .trace-label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    padding: 0 12px 0 calc(14px + var(--depth) * 24px);
+  }
+  @media (min-width: 640px) {
+    .trace-label { border-right: 1px solid #d8d4c8; }
+
+    /* Dashed tree connectors from the root to each child */
+    .trace-item[data-depth='1'] .trace-label::before,
+    .trace-item[data-depth='1'] .trace-label::after {
+      content: '';
+      position: absolute;
+      left: 25px;
+      background: repeating-linear-gradient(var(--dir, to bottom), #3c3a34 0 4px, transparent 4px 8px);
+    }
+    .trace-item[data-depth='1'] .trace-label::before { top: 0; bottom: 0; width: 2px; }
+    .trace-item[data-depth='1'].last .trace-label::before { bottom: 50%; }
+    .trace-item[data-depth='1'] .trace-label::after { --dir: to right; top: 50%; width: 14px; height: 2px; }
+  }
+
+  .sw {
+    display: inline-block;
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border: 1.5px solid #1a1712;
+    border-radius: 2px;
+    background: var(--c);
+  }
+
+  .trace-twist {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: 1.5px solid #1a1712;
+    border-radius: 5px;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.15s, color 0.15s;
+  }
+  .trace-twist:hover { background: #1a1712; color: #f7f5f0; }
+  .trace-twist[aria-expanded='false'] { transform: rotate(-90deg); }
+
+  .trace-span {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 9px;
+    min-width: 0;
+    padding: 8px 0;
+    border-radius: 4px;
+    text-align: left;
+    cursor: pointer;
+  }
+  .trace-span:focus-visible { outline-offset: 3px; }
+  .chev {
+    margin-left: auto;
+    font: 11px 'JetBrains Mono', monospace;
+    color: #8a8578;
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  [data-enhanced] .trace-item.open .chev {
+    transform: rotate(90deg);
+    color: #c2401b;
+  }
+
+  /* ── Bars ── */
+  .bar {
+    position: absolute;
+    top: 50%;
+    height: 16px;
+    transform: translateY(-50%);
+    background: var(--c);
+    border: 1.5px solid #1a1712;
+    border-radius: 4px;
+    box-shadow: 2px 2px 0 rgba(26, 23, 18, 0.14);
+  }
+  .trace-row:hover .bar,
+  .trace-item.open .bar { box-shadow: 3px 3px 0 rgba(26, 23, 18, 0.25); }
+  .dur {
+    position: absolute;
+    left: calc(100% + 8px);
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    font: 10.5px 'JetBrains Mono', monospace;
+    color: #6b6357;
+  }
+  .bar.inside .dur {
+    left: auto;
+    right: 8px;
+    font-weight: 700;
+    color: var(--on);
+  }
+  /* Still-open span: dashed end cap + pulsing head at "now" */
+  .bar.running {
+    border-right-style: dashed;
+    border-radius: 4px 0 0 4px;
+  }
+  .bar.running::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    margin-top: -4.5px;
+    border-radius: 50%;
+    background: #3fdd8f;
+    border: 1.5px solid #1a1712;
+    animation: trace-ring 2.4s ease-out infinite;
+  }
+
+  /* ── Drawer ──
+     Without JS every drawer is open so the whole history stays readable;
+     the trace script marks the card enhanced and collapses all but one. */
+  .trace-drawer {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-rows: 1fr;
+    background: #fdfcf8;
+    border-bottom: 1px solid #ece8de;
+    transition: grid-template-rows 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .trace-drawer > div {
+    min-height: 0;
+    overflow: hidden;
+  }
+  [data-enhanced='init'] .trace-drawer { transition: none; }
+  [data-enhanced] .trace-item:not(.open) .trace-drawer {
+    grid-template-rows: 0fr;
+    border-bottom-color: transparent;
+  }
+  .drawer-in {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px 28px;
+    padding: 16px 18px 20px;
+  }
+  .drawer-in::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: #c2401b;
+  }
+  @media (min-width: 640px) {
+    .drawer-in {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      padding: 18px 22px 22px calc(46px + var(--depth) * 24px);
+    }
+  }
+
+  .sec {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0 6px;
+    font: 9.5px 'JetBrains Mono', monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8a8578;
+  }
+  .sec::after {
+    content: '';
+    flex: 1;
+    border-top: 1px dashed #d8d4c8;
+  }
+  @media (min-width: 640px) {
+    .sec { margin-top: 0; }
+  }
+
+  .tags {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    margin: 0;
+    overflow: hidden;
+    font: 12px 'JetBrains Mono', monospace;
+    border: 1px solid #ece8de;
+    border-radius: 6px;
+  }
+  .tags dt,
+  .tags dd {
+    margin: 0;
+    padding: 6px 10px;
+    border-bottom: 1px solid #ece8de;
+  }
+  .tags dt {
+    color: #8a8578;
+    background: #fbfaf6;
+    border-right: 1px solid #ece8de;
+  }
+  .tags dd { overflow-wrap: anywhere; }
+  .tags dt:last-of-type,
+  .tags dd:last-of-type { border-bottom: 0; }
+
+  .st {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+  }
+  .st::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+  .st-ok,
+  .st-live { color: #2da44e; }
+  .st-redir { color: #b07a00; }
+  .st-live::before {
+    background: #3fdd8f;
+    animation: trace-ring 2.4s ease-out infinite;
+  }
+
+  kbd {
+    font: inherit;
+    color: #6b6357;
+    background: #fff;
+    border: 1px solid #d8d4c8;
+    border-radius: 3px;
+    padding: 0 4px;
+  }
+
+  /* ── Mobile: label above its bar ── */
+  @media (max-width: 639px) {
+    .trace-cols { grid-template-columns: minmax(0, 1fr); }
+    .trace-row {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto 26px;
+      padding-bottom: 6px;
+    }
+    .trace-label { padding-right: 16px; }
+  }
+
+  @keyframes trace-ring {
+    0% { box-shadow: 0 0 0 0 rgba(63, 221, 143, 0.6); }
+    70%, 100% { box-shadow: 0 0 0 7px rgba(63, 221, 143, 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar.running::after,
+    .st-live::before { animation: none; }
+    .trace-drawer,
+    .trace-twist,
+    .chev { transition: none; }
+  }
+</style>
+
+<script>
+  import { initCareerTrace } from '../scripts/career-trace';
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCareerTrace, { once: true });
+  } else {
+    initCareerTrace();
+  }
+</script>
