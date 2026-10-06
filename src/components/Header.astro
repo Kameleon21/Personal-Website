@@ -1,5 +1,5 @@
 ---
-const base = '/Personal-Website';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const routes = [
   { label: '/experience', href: `${base}/#experience` },
   { label: '/projects', href: `${base}/#projects` },

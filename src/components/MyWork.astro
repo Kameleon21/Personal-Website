@@ -1,51 +1,7 @@
 ---
 import workData from '../data/work.json';
 
-const findProject = (title: string) =>
-  workData.projects.find((item) => item.title === title);
-
-const tokenlens = findProject('Tokenlens');
-const oku = findProject('OKU');
-const firstDevJob = findProject('FirstDevJob');
-const ceEquipment = findProject('CE Equipment Solutions');
-
-const deployments = [
-  {
-    repo: 'tokenlens/',
-    kind: 'open source',
-    name: 'Tokenlens',
-    desc: 'See what your coding agents actually cost. A terminal dashboard for token usage and estimated spend across agents and models, with date filters, period comparisons, cached reports, themes, and JSON/CSV/SVG/PNG exports.',
-    tags: ['Go', 'Bubble Tea', 'TUI', 'ccusage'],
-    links: [{ label: 'view source →', href: tokenlens?.githubLink }],
-  },
-  {
-    repo: 'oku/',
-    kind: 'open source',
-    name: 'Oku',
-    desc: 'A book tracker that lives in your terminal. Manage a Hardcover reading library with lazygit-style modal panels, discovery search across books, authors and genres, and density modes. Built for devs who live in tmux.',
-    tags: ['Go', 'Bubble Tea', 'Lip Gloss', 'TUI'],
-    links: [{ label: 'view source →', href: oku?.githubLink }],
-  },
-  {
-    repo: 'firstdevjob/',
-    kind: 'platform',
-    name: 'FirstDevJob',
-    desc: "The job board Ireland's junior devs were missing. Curated listings that link straight to applications — no account needed to browse. Anonymous submissions, Google OAuth via Clerk, email notifications, audit trails.",
-    tags: ['TypeScript', 'Clerk', 'OAuth', 'Full-stack'],
-    links: [
-      { label: 'view live →', href: firstDevJob?.link },
-      { label: 'view source →', href: firstDevJob?.githubLink },
-    ],
-  },
-  {
-    repo: 'ce-equipment/',
-    kind: 'client work',
-    name: 'CE Equipment',
-    desc: 'B2B consulting website built for speed. Responsive, high-performance and maintainable — deployed and optimised for fast load times using modern web practices.',
-    tags: ['Astro', 'React', 'Tailwind'],
-    links: [{ label: 'case study →', href: ceEquipment?.link }],
-  },
-];
+const deployments = workData.deployments;
 ---
 
 <section id="projects" class="w-full max-w-[1100px] mx-auto px-5 sm:px-10 pt-14 md:pt-[60px] pb-5">

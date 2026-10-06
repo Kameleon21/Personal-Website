@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
+import sitemap from "@astrojs/sitemap";
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,6 +11,7 @@ export default defineConfig({
       applyBaseStyles: true,
     }),
     icon(),
+    sitemap(),
   ],
   markdown: {
     shikiConfig: {
@@ -17,7 +19,7 @@ export default defineConfig({
       wrap: true,
     },
   },
-  site: "https://kamilrogozinski.github.io",
+  site: "https://kameleon21.github.io",
   base: "/Personal-Website/",
 });
 
