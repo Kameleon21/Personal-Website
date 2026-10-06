@@ -10,26 +10,10 @@ interface ContactForm extends HTMLFormElement {
 }
 
 export function initContactForm() {
-  const tabs = document.querySelectorAll<HTMLButtonElement>('.contact-tab');
   const form = document.getElementById("contact-form") as ContactForm;
   const result = document.getElementById("form-result");
 
   if (!form || !result) return;
-
-  // Handle tab switching
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const tabType = tab.getAttribute('data-tab');
-      const placeholder = tabType === 'get-in-touch'
-        ? "I'd like to discuss..."
-        : "I have a project that I'd like to discuss. Here are some details...";
-
-      form.elements.message.placeholder = placeholder;
-    });
-  });
 
   // Form submission handler
   form.addEventListener("submit", async function (e) {
@@ -83,7 +67,6 @@ export function initContactForm() {
         const currentMessage = result.querySelector('.msg-success');
         if (currentMessage) {
           result.classList.add('hidden');
-          tabs[0]?.click();
         }
       }, 5000);
     }
@@ -110,11 +93,12 @@ export function initContactForm() {
     const textColor = type === 'error' ? 'text-accent' : type === 'success' ? 'text-ghgreen' : 'text-muted';
     const msgClass = type === 'success' ? 'msg-success' : '';
 
-    result.innerHTML = `
-      <div class="border-2 ${borderColor} ${textColor} ${msgClass} p-4 font-mono text-xs rounded-lg bg-white">
-        ${message}
-      </div>
-    `;
+    const box = document.createElement('div');
+    box.className = ['border-2', borderColor, textColor, msgClass, 'p-4 font-mono text-xs rounded-lg bg-white']
+      .filter(Boolean)
+      .join(' ');
+    box.textContent = message;
+    result.replaceChildren(box);
     result.classList.remove('hidden');
   }
 }

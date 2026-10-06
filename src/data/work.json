@@ -1,110 +1,44 @@
 {
-  "projects": [
+  "deployments": [
     {
-      "title": "Tokenlens",
-      "description": "Terminal dashboard for coding-agent token usage and estimated costs. Compare agents and models, filter and compare date ranges, cache reports for fast reloads, switch themes, and export to JSON, CSV, SVG, or PNG. Built on Bubble Tea with ccusage as the backend.",
-      "image": "",
-      "link": "",
-      "githubLink": "https://github.com/Kameleon21/tokenlens",
-      "technologies": [
-        "Go",
-        "Bubble Tea",
-        "Lip Gloss",
-        "TUI",
-        "ccusage"
+      "repo": "tokenlens/",
+      "kind": "open source",
+      "name": "Tokenlens",
+      "desc": "See what your coding agents actually cost. A terminal dashboard for token usage and estimated spend across agents and models, with date filters, period comparisons, cached reports, themes, and JSON/CSV/SVG/PNG exports.",
+      "tags": ["Go", "Bubble Tea", "TUI", "ccusage"],
+      "links": [
+        { "label": "view source →", "href": "https://github.com/Kameleon21/tokenlens" }
       ]
     },
     {
-      "title": "FirstDevJob",
-      "description": "Open-source job board helping developers land their first role in tech. Features job search with role-level and location filtering, application tracking dashboard, job posting with admin approval, and role-based access control. Fully documented with a dedicated /docs site.",
-      "image": "../assets/firstdevjob-demo.mov",
-      "link": "https://www.first-dev-job.com/",
-      "githubLink": "https://github.com/Kameleon21/firstdevjob",
-      "technologies": [
-        "Next.js",
-        "Convex",
-        "Clerk",
-        "TypeScript",
-        "Tailwind CSS"
+      "repo": "oku/",
+      "kind": "open source",
+      "name": "Oku",
+      "desc": "A book tracker that lives in your terminal. Manage a Hardcover reading library with lazygit-style modal panels, discovery search across books, authors and genres, and density modes. Built for devs who live in tmux.",
+      "tags": ["Go", "Bubble Tea", "Lip Gloss", "TUI"],
+      "links": [
+        { "label": "view source →", "href": "https://github.com/Kameleon21/oku" }
       ]
     },
     {
-      "title": "OKU",
-      "description": "Terminal companion for Hardcover that lets you track what you're reading, update progress, and manage shelves without leaving the terminal. Offers both a scriptable CLI and a full interactive TUI dashboard, with local SQLite caching and Hardcover GraphQL API integration.",
-      "image": "../assets/oku-demo.gif",
-      "link": "",
-      "githubLink": "https://github.com/Kameleon21/oku",
-      "technologies": ["Go", "SQLite", "GraphQL", "Cobra", "TUI"]
-    },
-    {
-      "title": "Group Dinner Picker",
-      "description": "Collaborative restaurant voting platform with a retro terminal UI and Spring Boot API enforcing fair voting, locking, and live stats across web clients.",
-      "image": "/Group-Picker.png",
-      "link": "",
-      "githubLink": "https://github.com/Kameleon21/group-dinner-picker",
-      "technologies": [
-        "Spring Boot",
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "Docker"
+      "repo": "firstdevjob/",
+      "kind": "platform",
+      "name": "FirstDevJob",
+      "desc": "The job board Ireland's junior devs were missing. Curated listings that link straight to applications — no account needed to browse. Anonymous submissions, Google OAuth via Clerk, email notifications, audit trails.",
+      "tags": ["TypeScript", "Clerk", "OAuth", "Full-stack"],
+      "links": [
+        { "label": "view live →", "href": "https://www.first-dev-job.com/" },
+        { "label": "view source →", "href": "https://github.com/Kameleon21/firstdevjob" }
       ]
     },
     {
-      "title": "CE Equipment Solutions",
-      "description": "Professional B2B website for Ireland's leading CE marking consultancy. Built with Astro 5.9, React 19, and TypeScript featuring GDPR-compliant cookie system, dynamic service routing, and advanced lead generation.",
-      "image": "../assets/ce-equipment-solutions.png",
-      "link": "https://ceequipmentsolutions.com/",
-      "githubLink": "https://github.com/Kameleon21/CE-Equipment-Solutions",
-      "technologies": [
-        "Astro",
-        "React",
-        "TypeScript",
-        "Tailwind CSS",
-        "GDPR Compliance"
-      ]
-    },
-    {
-      "title": "ARC Management Systems",
-      "description": "High-performance ISO certification consultancy website with advanced contact forms, performance optimization, and SEO. Features TypeScript throughout, WebP optimization, and Netlify integration with 95+ Lighthouse scores.",
-      "image": "/iso9001.png",
-      "link": "https://iso9001.ie/",
-      "githubLink": "https://github.com/Kameleon21/ARC-Management-Systems",
-      "technologies": [
-        "Astro",
-        "TypeScript",
-        "Tailwind CSS",
-        "Netlify",
-        "Performance Optimization"
-      ]
-    },
-    {
-      "title": "A Class Barbers",
-      "description": "A modern website for a barbershop, featuring online booking and service showcase. Static site with Google Places API integration, Google Maps embed, and responsive design optimized for local business.",
-      "image": "/A-Class-Barbers.jpeg",
-      "link": "https://aclassbarbers.com/",
-      "githubLink": "https://github.com/Kameleon21/A-Class-Barber",
-      "technologies": [
-        "Astro",
-        "JavaScript",
-        "Google Places API",
-        "Google Maps",
-        "Netlify"
-      ]
-    },
-    {
-      "id": 4,
-      "title": "This Personal Website",
-      "description": "Personal website built with Astro.js, Tailwind CSS, and TypeScript. Features blog system, contact forms, responsive design, and performance optimization with WebP images.",
-      "image": "../assets/Personal-Website.jpeg",
-      "link": "https://kameleon21.github.io/Personal-Website/",
-      "githubLink": "https://github.com/Kameleon21/Personal-Website",
-      "technologies": [
-        "Astro",
-        "TypeScript",
-        "Tailwind CSS",
-        "Web3Forms",
-        "GitHub Pages"
+      "repo": "ce-equipment/",
+      "kind": "client work",
+      "name": "CE Equipment",
+      "desc": "B2B consulting website built for speed. Responsive, high-performance and maintainable — deployed and optimised for fast load times using modern web practices.",
+      "tags": ["Astro", "React", "Tailwind"],
+      "links": [
+        { "label": "case study →", "href": "https://ceequipmentsolutions.com/" }
       ]
     }
   ]

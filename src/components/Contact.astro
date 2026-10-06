@@ -51,5 +51,9 @@ import ContactForm from './ContactForm.astro';
 <script>
   import { initContactForm } from '../scripts/contact-form';
 
-  document.addEventListener("DOMContentLoaded", initContactForm);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContactForm, { once: true });
+  } else {
+    initContactForm();
+  }
 </script>

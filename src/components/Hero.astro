@@ -1,4 +1,7 @@
 ---
+import workData from '../data/work.json';
+
+const deployments = workData.deployments;
 const today = new Date().toISOString().slice(0, 10);
 
 const services = [
@@ -14,8 +17,8 @@ const services = [
   {
     id: 'proj',
     label: 'SVC / PROJECTS',
-    title: '4 deployments',
-    desc: 'Tokenlens · Oku · FirstDevJob · CE Equipment',
+    title: `${deployments.length} deployments`,
+    desc: deployments.map((d) => d.name).join(' · '),
     get: 'GET /projects →',
     href: '#projects',
     pos: 'left-1/2 hnode-center land-2',

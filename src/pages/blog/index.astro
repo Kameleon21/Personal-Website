@@ -24,7 +24,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
         <div class="space-y-6">
           {sortedPosts.map((post) => (
             <article class="brutal-card group">
-              <a href={`/Personal-Website/blog/${post.slug}`} class="block">
+              <a href={`${import.meta.env.BASE_URL}blog/${post.slug}`} class="block">
                 <div class="flex flex-wrap gap-2 mb-4">
                   {post.data.tags?.map((tag: string) => (
                     <span class="brutal-tag">{tag}</span>
