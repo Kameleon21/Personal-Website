@@ -23,6 +23,17 @@
       ]
     },
     {
+      "repo": "tramly/",
+      "kind": "pwa",
+      "name": "Tramly",
+      "desc": "Dublin's Luas, answered before you leave the door. Live trams on a map and a \"can I catch it?\" verdict that weighs your walk against the next arrival. It also plans journeys across the Red and Green lines and tells you when walking or a Dublin Bike gets you there sooner. Works offline once installed.",
+      "tags": ["Next.js", "React", "Mapbox GL", "PWA"],
+      "demo": { "src": "tramly", "title": "tramly-theta.vercel.app — iPhone", "alt": "Screen recording of Tramly on a phone: live trams, a stop's catch verdicts and a planned journey" },
+      "links": [
+        { "label": "view live →", "href": "https://tramly-theta.vercel.app" }
+      ]
+    },
+    {
       "repo": "firstdevjob/",
       "kind": "platform",
       "name": "FirstDevJob",
