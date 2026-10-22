@@ -1,14 +1,16 @@
 ---
-import workData from '../data/work.json';
+import { getProjects } from '../lib/projects-collection';
+import { coreStackLine, profile, projectsSummary, stackLine, version } from '../lib/profile';
 
-const deployments = workData.deployments;
+const projects = await getProjects();
+const projectsNode = projectsSummary(projects);
 const today = new Date().toISOString().slice(0, 10);
 
 const services = [
   {
     id: 'exp',
     label: 'SVC / EXPERIENCE',
-    title: 'Citi Dublin',
+    title: profile.employer,
     desc: 'Spring Boot APIs · Angular · Docker / OpenShift · mentoring',
     get: 'GET /experience →',
     href: '#experience',
@@ -17,8 +19,8 @@ const services = [
   {
     id: 'proj',
     label: 'SVC / PROJECTS',
-    title: `${deployments.length} deployments`,
-    desc: deployments.map((d) => d.name).join(' · '),
+    title: projectsNode.title,
+    desc: projectsNode.desc,
     get: 'GET /projects →',
     href: '#projects',
     pos: 'left-1/2 hnode-center land-2',
@@ -27,7 +29,7 @@ const services = [
     id: 'stack',
     label: 'SVC / STACK',
     title: 'Polyglot',
-    desc: 'Java · Go · TypeScript · MySQL · CI/CD',
+    desc: stackLine,
     get: 'GET /stack →',
     href: '#stack',
     pos: 'right-[14%] hnode-right land-3',
@@ -85,12 +87,12 @@ const edges = [
       data-node="root"
       data-mass="4"
     >
-      <div class="font-bold text-3xl tracking-[-0.5px] whitespace-nowrap">KAMIL ROGOZINSKI</div>
-      <div class="font-mono text-[11px] text-inkmuted mt-1.5 whitespace-nowrap">core service · software engineer @ Citi Dublin · v25.9</div>
+      <div class="font-bold text-3xl tracking-[-0.5px] whitespace-nowrap">{profile.name.toUpperCase()}</div>
+      <div class="font-mono text-[11px] text-inkmuted mt-1.5 whitespace-nowrap">core service · {profile.role} @ {profile.employer} · {version}</div>
       <div class="flex gap-2 justify-center mt-3">
         <span class="pill-health font-mono text-[10px] font-bold bg-mint text-ink rounded-full px-2.5 py-[3px] pulse-ring" data-health>● HEALTHY</span>
         <span class="font-mono text-[10px] font-bold bg-hire text-ink rounded-full px-2.5 py-[3px]">HIREABLE</span>
-        <span class="font-mono text-[10px] font-bold bg-paper text-ink rounded-full px-2.5 py-[3px]">JAVA · GO · TS</span>
+        <span class="font-mono text-[10px] font-bold bg-paper text-ink rounded-full px-2.5 py-[3px]">{coreStackLine}</span>
       </div>
     </div>
 
@@ -143,12 +145,12 @@ const edges = [
   <!-- Mobile: stacked flow -->
   <div class="md:hidden flex flex-col items-center">
     <div class="text-center bg-ink text-paper rounded-xl px-6 py-5 shadow-offset-lg w-full">
-      <div class="font-bold text-2xl tracking-[-0.5px]">KAMIL ROGOZINSKI</div>
-      <div class="font-mono text-[11px] text-inkmuted mt-1.5">core service · software engineer<br />@ Citi Dublin · v25.9</div>
+      <div class="font-bold text-2xl tracking-[-0.5px]">{profile.name.toUpperCase()}</div>
+      <div class="font-mono text-[11px] text-inkmuted mt-1.5">core service · {profile.role}<br />@ {profile.employer} · {version}</div>
       <div class="flex gap-2 justify-center mt-3 flex-wrap">
         <span class="font-mono text-[10px] font-bold bg-mint text-ink rounded-full px-2.5 py-[3px] pulse-ring">● HEALTHY</span>
         <span class="font-mono text-[10px] font-bold bg-hire text-ink rounded-full px-2.5 py-[3px]">HIREABLE</span>
-        <span class="font-mono text-[10px] font-bold bg-paper text-ink rounded-full px-2.5 py-[3px]">JAVA · GO · TS</span>
+        <span class="font-mono text-[10px] font-bold bg-paper text-ink rounded-full px-2.5 py-[3px]">{coreStackLine}</span>
       </div>
     </div>
 

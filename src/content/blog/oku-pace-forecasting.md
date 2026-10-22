@@ -3,6 +3,7 @@ title: "My terminal now tells me when I'll finish my book (and UTC midnight trie
 description: "oku v0.16 adds pace forecasting, a house theme and a prompt segment to a Go TUI for Hardcover. Here's how the forecast works and the time zone bug it uncovered."
 pubDate: 2026-10-20
 author: "Kamil Rogozinski"
+image: "/media/oku-v0-16/cover.png"
 tags: ["go", "cli", "oku", "open-source"]
 ---
 
@@ -10,7 +11,7 @@ I read most evenings and track it on [Hardcover](https://hardcover.app). I also 
 
 Version 0.16 is out this week. The headline feature answers the question I actually ask while I'm reading: *when am I going to finish this?*
 
-![oku v0.16: finish estimates, the goal pace, the oku-light theme preview, then oku stats and oku line](/Personal-Website/media/oku-v0-16/whats-new.gif)
+![oku v0.16: finish estimates, the goal pace, the oku-light theme preview, then oku stats and oku line](/media/oku-v0-16/whats-new.gif)
 
 ## Pace forecasting
 
@@ -73,7 +74,7 @@ oku already shipped Nord, Dracula, Gruvbox, Solarized, Catppuccin and Tokyo Nigh
 
 The dark theme is sumi ink with washi-ivory text. The light one is the same palette on paper. The activity heatmap climbs from the ink into the vermilion, so a busy reading week glows. Every palette in oku is held to WCAG contrast floors by a test, and these two pass with room to spare.
 
-![The oku-light theme previewed live in the theme picker](/Personal-Website/media/oku-v0-16/stats-oku-light.png)
+![The oku-light theme previewed live in the theme picker](/media/oku-v0-16/stats-oku-light.png)
 
 Press `T` in the dashboard to preview themes live, or run `oku config theme oku`.
 

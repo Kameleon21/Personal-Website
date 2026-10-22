@@ -1,5 +1,9 @@
 ---
 import ContactForm from './ContactForm.astro';
+import { contactSummary } from '../lib/profile';
+import { getProjects } from '../lib/projects-collection';
+
+const summary = contactSummary(await getProjects());
 ---
 
 <section id="contact" class="max-w-[1100px] mx-auto px-5 sm:px-10 pt-16 md:pt-[70px] pb-4 w-full">
@@ -18,7 +22,7 @@ import ContactForm from './ContactForm.astro';
           <span class="w-[26px] h-[26px] rounded-full bg-ghgreen text-white flex items-center justify-center text-[13px] flex-none">✓</span>
           <span class="font-bold text-base">All checks have passed — no conflicts with your team</span>
         </div>
-        <div class="text-[13px] text-muted sm:pl-9">BSc (Hons) 1.1 · 2 yrs at Citi · 4 shipped projects · fluent EN / PL</div>
+        <div class="text-[13px] text-muted sm:pl-9">{summary}</div>
       </div>
       <div class="flex gap-2.5 items-center flex-wrap">
         <a
