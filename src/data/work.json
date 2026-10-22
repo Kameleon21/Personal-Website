@@ -6,7 +6,7 @@
       "name": "Tokenlens",
       "desc": "See what your coding agents actually cost. A terminal dashboard for token usage and estimated spend across agents and models, with date filters, period comparisons, cached reports, themes, and JSON/CSV/SVG/PNG exports.",
       "tags": ["Go", "Bubble Tea", "TUI", "ccusage"],
-      "demo": { "src": "tokenlens", "title": "~/tokenlens — zsh" },
+      "demo": { "kind": "terminal", "src": "tokenlens", "cwd": "~/tokenlens", "shell": "zsh" },
       "links": [
         { "label": "view source →", "href": "https://github.com/Kameleon21/tokenlens" }
       ]
@@ -17,7 +17,7 @@
       "name": "Oku",
       "desc": "A book tracker that lives in your terminal. Manage a Hardcover reading library with lazygit-style modal panels, discovery search across books, authors and genres, and density modes. Built for devs who live in tmux.",
       "tags": ["Go", "Bubble Tea", "Lip Gloss", "TUI"],
-      "demo": { "src": "oku", "title": "~/oku — zsh" },
+      "demo": { "kind": "terminal", "src": "oku", "cwd": "~/oku", "shell": "zsh" },
       "links": [
         { "label": "view source →", "href": "https://github.com/Kameleon21/oku" }
       ]
@@ -28,7 +28,7 @@
       "name": "Tramly",
       "desc": "Dublin's Luas, answered before you leave the door. Live trams on a map and a \"can I catch it?\" verdict that weighs your walk against the next arrival. It also plans journeys across the Red and Green lines and tells you when walking or a Dublin Bike gets you there sooner. Works offline once installed.",
       "tags": ["Next.js", "React", "Mapbox GL", "PWA"],
-      "demo": { "src": "tramly", "title": "tramly-theta.vercel.app — iPhone", "alt": "Screen recording of Tramly on a phone: live trams, a stop's catch verdicts and a planned journey" },
+      "demo": { "kind": "device", "src": "tramly", "host": "tramly-theta.vercel.app", "device": "iPhone", "alt": "Screen recording of Tramly on a phone: live trams, a stop's catch verdicts and a planned journey" },
       "links": [
         { "label": "view live →", "href": "https://tramly-theta.vercel.app" }
       ]

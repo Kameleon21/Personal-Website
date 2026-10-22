@@ -1,16 +1,14 @@
 ---
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const routes = [
-  { label: '/experience', href: `${base}/#experience` },
-  { label: '/projects', href: `${base}/#projects` },
-  { label: '/stack', href: `${base}/#stack` },
-  { label: '/blog', href: `${base}/blog` },
-];
+import { hrefFor, NAV_ROUTES } from '../lib/routes';
+
+const routes = NAV_ROUTES.map((route) => ({ label: route, href: hrefFor(route) }));
+const home = hrefFor('/');
+const contact = hrefFor('/contact');
 ---
 
 <nav class="sticky top-0 z-[100] border-b-2 border-ink bg-paper/[.92] backdrop-blur-[6px]">
   <div class="flex justify-between items-center py-3.5 px-5 sm:px-10 relative">
-    <a href={`${base}/`} class="font-mono text-[13px] font-bold text-ink relative z-[102]">
+    <a href={home} class="font-mono text-[13px] font-bold text-ink relative z-[102]">
       kamil-system-design.md
     </a>
 
@@ -20,7 +18,7 @@ const routes = [
         <a href={route.href} class="nav-route">{route.label}</a>
       ))}
       <a
-        href={`${base}/#contact`}
+        href={contact}
         class="font-mono text-xs font-bold bg-accent text-white px-4 py-[7px] rounded-md shadow-offset-sm hover:bg-ink transition-colors ml-2"
       >
         POST /contact
@@ -51,7 +49,7 @@ const routes = [
           <a href={route.href} class="nav-route py-3 border-b border-dot">{route.label}</a>
         ))}
         <a
-          href={`${base}/#contact`}
+          href={contact}
           class="font-mono text-xs font-bold bg-accent text-white px-4 py-3 rounded-md shadow-offset-sm text-center mt-3"
         >
           POST /contact

@@ -5,24 +5,20 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ReadingProgress from '../components/ReadingProgress.astro';
 import TableOfContents from '../components/TableOfContents.astro';
-import { formatDate } from '../utils/date';
-import { getReadingTime } from '../utils/readingTime';
+import { formatDate, readingTime } from '../lib/posts';
 import '../styles/blog-post.css';
 
 interface Props {
-  title: string;
-  description: string;
-  pubDate: Date;
-  author: string;
   post: CollectionEntry<'blog'>;
 }
 
-const { title, description, pubDate, author, post } = Astro.props;
+const { post } = Astro.props;
+const { title, description, pubDate, author, image } = post.data;
 const { Content, headings } = await post.render();
-const readingTime = getReadingTime(post.body);
+const minutes = readingTime(post.body);
 ---
 
-<Layout title={title} description={description} type="article" pubDate={pubDate}>
+<Layout title={title} description={description} type="article" pubDate={pubDate} image={image}>
   <ReadingProgress />
   <Header />
 
@@ -44,7 +40,7 @@ const readingTime = getReadingTime(post.body);
               <span class="text-dot">|</span>
               <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
               <span class="text-dot">|</span>
-              <span>{readingTime} min read</span>
+              <span>{minutes} min read</span>
             </div>
             <div class="brutal-hr mt-6"></div>
           </header>

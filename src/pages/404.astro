@@ -2,13 +2,15 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import workData from '../data/work.json';
+import { getProjects } from '../lib/projects-collection';
+import { projectsSummary, version } from '../lib/profile';
 
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const home = `${base}/`;
-const projects = `${base}/#projects`;
-const blog = `${base}/blog`;
-const deploymentCount = workData.deployments.length;
+import { hrefFor } from '../lib/routes';
+
+const home = hrefFor('/');
+const projects = hrefFor('/projects');
+const blog = hrefFor('/blog');
+const projectsNode = projectsSummary(await getProjects());
 ---
 
 <Layout
@@ -17,7 +19,7 @@ const deploymentCount = workData.deployments.length;
   noindex
 >
   <Header />
-  <main class="w-full max-w-[1100px] mx-auto px-5 sm:px-10 pt-10 sm:pt-14 pb-16 sm:pb-20" data-not-found data-base={base}>
+  <main class="w-full max-w-[1100px] mx-auto px-5 sm:px-10 pt-10 sm:pt-14 pb-16 sm:pb-20" data-not-found>
     <div class="flex flex-wrap justify-between gap-x-4 gap-y-1.5 font-mono text-[11px] text-faint mb-[26px]">
       <span>// incident <span class="text-accent">INC-404</span> · severity: low · blast radius: one url</span>
       <span><span data-nf-opened></span>status: investigating</span>
@@ -48,13 +50,13 @@ const deploymentCount = workData.deployments.length;
           <svg class="nf-wires" data-nf-wires></svg>
           <div class="nn nn-root" data-n="root">
             <div class="font-bold text-base tracking-[-0.3px]">KAMIL ROGOZINSKI</div>
-            <div class="font-mono text-[10px] text-inkmuted mt-1">core service · v25.9</div>
+            <div class="font-mono text-[10px] text-inkmuted mt-1">core service · {version}</div>
             <span class="inline-block font-mono text-[9.5px] font-bold bg-mint text-ink rounded-full px-[9px] py-0.5 mt-[9px]">● HEALTHY</span>
           </div>
           <a class="nn nn-link" data-n="proj" href={projects} tabindex="-1">
             <div class="nn-label">SVC / PROJECTS</div>
             <div class="nn-title">/projects</div>
-            <div class="nn-status text-ghgreen">● 200 · {deploymentCount} deployments</div>
+            <div class="nn-status text-ghgreen">● 200 · {projectsNode.title}</div>
           </a>
           <a class="nn nn-link" data-n="blog" href={blog} tabindex="-1">
             <div class="nn-label">SVC / BLOG</div>

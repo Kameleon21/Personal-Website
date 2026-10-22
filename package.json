@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "new-post": "bun scripts/new-post.js"
+    "new-post": "bun scripts/new-post.js",
+    "test": "bun test"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^6.3.6",

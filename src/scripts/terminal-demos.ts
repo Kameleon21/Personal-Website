@@ -1,11 +1,11 @@
 /**
- * Terminal recordings on the project cards.
+ * Screen recordings on the project cards (terminal and device demos).
  *
  * Videos are `preload="none"` with a poster, so nothing downloads until a card
  * is at least half in view. They play muted + looped only while visible and
  * pause when scrolled away. With reduced motion they never autoplay: the card
- * shows a play button instead. A missing recording falls back to the faux
- * terminal rendered behind the video.
+ * shows a play button instead. A missing recording falls back to the
+ * placeholder rendered behind the video.
  */
 
 type State = 'playing' | 'paused';

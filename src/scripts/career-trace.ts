@@ -7,27 +7,16 @@
  * "now" so open spans keep growing between deploys.
  */
 
-const DEFAULT_OPEN = 'swe';
-
-function currentYear(d = new Date()) {
-  const daysInMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
-  return d.getFullYear() + (d.getMonth() + (d.getDate() - 1) / daysInMonth) / 12;
-}
-
-function formatDuration(years: number) {
-  const months = Math.round(years * 12);
-  const y = Math.floor(months / 12);
-  const m = months % 12;
-  return y ? `${y}y${m ? ` ${m}m` : ''}` : `${m}mo`;
-}
+import { DEFAULT_OPEN, clampNow, currentYear, formatDuration, pct as pctIn } from '../lib/trace';
 
 /** Move the "now" marker and stretch still-running spans to today. */
 function refreshNow(trace: HTMLElement) {
   const [d0, d1] = (trace.dataset.domain ?? '').split(',').map(Number);
   if (!Number.isFinite(d0) || !Number.isFinite(d1)) return;
 
-  const now = Math.min(currentYear(), d1);
-  const pct = (t: number) => ((t - d0) / (d1 - d0)) * 100;
+  const domain: [number, number] = [d0, d1];
+  const now = clampNow(currentYear(), domain);
+  const pct = (t: number) => pctIn(t, domain);
 
   trace.querySelectorAll<HTMLElement>('[data-now]').forEach((el) => {
     el.style.left = `${pct(now)}%`;

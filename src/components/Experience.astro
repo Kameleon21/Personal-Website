@@ -1,135 +1,25 @@
 ---
-type Svc = 'kamil' | 'setu' | 'citi';
-type Tag = { k: string; v: string; status?: 'ok' | 'live' | 'redir' };
-type Log = { text: string; comment?: string };
-type Span = {
-  id: string;
-  op: string;
-  svc: Svc;
-  depth: 0 | 1;
-  start: number;
-  end: number | null;
-  from: string;
-  to: string;
-  durLabel?: string;
-  title: string;
-  tags: Tag[];
-  logs: Log[];
-  logsTitle?: string;
-};
-
-// Months as fractional years so every span shares one time axis.
-const ym = (y: number, m: number) => y + (m - 1) / 12;
-
-const spans: Span[] = [
-  {
-    id: 'career',
-    op: 'kamil.career',
-    svc: 'kamil',
-    depth: 0,
-    start: ym(2022, 9),
-    end: null,
-    from: '2022',
-    to: 'now',
-    title: 'Kamil Rogozinski — software engineer',
-    tags: [
-      { k: 'service', v: 'kamil-rogozinski' },
-      { k: 'region', v: 'waterford, ie' },
-      { k: 'stack', v: 'java · go · typescript' },
-      { k: 'languages', v: 'polish (native) · english (fluent)' },
-      { k: 'status', v: '200 · HEALTHY', status: 'live' },
-    ],
-    logs: [],
-  },
-  {
-    id: 'setu',
-    op: 'setu.bsc',
-    svc: 'setu',
-    depth: 1,
-    start: ym(2022, 9),
-    end: ym(2025, 6),
-    from: '2022',
-    to: '2025',
-    durLabel: '3y',
-    title: 'BSc (Hons) Software Systems',
-    tags: [
-      { k: 'org', v: 'SETU Waterford' },
-      { k: 'degree', v: 'BSc (Hons) Software Systems' },
-      { k: 'result', v: 'First Class Honours (1.1)' },
-      { k: 'status', v: '200 · graduated', status: 'ok' },
-    ],
-    logs: [{ text: 'First Class Honours (1.1)' }],
-  },
-  {
-    id: 'intern',
-    op: 'citi.intern',
-    svc: 'citi',
-    depth: 1,
-    start: ym(2024, 6),
-    end: ym(2024, 12),
-    from: '2024.06',
-    to: '2024.12',
-    title: 'SWE Intern — Citi Dublin',
-    tags: [
-      { k: 'org', v: 'Citi Dublin' },
-      { k: 'role', v: 'SWE Intern' },
-      { k: 'stack', v: 'Java · .NET' },
-      { k: 'scope', v: 'APIs · microservices' },
-      { k: 'team', v: 'Agile teams · code reviews' },
-      { k: 'status', v: '301 → citi.swe', status: 'redir' },
-    ],
-    logs: [
-      { text: 'Java + .NET, APIs and microservices' },
-      { text: 'Agile teams, code reviews' },
-      { text: 'converted to full-time', comment: '// 301 Moved Permanently' },
-    ],
-  },
-  {
-    id: 'swe',
-    op: 'citi.swe',
-    svc: 'citi',
-    depth: 1,
-    start: ym(2025, 9),
-    end: null,
-    from: '2025.09',
-    to: 'now',
-    title: 'Software Engineer — Citi Dublin',
-    tags: [
-      { k: 'org', v: 'Citi Dublin' },
-      { k: 'role', v: 'Software Engineer' },
-      { k: 'stack', v: 'Spring Boot · Angular · MySQL' },
-      { k: 'infra', v: 'Docker · OpenShift · CI/CD' },
-      { k: 'ref', v: 'follows_from → citi.intern' },
-      { k: 'status', v: '200 · span open', status: 'live' },
-    ],
-    logs: [
-      { text: 'ships Spring Boot REST services across multiple apps' },
-      { text: 'builds modular Angular front-end components' },
-      { text: 'designs MySQL schemas for query efficiency' },
-      { text: 'deploys via Docker + OpenShift, improves CI/CD' },
-      { text: 'mentors(intern)', comment: '// onboarding, reviews, guidance' },
-    ],
-    logsTitle: 'logs · diff',
-  },
-];
-
-const DEFAULT_OPEN = 'swe';
+import { spans, type Span } from '../data/career';
+import {
+  DEFAULT_OPEN,
+  clampNow,
+  currentYear,
+  domainFor,
+  endOf,
+  pct as pctIn,
+  spanDuration,
+  traceStats,
+} from '../lib/trace';
 
 // "now" at build time; the trace script re-measures it in the browser.
-const d = new Date();
-const daysInMonth = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
-const now = d.getFullYear() + (d.getMonth() + (d.getDate() - 1) / daysInMonth) / 12;
-const domain: [number, number] = [2022.5, Math.max(2027, Math.ceil(now + 0.2))];
+const rawNow = currentYear();
+const domain = domainFor(rawNow);
+const now = clampNow(rawNow, domain);
 
-const pct = (t: number) => ((t - domain[0]) / (domain[1] - domain[0])) * 100;
-const endOf = (s: Span) => s.end ?? now;
-const duration = (s: Span) => {
-  if (s.durLabel) return s.durLabel;
-  const months = Math.round((endOf(s) - s.start) * 12);
-  const y = Math.floor(months / 12);
-  const m = months % 12;
-  return y ? `${y}y${m ? ` ${m}m` : ''}` : `${m}mo`;
-};
+const pct = (t: number) => pctIn(t, domain);
+const duration = (s: Span) => spanDuration(s, now);
+const stats = traceStats(spans);
+const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
 const years: number[] = [];
 for (let y = Math.ceil(domain[0]); y < domain[1]; y++) {
@@ -141,14 +31,14 @@ const childIds = spans
   .filter((s) => s.depth === 1)
   .map((s) => `trace-${s.id}`)
   .join(' ');
-const statusClass = { ok: 'st-ok', live: 'st-live', redir: 'st-redir' };
+const statusClass = { ok: 'st-ok', live: 'st-live', redir: 'st-redir', error: 'st-err', rollback: 'st-err' };
 ---
 
 <section id="experience" class="w-full max-w-[1100px] mx-auto px-5 sm:px-10 pt-14 md:pt-[60px] pb-5">
   <div class="section-head">
     <span class="section-label">SVC / EXPERIENCE</span>
     <span class="font-bold text-[28px]">Career trace</span>
-    <span class="font-mono text-[11px] text-faint sm:ml-auto">0 errors · 0 rollbacks · 1 redirect (301)</span>
+    <span class="font-mono text-[11px] text-faint sm:ml-auto">{plural(stats.errors, 'error')} · {plural(stats.rollbacks, 'rollback')} · {plural(stats.redirects, 'redirect')} (301)</span>
   </div>
 
   <div class="trace node-card overflow-hidden" data-trace data-domain={domain.join(',')}>
@@ -156,14 +46,14 @@ const statusClass = { ok: 'st-ok', live: 'st-live', redir: 'st-redir' };
       <span>● trace</span>
       <span class="text-inkmuted">4b1d9e7c…c21f</span>
       <span>{root.op}</span>
-      <span class="text-mint ml-auto">0 errors</span>
+      <span class="text-mint ml-auto">{plural(stats.errors, 'error')}</span>
     </div>
 
     <div class="flex flex-wrap gap-x-4 sm:gap-x-[26px] gap-y-1 px-5 py-3 border-b-2 border-ink font-mono text-[11px] text-faint">
       <span>trace start<b class="text-ink ml-1.5">2022</b></span>
       <span>duration<b class="text-ink ml-1.5" data-dur-of={root.id}>{duration(root)}</b></span>
-      <span>services<b class="text-ink ml-1.5">3</b></span>
-      <span>depth<b class="text-ink ml-1.5">2</b></span>
+      <span>services<b class="text-ink ml-1.5">{stats.services}</b></span>
+      <span>depth<b class="text-ink ml-1.5">{stats.depth}</b></span>
       <span>total spans<b class="text-ink ml-1.5">{spans.length}</b></span>
     </div>
 
@@ -189,7 +79,7 @@ const statusClass = { ok: 'st-ok', live: 'st-live', redir: 'st-redir' };
 
       {spans.map((s, i) => {
         const left = pct(s.start);
-        const width = pct(endOf(s)) - left;
+        const width = pct(endOf(s, now)) - left;
         return (
           <div
             class:list={['trace-item', `svc-${s.svc}`, { open: s.id === DEFAULT_OPEN, last: i === spans.length - 1 }]}
@@ -602,6 +492,7 @@ const statusClass = { ok: 'st-ok', live: 'st-live', redir: 'st-redir' };
   .st-ok,
   .st-live { color: #2da44e; }
   .st-redir { color: #b07a00; }
+  .st-err { color: #cf222e; }
   .st-live::before {
     background: #3fdd8f;
     animation: trace-ring 2.4s ease-out infinite;

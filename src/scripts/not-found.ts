@@ -7,56 +7,23 @@
  * missing route is cut and sparking.
  */
 
+import { hrefFor, stripBase, type Route } from '../lib/routes';
+import { suggest, type Hint } from '../lib/suggest';
+
 type Pt = [number, number];
 type Curve = [Pt, Pt, Pt, Pt];
 type Box = { x: number; y: number; w: number; h: number };
 
-const ROUTES = ['/', '/blog', '/projects', '/experience', '/stack', '/contact'];
 const NARROW = 460;
 
-function levenshtein(a: string, b: string) {
-  const row = Array.from({ length: b.length + 1 }, (_, j) => j);
-  for (let i = 1; i <= a.length; i++) {
-    let prev = row[0];
-    row[0] = i;
-    for (let j = 1; j <= b.length; j++) {
-      const tmp = row[j];
-      row[j] = Math.min(row[j] + 1, row[j - 1] + 1, prev + (a[i - 1] === b[j - 1] ? 0 : 1));
-      prev = tmp;
-    }
-  }
-  return row[b.length];
-}
-
-type Hint = { kind: 'probe' } | { kind: 'prefix'; route: string } | { kind: 'typo'; route: string } | null;
-
-function suggest(path: string): Hint {
-  if (/wp-|\.php|\.env/i.test(path)) return { kind: 'probe' };
-  const first = `/${(path.split('/').filter(Boolean)[0] ?? '').toLowerCase()}`;
-  if (first !== '/' && ROUTES.includes(first)) return { kind: 'prefix', route: first };
-
-  let best: string | null = null;
-  let bestDistance = 3;
-  for (const route of ROUTES) {
-    if (route === '/') continue;
-    const distance = levenshtein(first, route);
-    if (distance < bestDistance) {
-      bestDistance = distance;
-      best = route;
-    }
-  }
-  return best ? { kind: 'typo', route: best } : null;
-}
-
-function requestedPath(base: string) {
+function requestedPath() {
   let path = location.pathname;
   try {
     path = decodeURI(path);
   } catch {
     /* keep the raw path */
   }
-  if (base && (path === base || path.startsWith(`${base}/`))) path = path.slice(base.length) || '/';
-  return path;
+  return stripBase(path);
 }
 
 function stamp(offsetMs: number) {
@@ -66,8 +33,8 @@ function stamp(offsetMs: number) {
 
 /* ── Incident log ── */
 
-function writeHint(target: HTMLElement, hint: Hint, path: string, hrefFor: (route: string) => string) {
-  const link = (route: string) => {
+function writeHint(target: HTMLElement, hint: Hint, path: string) {
+  const link = (route: Route) => {
     const a = document.createElement('a');
     a.href = hrefFor(route);
     a.textContent = route;
@@ -196,11 +163,7 @@ export function initNotFound() {
   main.dataset.nfInit = 'true';
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const base = main.dataset.base ?? '';
-  const hrefFor = (route: string) =>
-    route === '/' ? `${base}/` : route === '/blog' ? `${base}/blog` : `${base}/#${route.slice(1)}`;
-
-  const path = requestedPath(base);
+  const path = requestedPath();
   main.querySelectorAll('[data-nf-path]').forEach((el) => {
     el.textContent = path;
   });
@@ -210,7 +173,7 @@ export function initNotFound() {
 
   const hintLine = main.querySelector<HTMLElement>('[data-nf-hint]');
   const hintMsg = main.querySelector<HTMLElement>('[data-nf-hint-msg]');
-  if (hintLine && hintMsg) hintLine.hidden = !writeHint(hintMsg, suggest(path), path, hrefFor);
+  if (hintLine && hintMsg) hintLine.hidden = !writeHint(hintMsg, suggest(path), path);
 
   const log = main.querySelector<HTMLElement>('[data-nf-log]');
   if (log) tailLog(log, reducedMotion);
